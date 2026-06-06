@@ -567,53 +567,98 @@ form input:focus, form textarea:focus,
 
 /* ── RESPONSIVE ────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr !important; gap: 2.5rem; text-align: center; padding: 0 24px; align-items: center; }
+
+  /* ── Global overflow guard ── */
+  .pf-root, section, footer { overflow-x: hidden !important; }
+
+  /* ── Hero ── */
+  .hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem; text-align: center;
+    padding: 0 20px; align-items: center;
+  }
   .hero-left { align-items: center; }
-  .hero-bio { text-align: left; }
+  .hero-bio  { text-align: left; }
   .hero-right { display: flex; justify-content: center; }
-  .id-card { width: 280px; }
+  .id-card  { width: 280px; }
   .id-photo { width: 100px; height: 125px; }
   .hero-scroll { display: none; }
   .hero-ctas { justify-content: center; }
   .hero-tags { justify-content: center; }
-
-  /* Stop wordmark causing horizontal overflow repaint */
   .hero-wordmark { display: none; }
-
-  .about-grid { grid-template-columns: 1fr !important; gap: 3rem; }
-
-  /* Kill sticky positioning — main cause of scroll-up glitch on iOS Safari */
-  [id="experience"] > div,
-  [class*="ExperienceSection"] {
-    flex-direction: column !important;
-    gap: 48px !important;
-  }
-  [class*="achievements"], [class*="Achievements"] {
-    position: relative !important;
-    top: 0 !important;
-    width: 100% !important;
-  }
-  /* Kill any other sticky elements that cause repaint on scroll-up */
-  [style*="position: sticky"],
-  [style*="position:sticky"] {
-    position: relative !important;
-    top: auto !important;
-  }
-
-  /* Stop grain animation on mobile — kills performance and causes visual artifacts */
-  .grain { animation: none !important; opacity: 0.018; }
-
-  /* Stop orb animation on mobile */
   .hero-glow { animation: none !important; }
 
-  .pf-footer__inner { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  /* ── About — stack meta below text ── */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem;
+  }
+  .about-meta { width: 100%; }
+  .meta-row { grid-template-columns: 80px 1fr; gap: 12px; }
+
+  /* ── Skills — stack left title above rows ── */
+  #skills > div > div:first-child {
+    position: relative !important; top: auto !important;
+    flex: none !important; width: 100% !important;
+    margin-bottom: 8px;
+  }
+  #skills > div {
+    flex-direction: column !important; gap: 24px !important;
+  }
+  #skills > div > div:last-child { width: 100% !important; }
+
+  /* ── Projects — single column ── */
+  [id="projects"] > div > div,
+  [class*="ProjectGrid"], [class*="projectGrid"],
+  [class*="projects-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Experience — stack timeline above achievements ── */
+  [id="experience"] > div {
+    flex-direction: column !important; gap: 40px !important;
+  }
+  [class*="ExperienceSection"], [class*="experienceSection"] {
+    flex-direction: column !important; gap: 40px !important;
+  }
+  [class*="achievements"], [class*="Achievements"] {
+    position: relative !important; top: 0 !important; width: 100% !important;
+    flex: none !important;
+  }
+  [class*="timeline"], [class*="Timeline"] {
+    flex: none !important; width: 100% !important;
+  }
+
+  /* ── Kill all inline sticky (Skills left col, Experience header) ── */
+  [style*="position: sticky"],
+  [style*="position:sticky"] {
+    position: relative !important; top: auto !important;
+  }
+
+  /* ── Contact — single column ── */
+  [class*="Contact"] > div,
+  [class*="contact-grid"] {
+    grid-template-columns: 1fr !important; flex-direction: column !important;
+  }
+
+  /* ── Footer ── */
+  .pf-footer { padding: 40px 20px; }
+  .pf-footer__inner { grid-template-columns: 1fr; gap: 14px; text-align: center; }
   .footer-copy--center { display: none; }
-  .footer-links { justify-content: center; }
+  .footer-links { justify-content: center; gap: 20px; }
+
+  /* ── Grain — stop animation on mobile ── */
+  .grain { animation: none !important; opacity: 0.015; }
+
+  /* ── Section padding tighter on mobile ── */
+  section > div { padding-left: 20px !important; padding-right: 20px !important; }
 }
 
 @media (max-width: 600px) {
-  #skills > div { flex-direction: column !important; gap: 32px !important; }
-  #skills > div > div:first-child { position: relative !important; top: auto !important; }
+  /* Skills rows wrap items vertically */
+  #skills > div > div:last-child > div > div:last-child {
+    flex-direction: column !important; gap: 8px !important;
+  }
 }
 
 /* ── EXPERIENCE SECTION HEADER ─────────────────────────────────────────────── */
