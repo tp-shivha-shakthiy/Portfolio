@@ -104,16 +104,6 @@ npm run preview
 
 ---
 
-## Design Philosophy
-
-### From Models To Systems
-
-The portfolio is built around a simple idea: moving beyond isolated experiments and focusing on complete systems.
-
-Whether the work involves machine learning, software development, research, or engineering projects, the goal is to build solutions that are practical, understandable, and usable.
-
----
-
 ## Connect
 
 **GitHub**
@@ -124,9 +114,3 @@ https://linkedin.com/in/t-p-shivha-shakthiy-801723346
 
 **Portfolio**
 https://my-portfolio-beta-one-95.vercel.app
-
----
-
-## License
-
-This project is available under the MIT License.
