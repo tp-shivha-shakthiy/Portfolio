@@ -1,16 +1,132 @@
-# React + Vite
+# T P Shivha Shakthiy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### From Models To Systems
 
-Currently, two official plugins are available:
+Personal portfolio website featuring projects, research work, technical experience, and interests in machine learning and software engineering.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🌐 **Live Portfolio:** https://my-portfolio-beta-one-95.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About
 
-## Expanding the ESLint configuration
+I am a Computer Science undergraduate specializing in Artificial Intelligence and Data Science at IIIT Kottayam.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+My interests lie in machine learning, software engineering, and intelligent systems. I enjoy building projects that combine technical depth with practical implementation, moving from ideas and models to working systems.
+
+This portfolio serves as a central place to showcase my projects, research experiences, skills, achievements, and professional journey.
+
+---
+
+## Features
+
+* Custom system-inspired identity card interface
+* Responsive design for desktop and mobile devices
+* Interactive project showcase
+* Experience and achievements timeline
+* Scroll-aware navigation
+* Smooth section animations
+* Custom cursor interactions
+* Contact form powered by EmailJS
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React.js
+* JavaScript (ES6+)
+* HTML5
+* CSS3
+
+### Tools & Libraries
+
+* Vite
+* EmailJS
+* ESLint
+
+### Deployment
+
+* GitHub
+* Vercel
+
+---
+
+
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── data/
+├── hooks/
+├── assets/
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## Running Locally
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/tp-shivha-shakthiy/Portfolio.git
+cd Portfolio
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start Development Server
+
+```bash
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## Design Philosophy
+
+### From Models To Systems
+
+The portfolio is built around a simple idea: moving beyond isolated experiments and focusing on complete systems.
+
+Whether the work involves machine learning, software development, research, or engineering projects, the goal is to build solutions that are practical, understandable, and usable.
+
+---
+
+## Connect
+
+**GitHub**
+https://github.com/tp-shivha-shakthiy
+
+**LinkedIn**
+https://linkedin.com/in/t-p-shivha-shakthiy-801723346
+
+**Portfolio**
+https://my-portfolio-beta-one-95.vercel.app
+
+---
+
+## License
+
+This project is available under the MIT License.
