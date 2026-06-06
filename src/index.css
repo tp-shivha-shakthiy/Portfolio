@@ -596,7 +596,7 @@ form input:focus, form textarea:focus,
   .about-meta { width: 100%; }
   .meta-row { grid-template-columns: 80px 1fr; gap: 12px; }
 
-  /* ── Skills — stack left title above rows ── */
+  /* ── Skills — target inline flex container ── */
   #skills > div > div:first-child {
     position: relative !important; top: auto !important;
     flex: none !important; width: 100% !important;
@@ -604,8 +604,19 @@ form input:focus, form textarea:focus,
   }
   #skills > div {
     flex-direction: column !important; gap: 24px !important;
+    width: 100% !important;
   }
-  #skills > div > div:last-child { width: 100% !important; }
+  #skills > div > div:last-child {
+    width: 100% !important; flex: none !important;
+  }
+  /* Each category row inside the right col — stack name above items */
+  #skills > div > div:last-child > div {
+    flex-direction: column !important; gap: 10px !important;
+  }
+  /* Category label — full width */
+  #skills > div > div:last-child > div > div:first-child {
+    width: 100% !important;
+  }
 
   /* ── Projects — single column ── */
   [id="projects"] > div > div,
@@ -614,19 +625,38 @@ form input:focus, form textarea:focus,
     grid-template-columns: 1fr !important;
   }
 
-  /* ── Experience — stack timeline above achievements ── */
-  [id="experience"] > div {
-    flex-direction: column !important; gap: 40px !important;
+  /* ── Experience outer container — column ── */
+  #experience > div > div:last-child,
+  #experience > div > div[style*="gap: 80px"],
+  #experience > div > div[style*="gap:80px"] {
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
   }
-  [class*="ExperienceSection"], [class*="experienceSection"] {
-    flex-direction: column !important; gap: 40px !important;
-  }
-  [class*="achievements"], [class*="Achievements"] {
-    position: relative !important; top: 0 !important; width: 100% !important;
-    flex: none !important;
-  }
-  [class*="timeline"], [class*="Timeline"] {
+  /* Left stream (experience rows) — full width */
+  #experience div[style*="flex: 1.2"],
+  #experience div[style*="flex:1.2"] {
     flex: none !important; width: 100% !important;
+  }
+  /* Right laurels panel — full width, no sticky, kill left border */
+  #experience div[style*="borderLeft"],
+  #experience div[style*="border-left"] {
+    flex: none !important; width: 100% !important;
+    position: relative !important; top: auto !important;
+    border-left: none !important; padding-left: 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.06) !important;
+    padding-top: 32px !important; margin-top: 16px !important;
+  }
+  /* Each experience row — stack meta above content */
+  #experience div[style*="gap: 48px"],
+  #experience div[style*="gap:48px"] {
+    flex-direction: column !important; gap: 12px !important;
+  }
+  /* Period/org meta block — row layout side by side */
+  #experience div[style*="width: 140px"],
+  #experience div[style*="width:140px"] {
+    width: 100% !important; display: flex !important;
+    flex-direction: row !important; gap: 16px !important; align-items: center !important;
   }
 
   /* ── Kill all inline sticky (Skills left col, Experience header) ── */
@@ -635,10 +665,28 @@ form input:focus, form textarea:focus,
     position: relative !important; top: auto !important;
   }
 
-  /* ── Contact — single column ── */
-  [class*="Contact"] > div,
-  [class*="contact-grid"] {
-    grid-template-columns: 1fr !important; flex-direction: column !important;
+  /* ── Contact — stack left col above form ── */
+  #contact > div > div[style*="gap: 64px"],
+  #contact > div > div[style*="gap:64px"] {
+    flex-direction: column !important;
+    gap: 40px !important;
+    width: 100% !important;
+  }
+  /* Left identity col — full width, no sticky */
+  #contact div[style*="flex: 0.8"],
+  #contact div[style*="flex:0.8"] {
+    flex: none !important; width: 100% !important;
+    position: relative !important; top: auto !important;
+  }
+  /* Right form col — full width */
+  #contact div[style*="flex: 1.2"],
+  #contact div[style*="flex:1.2"] {
+    flex: none !important; width: 100% !important;
+  }
+  /* Form name/email grid — stack to single column */
+  #contact div[style*="gridTemplateColumns"],
+  #contact div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
   }
 
   /* ── Footer ── */
@@ -646,6 +694,10 @@ form input:focus, form textarea:focus,
   .pf-footer__inner { grid-template-columns: 1fr; gap: 14px; text-align: center; }
   .footer-copy--center { display: none; }
   .footer-links { justify-content: center; gap: 20px; }
+
+  /* ── Navbar — show burger, hide desktop links ── */
+  .desktop-nav { display: none !important; }
+  .burger { display: flex !important; }
 
   /* ── Grain — stop animation on mobile ── */
   .grain { animation: none !important; opacity: 0.015; }
@@ -655,9 +707,14 @@ form input:focus, form textarea:focus,
 }
 
 @media (max-width: 600px) {
-  /* Skills rows wrap items vertically */
+  /* Skills — wrap skill items to column on very small screens */
   #skills > div > div:last-child > div > div:last-child {
-    flex-direction: column !important; gap: 8px !important;
+    flex-direction: column !important; gap: 10px !important;
+  }
+  /* Experience rows — ensure no min-width issues */
+  #experience div[style*="gap: 48px"],
+  #experience div[style*="gap:48px"] {
+    min-width: 0 !important;
   }
 }
 
