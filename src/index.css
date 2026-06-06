@@ -567,10 +567,12 @@ form input:focus, form textarea:focus,
 
 /* ── RESPONSIVE ────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr !important; gap: 3rem; text-align: center; padding: 0 24px; }
+  .hero-inner { grid-template-columns: 1fr !important; gap: 2.5rem; text-align: center; padding: 0 24px; align-items: center; }
   .hero-left { align-items: center; }
   .hero-bio { text-align: left; }
-  .hero-right { display: none; }
+  .hero-right { display: flex; justify-content: center; }
+  .id-card { width: 280px; }
+  .id-photo { width: 100px; height: 125px; }
   .hero-scroll { display: none; }
   .hero-ctas { justify-content: center; }
   .hero-tags { justify-content: center; }
