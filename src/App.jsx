@@ -8,7 +8,7 @@ import { ACHIEVEMENTS } from "./data/achievements";
 import { useFadeIn } from "./hooks/useFadeIn";
 
 import Skills from "./components/Skills";
-import Projects from "./components/Projects";
+import Projects from "./components/projects";
 import ExperienceSection from "./components/Experience";
 import ContactSection from "./components/Contact";
 
