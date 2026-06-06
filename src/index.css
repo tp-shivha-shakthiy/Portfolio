@@ -574,20 +574,44 @@ form input:focus, form textarea:focus,
   .hero-scroll { display: none; }
   .hero-ctas { justify-content: center; }
   .hero-tags { justify-content: center; }
-  .hero-wordmark { font-size: 80px; }
+
+  /* Stop wordmark causing horizontal overflow repaint */
+  .hero-wordmark { display: none; }
+
   .about-grid { grid-template-columns: 1fr !important; gap: 3rem; }
-  [id="experience"] > div, [class*="ExperienceSection"] {
-    flex-direction: column !important; gap: 48px !important;
+
+  /* Kill sticky positioning — main cause of scroll-up glitch on iOS Safari */
+  [id="experience"] > div,
+  [class*="ExperienceSection"] {
+    flex-direction: column !important;
+    gap: 48px !important;
   }
   [class*="achievements"], [class*="Achievements"] {
-    position: relative !important; top: 0 !important; width: 100% !important;
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
   }
+  /* Kill any other sticky elements that cause repaint on scroll-up */
+  [style*="position: sticky"],
+  [style*="position:sticky"] {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Stop grain animation on mobile — kills performance and causes visual artifacts */
+  .grain { animation: none !important; opacity: 0.018; }
+
+  /* Stop orb animation on mobile */
+  .hero-glow { animation: none !important; }
+
   .pf-footer__inner { grid-template-columns: 1fr; gap: 16px; text-align: center; }
   .footer-copy--center { display: none; }
   .footer-links { justify-content: center; }
 }
+
 @media (max-width: 600px) {
-  #skills > div > div { flex-direction: column !important; }
+  #skills > div { flex-direction: column !important; gap: 32px !important; }
+  #skills > div > div:first-child { position: relative !important; top: auto !important; }
 }
 
 /* ── EXPERIENCE SECTION HEADER ─────────────────────────────────────────────── */
