@@ -417,7 +417,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 
 /* ── PROJECTS ──────────────────────────────────────────────────────────────── */
 .proj-card, [class*="proj-card"], [class*="projCard"], [class*="ProjectCard"] {
-  background: var(--bg-1) !important; border: 1px solid var(--br) !important;
+  background: transparent !important; border: 1px solid var(--br) !important;
   border-radius: 3px !important; padding: 32px !important; box-shadow: none !important;
   position: relative; overflow: hidden;
   transition: border-color 0.3s var(--spring), background 0.3s, transform 0.35s var(--spring), box-shadow 0.35s !important;
@@ -701,7 +701,7 @@ form input:focus, form textarea:focus,
     flex: none !important; width: 100% !important;
     position: relative !important; top: auto !important;
     border-left: none !important; padding-left: 0 !important;
-    border-top: 1px solid rgba(255,255,255,0.06) !important;
+    border-top: 1px solid rgba(10, 10, 10, 0.06) !important;
     padding-top: 32px !important; margin-top: 16px !important;
   }
   /* Each experience row — stack meta above content */

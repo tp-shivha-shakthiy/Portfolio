@@ -1,5 +1,20 @@
 import { PROJECTS } from "../data/projects";
 
+const mobileStyles = `
+  @media (max-width: 768px) {
+    .proj-card {
+      padding: 16px !important;
+    }
+    .proj-desc {
+      padding-left: 0 !important;
+      margin-top: 12px !important;
+    }
+    .proj-footer {
+      padding-left: 0 !important;
+    }
+  }
+`;
+
 function Tag({ label }) {
   return (
     <span
@@ -23,19 +38,23 @@ function Tag({ label }) {
 export default function Projects({ prRef, prStyle }) {
   return (
     <section id="projects">
+      <style>{mobileStyles}</style>
       <div ref={prRef} style={prStyle}>
         <h2>Projects</h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {PROJECTS.map((p) => (
             <div
-              key={p.name}
-              style={{
-                border: "1px solid #141414",
-                borderRadius: 10,
-                padding: 24,
-              }}
-            >
+  key={p.name}
+  className="proj-card"
+  style={{
+    border: "none",
+    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    borderRadius: 0,
+    padding: 24,
+    background: "transparent",  // ← add this
+  }}
+>
               {/* Header */}
               <div
                 style={{
@@ -58,6 +77,7 @@ export default function Projects({ prRef, prStyle }) {
                       fontFamily: "monospace",
                       fontSize: 10,
                       color: p.color,
+                      flexShrink: 0,
                     }}
                   >
                     {p.abbr}
@@ -82,6 +102,8 @@ export default function Projects({ prRef, prStyle }) {
                       padding: "3px 10px",
                       borderRadius: 99,
                       color: "#4b5563",
+                      flexShrink: 0,
+                      alignSelf: "flex-start",
                     }}
                   >
                     {p.status}
@@ -91,6 +113,7 @@ export default function Projects({ prRef, prStyle }) {
 
               {/* Description */}
               <p
+                className="proj-desc"
                 style={{
                   fontSize: 13,
                   color: "#6b7280",
@@ -103,6 +126,7 @@ export default function Projects({ prRef, prStyle }) {
 
               {/* Tags + Links */}
               <div
+                className="proj-footer"
                 style={{
                   paddingLeft: 58,
                   display: "flex",
