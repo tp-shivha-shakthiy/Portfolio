@@ -51,18 +51,48 @@ export default function Portfolio() {
   const [exRef, exStyle] = useFadeIn(0);
   const [coRef, coStyle] = useFadeIn(0);
 
-  /* ── custom cursor — instant snap ── */
+ /* ── custom cursor — instant snap ── */
   const cursorRef     = useRef(null);
   const cursorDotRef  = useRef(null);
   const cursorTextRef = useRef(null);
-  
+
+  // Position trackers (prevents heavy React re-renders)
+  const mouse  = useRef({ x: 0, y: 0 });
+  const dotPos = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
+    const DOT_OFFSET = 3.5;   // Centers the 7px diamond
+    const RING_OFFSET = 20;   // Centers your 40px base ring layout
+    const LERP_FACTOR = 0.12; // Controls the fluid drift speed
+
+   
+    const SATELLITE_OFFSET_X = 0; 
+    const SATELLITE_OFFSET_Y = 75;  
+
+    let animationFrameId;
+
     const move = e => {
       const x = e.clientX, y = e.clientY;
+      mouse.current.x = x;
+      mouse.current.y = y;
+
       if (cursorRef.current)
-        cursorRef.current.style.transform = `translate(${x - 20}px,${y - 20}px)`;
-      if (cursorDotRef.current)
-        cursorDotRef.current.style.transform = `translate(${x - 4}px,${y - 4}px)`;
+        cursorRef.current.style.transform = `translate3d(${x - RING_OFFSET}px,${y - RING_OFFSET}px,0)`;
+    };
+
+    // Frame loop to smoothly animate the diamond to its outside satellite position
+    const animateDot = () => {
+      const targetX = mouse.current.x + SATELLITE_OFFSET_X;
+      const targetY = mouse.current.y + SATELLITE_OFFSET_Y;
+
+      dotPos.current.x += (targetX - dotPos.current.x) * LERP_FACTOR;
+      dotPos.current.y += (targetY - dotPos.current.y) * LERP_FACTOR;
+
+      if (cursorDotRef.current) {
+        cursorDotRef.current.style.transform = `translate3d(${dotPos.current.x - DOT_OFFSET}px,${dotPos.current.y - DOT_OFFSET}px,0) rotate(45deg)`;
+      }
+
+      animationFrameId = requestAnimationFrame(animateDot);
     };
 
     const onEnter = e => {
@@ -87,16 +117,21 @@ export default function Portfolio() {
     document.addEventListener("mouseout",   onLeave);
     document.addEventListener("mousedown",  onDown);
     document.addEventListener("mouseup",    onUp);
+    
+    // Start the diamond animation frame loop
+    animationFrameId = requestAnimationFrame(animateDot);
+
     return () => {
       window.removeEventListener("mousemove", move);
       document.removeEventListener("mouseover",  onEnter);
       document.removeEventListener("mouseout",   onLeave);
       document.removeEventListener("mousedown",  onDown);
       document.removeEventListener("mouseup",    onUp);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  const S = { maxWidth: 1050, margin: "0 auto", padding: "130px 32px" };
+  const S = { maxWidth: 1050, margin: "0 auto", padding: "70px 32px" };
 
   return (
     <div className="pf-root">

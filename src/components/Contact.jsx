@@ -203,7 +203,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Requester ID</label>
+                <label className="interactive-label">Profile Name</label>
               </div>
 
               <div className="form-group">
@@ -216,7 +216,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Contact Channel</label>
+                <label className="interactive-label">Email Address</label>
               </div>
             </div>
 
