@@ -203,7 +203,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Your Name</label>
+                <label className="interactive-label">Requester ID</label>
               </div>
 
               <div className="form-group">
@@ -216,7 +216,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Email Address</label>
+                <label className="interactive-label">Contact Channel</label>
               </div>
             </div>
 
@@ -230,7 +230,7 @@ export default function ContactSection() {
                 disabled={loading}
                 required
               />
-              <label className="interactive-label">Subject</label>
+              <label className="interactive-label">Transmission Subject</label>
             </div>
 
             <div className="form-group">
@@ -244,7 +244,7 @@ export default function ContactSection() {
                 disabled={loading}
                 required
               />
-              <label className="interactive-label">Your Message</label>
+              <label className="interactive-label">Message Payload</label>
             </div>
 
             {errorMessage && (
