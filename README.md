@@ -4,7 +4,7 @@
 
 Personal portfolio website featuring projects, research work, technical experience, and interests in machine learning and software engineering.
 
-🌐 **Live Portfolio:** https://my-portfolio-beta-one-95.vercel.app
+🌐 **Live Portfolio:** https://tp-shivha-shakthiy.vercel.app
 
 ---
 
@@ -113,4 +113,4 @@ https://github.com/tp-shivha-shakthiy
 https://linkedin.com/in/t-p-shivha-shakthiy-801723346
 
 **Portfolio**
-https://my-portfolio-beta-one-95.vercel.app
+https://tp-shivha-shakthiy.vercel.app
