@@ -1,4 +1,27 @@
 export const PROJECTS = [
+  
+  {
+  abbr: "NID",
+    color: "#d97706",
+    name: "Network Intrusion Detection under Class Imbalance",
+    year: "2026",
+    desc: "Preprocessing + benchmarking pipeline on NSL-KDD and CICIDS using SMOTE / KMeans-SMOTE and stratified CV across XGBoost, RF and CNN.",
+    tags: ["Python","Machine Learning","Cybersecurity","Data Analysis","Scikit-Learn","Intrusion Detection"],
+    github: "https://github.com/tp-shivha-shakthiy/Intrusion-Detection-System",
+    demo: null,
+    status: "Research · WIP",
+  },
+  {
+    abbr: "VI-ReID",
+    color: "#be185d",
+    name: "Visible–Infrared Person Re-Identification",
+    year: "2026",
+    desc: "Feature learning pipelines and evaluation frameworks for representation learning, run on real-world image datasets.",
+    tags: ["PyTorch","Computer Vision","Deep Learning","Person Re-Identification","Cross-Modal Learning","Image Processing"],
+    github: "https://github.com/tp-shivha-shakthiy/sthf-vi-reid",
+    demo: null,
+    status: "Research · WIP",
+  },
   {
     abbr: "VA",
     color: "#7c3aed",
@@ -20,28 +43,5 @@ export const PROJECTS = [
     github: "https://github.com/tp-shivha-shakthiy/Neurobridge",
     demo: "#",
     status: null,
-  },
-  
-  {
-    abbr: "IDS",
-    color: "#d97706",
-    name: "Intrusion Detection System",
-    year: "2026",
-    desc: "Preprocessing + benchmarking pipeline on NSL-KDD and CICIDS using SMOTE / KMeans-SMOTE and stratified CV across XGBoost, RF and CNN.",
-    tags: ["Python","Machine Learning","Cybersecurity","Data Analysis","Scikit-Learn","Intrusion Detection"],
-    github: null,
-    demo: null,
-    status: "Research · WIP",
-  },
-  {
-    abbr: "CVE",
-    color: "#be185d",
-    name: "Computer Vision Experiments",
-    year: "2026",
-    desc: "Feature learning pipelines and evaluation frameworks for representation learning, run on real-world image datasets.",
-    tags: ["PyTorch","Computer Vision","Deep Learning","Person Re-Identification","Cross-Modal Learning","Image Processing"],
-    github: null,
-    demo: null,
-    status: "Research · WIP",
   },
 ];
