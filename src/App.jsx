@@ -158,8 +158,7 @@ export default function Portfolio() {
 
             <div ref={h2Ref} style={h2Style}>
               <h1 className="hero-name">
-                <span className="hero-name__first">T P Shivha </span>
-                <span className="hero-name__last">Shakthiy</span>
+                <span className="hero-name__first">T P Shivha Shakthiy</span>
               </h1>
             </div>
 
@@ -191,11 +190,11 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <div ref={hImgRef} style={hImgStyle} className="hero-right">
+          <div className="hero-right">
             <div className="id-card">
               <div className="id-card__topbar">
-                <span className="id-dot id-dot--r" /><span className="id-dot id-dot--y" /><span className="id-dot id-dot--g" />
-                <span className="id-card__filename">identity.sys</span>
+                <span className="id-dot id-dot--r" title="close" /><span className="id-dot id-dot--y" title="minimize" /><span className="id-dot id-dot--g" title="maximize" />
+                <span className="id-card__filename">~/profile/identity.sys</span>
               </div>
               <div className="id-card__content">
   
@@ -214,7 +213,7 @@ export default function Portfolio() {
                   ["INSTITUTION", "IIIT Kottayam"],
                   ["DEGREE",      "B.Tech CS · AI & DS"],
                   ["STATUS",      "Building"],
-                  ["DOMAIN ", "Applied AI Systems"],
+                  ["DOMAIN",      "Applied AI Systems"],
                 ].map(([k, v]) => (
                   <div key={k} className="id-row">
                     <span className="id-row__k">{k}</span>
@@ -227,12 +226,9 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="hero-scroll">
-          <div className="hero-scroll__line" />
-          <span>scroll</span>
+        <div className="hero-scroll" aria-hidden="true">
+          <div className="hero-scroll__chevron" />
         </div>
-
-        <div className="hero-wordmark" aria-hidden="true">SHIVHA</div>
       </section>
 
       {/* ╔══════════════ ABOUT ══════════════╗ */}
@@ -245,7 +241,7 @@ export default function Portfolio() {
             <h2 className="about-headline">
               Engineering at the<br />
               intersection of AI<br />
-              <em>and real-world systems.</em>
+              and real-world systems.
             </h2>
             <p className="body-text mt-5">
               I’m a Computer Science undergraduate focusing on Artificial Intelligence and Data Science. 
@@ -256,7 +252,7 @@ export default function Portfolio() {
               I focus on clean design, solid structure, and making things that actually work outside of notebooks.
 
 I prefer simple, intentional solutions over unnecessary complexity, 
-and and I keep iterating until things feel solid and reliable.            
+and I keep iterating until things feel solid and reliable.            
             </p>
           </div>
           <div ref={a2Ref} style={a2Style} className="about-meta">

@@ -52,10 +52,7 @@ export default function Skills({ skillsData }) {
               margin: 0,
             }}
           >
-            Technical <br />
-            <span style={{ color: "var(--tx-2)", fontStyle: "italic" }}>
-              Competencies
-            </span>
+            Technical Competencies
           </h2>
           <p
             style={{

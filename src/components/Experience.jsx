@@ -195,35 +195,19 @@ export default function ExperienceSection({ experienceData, achievementsData }) 
         >
           <div style={{ display: "flex", gap: "12px", alignItems: "center", opacity: 0.4 }}>
             <span style={{ fontFamily: "var(--fm)", fontSize: "11px" }}>04</span>
-            <span style={{ fontFamily: "var(--fm)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase" }}>Section</span>
           </div>
-          <div>
-            <h2
-              style={{
-                fontFamily: "var(--fd)",
-                fontSize: "38px",
-                fontWeight: 400,
-                color: "var(--tx-h)",
-                lineHeight: "1.15",
-                margin: 0,
-              }}
-            >
-              Professional
-            </h2>
-            <h2
-              style={{
-                fontFamily: "var(--fd)",
-                fontSize: "38px",
-                fontWeight: 400,
-                color: "var(--tx-2)",
-                fontStyle: "italic",
-                lineHeight: "1.15",
-                margin: "4px 0 0 0",
-              }}
-            >
-              Experience
-            </h2>
-          </div>
+          <h2
+            style={{
+              fontFamily: "var(--fd)",
+              fontSize: "38px",
+              fontWeight: 400,
+              color: "var(--tx-h)",
+              lineHeight: "1.15",
+              margin: 0,
+            }}
+          >
+            Experience
+          </h2>
           <p
             style={{
               fontFamily: "var(--fb)",
@@ -273,7 +257,7 @@ export default function ExperienceSection({ experienceData, achievementsData }) 
               margin: "0 0 28px 0",
             }}
           >
-            Selected Laurels
+            Awards
           </p>
           <ul
             style={{

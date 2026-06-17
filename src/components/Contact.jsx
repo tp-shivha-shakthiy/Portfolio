@@ -95,7 +95,7 @@ export default function ContactSection() {
             setLoading(false);
             // Catch the explicit API error string if there's an account/template mismatch
             const detail = error?.text || JSON.stringify(error);
-            setErrorMessage(`Transmission failure: ${detail}. Please try again.`);
+            setErrorMessage(`Error: ${detail}. Please try again.`);
             console.error("EmailJS Technical Context:", error);
           }
         );
@@ -132,7 +132,7 @@ export default function ContactSection() {
           }}
         >
           Get In <br />
-          <span style={{ color: "var(--tx-2)", fontStyle: "italic" }}>Touch</span>
+          <span style={{ color: "var(--tx-2)" }}>Touch</span>
         </h2>
         Let's connect for AI, ML, software engineering, or research.
         <div style={{ display: "flex", flexDirection: "column", marginTop: "24px" }}>
@@ -164,7 +164,7 @@ export default function ContactSection() {
           >
             <span style={{ fontSize: "32px", color: "var(--a)" }}>✓</span>
             <p style={{ fontFamily: "var(--fd)", fontSize: "20px", color: "var(--tx-h)", margin: 0 }}>
-              Transmission Received
+              Message Received
             </p>
             <p style={{ fontFamily: "var(--fb)", fontSize: "14px", color: "var(--tx-2)", maxWidth: "280px", margin: 0 }}>
               Thank you. I will review your message and reply shortly.
@@ -203,7 +203,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Profile Name</label>
+                <label className="interactive-label"><span className="terminal-prompt">$</span> name</label>
               </div>
 
               <div className="form-group">
@@ -216,7 +216,7 @@ export default function ContactSection() {
                   disabled={loading}
                   required
                 />
-                <label className="interactive-label">Email Address</label>
+                <label className="interactive-label"><span className="terminal-prompt">$</span> email</label>
               </div>
             </div>
 
@@ -230,7 +230,7 @@ export default function ContactSection() {
                 disabled={loading}
                 required
               />
-              <label className="interactive-label">Transmission Subject</label>
+              <label className="interactive-label"><span className="terminal-prompt">$</span> subject</label>
             </div>
 
             <div className="form-group">
@@ -244,7 +244,7 @@ export default function ContactSection() {
                 disabled={loading}
                 required
               />
-              <label className="interactive-label">Message Payload</label>
+              <label className="interactive-label"><span className="terminal-prompt">$</span> message</label>
             </div>
 
             {errorMessage && (
@@ -275,7 +275,7 @@ export default function ContactSection() {
                 cursor: loading ? "not-allowed" : "pointer"
               }}
             >
-              {loading ? "Transmitting Pipeline..." : "Send Message"}
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
         )}
