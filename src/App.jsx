@@ -10,6 +10,7 @@ import { useFadeIn } from "./hooks/useFadeIn";
 import Skills from "./components/Skills";
 import Projects from "./components/projects";
 import ExperienceSection from "./components/Experience";
+import Awards from "./components/Awards";
 import ContactSection from "./components/Contact";
 
 import Navbar from "./components/Navbar";
@@ -49,6 +50,7 @@ export default function Portfolio() {
   const [skRef, skStyle] = useFadeIn(0);
   const [prRef, prStyle] = useFadeIn(0);
   const [exRef, exStyle] = useFadeIn(0);
+  const [awRef, awStyle] = useFadeIn(0);
   const [coRef, coStyle] = useFadeIn(0);
 
  /* ── custom cursor — instant snap ── */
@@ -131,7 +133,7 @@ export default function Portfolio() {
     };
   }, []);
 
-  const S = { maxWidth: 1050, margin: "0 auto", padding: "70px 32px" };
+  const S = { padding: "70px 120px" };
 
   return (
     <div className="pf-root">
@@ -151,6 +153,7 @@ export default function Portfolio() {
       <section id="hero" className="hero">
         <div className="hero-grid-bg" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
+        <div className="hero-ambient" aria-hidden="true" />
 
         <div className="hero-inner">
           <div className="hero-left">
@@ -291,16 +294,23 @@ and I keep iterating until things feel solid and reliable.
   <div ref={exRef} style={exStyle}>
     <ExperienceSection
       experienceData={EXPERIENCE}
-      achievementsData={ACHIEVEMENTS}
       isDarkMode={true}
     />
   </div>
 </section>
 
+      {/* ╔══════════════ AWARDS ══════════════╗ */}
+      <section id="awards" style={{ ...S, borderTop: "1px solid var(--border)" }}>
+        <div ref={awRef} style={awStyle}>
+          <SectionHeading num="05" title="Awards" />
+          <Awards />
+        </div>
+      </section>
+
       {/* ╔══════════════ CONTACT ══════════════╗ */}
       <section id="contact" style={{ ...S, borderTop: "1px solid var(--border)" }}>
         <div ref={coRef} style={coStyle}>
-          <SectionHeading num="05" title="Contact" />
+          <SectionHeading num="06" title="Contact" />
           <ContactSection isDarkMode={true} />
         </div>
       </section>
