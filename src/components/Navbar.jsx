@@ -11,7 +11,7 @@ export default function Navbar({ active, goto }) {
 
   return (
     <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, borderBottom: "1px solid #111", background: "rgba(8,8,8,.85)", backdropFilter: "blur(12px)" }}>
-      <nav style={{ maxWidth: 1024, margin: "0 auto", padding: "0 24px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <nav style={{ padding: "0 120px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <button onClick={() => handleNavClick("hero")} style={{ fontFamily: "monospace", fontSize: 13, color: "#848181", letterSpacing: ".15em" }}>
            Build. Refine. Evolve. <span style={{ color: "#acb2a9" }}></span>
         </button>
@@ -45,7 +45,7 @@ export default function Navbar({ active, goto }) {
 
       {/* Mobile Flyout */}
       {menuOpen && (
-        <div style={{ background: "#0d0d0d", borderTop: "1px solid #111", padding: "16px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ background: "#0d0d0d", borderTop: "1px solid #111", padding: "16px 120px", display: "flex", flexDirection: "column", gap: 16 }}>
           {NAV.map(n => (
             <button 
               key={n} 

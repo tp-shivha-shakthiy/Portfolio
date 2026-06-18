@@ -118,10 +118,7 @@ em    { font-style: italic; }
 /* ── ROOT WRAPPER ──────────────────────────────────────────────────────────── */
 .pf-root {
   position: relative; min-height: 100vh;
-  max-width: 1120px; margin: 0 auto;
-  border-inline: 1px solid var(--br);
 }
-@media (max-width: 1160px) { .pf-root { border-inline: none; } }
 .section-surface { background: var(--bg-1); }
 
 /* ── NAVBAR ────────────────────────────────────────────────────────────────── */
@@ -185,11 +182,20 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .hero-grid-bg {
   position: absolute; inset: 0; z-index: 0;
   background-image:
-    linear-gradient(var(--br) 1px, transparent 1px),
-    linear-gradient(90deg, var(--br) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 65% 65% at 52% 48%, black 15%, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse 65% 65% at 52% 48%, black 15%, transparent 72%);
+}
+.hero-grid-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(ellipse 50% 50% at 65% 45%, black 10%, transparent 60%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 65% 45%, black 10%, transparent 60%);
 }
 .hero-glow {
   position: absolute; z-index: 0; pointer-events: none;
@@ -198,6 +204,12 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   filter: blur(80px);
   animation: orb-breathe 10s ease-in-out infinite;
 }
+.hero-ambient {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: 800px; height: 800px; bottom: -20%; right: -5%;
+  background: radial-gradient(circle at 60% 50%, rgba(212,146,15,0.07) 0%, transparent 55%);
+  filter: blur(100px);
+}
 @keyframes orb-breathe {
   0%,100% { opacity: 0.6; transform: scale(1) translateY(0); }
   50%      { opacity: 1;   transform: scale(1.1) translateY(-20px); }
@@ -205,12 +217,15 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 /* wordmark removed per redesign */
 .hero-inner {
   position: relative; z-index: 2;
-  max-width: 1050px; margin: 0 auto; width: 100%;
-  padding: 0 40px; padding-top: 24px;
-  display: grid; grid-template-columns: 1fr 360px;
-  gap: 64px; align-items: center;
+  width: 100%;
+  padding: 24px 120px 0;
+  display: flex; align-items: center;
+  gap: clamp(48px, 5vw, 120px);
 }
-.hero-left { display: flex; flex-direction: column; gap: 2.2rem; }
+.hero-left {
+  display: flex; flex-direction: column; gap: 2.2rem;
+  flex: 1; min-width: 0;
+}
 
 .hero-status {
   display: inline-flex; align-items: center; gap: 10px;
@@ -250,8 +265,9 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .tag:hover { border-color: var(--a-bd); color: var(--tx-h); background: var(--a-dim); }
 
 /* ── IDENTITY CARD ─────────────────────────────────────────────────────────── */
-.hero-right { flex-shrink: 0; }
+.hero-right { flex: 0 0 clamp(300px, 28vw, 520px); }
 .id-card {
+  width: 100%;
   background: rgba(20,20,22,0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -468,45 +484,31 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 [id="projects"] a, .proj-card a { color: var(--a) !important; }
 
 /* ── EXPERIENCE ────────────────────────────────────────────────────────────── */
-[id="experience"] > div,
-[class*="ExperienceSection"], [class*="experienceSection"] {
-  display: flex !important; gap: 64px !important;
-  align-items: flex-start !important; margin-top: 40px !important; width: 100% !important;
+.exp-layout {
+  display: flex; gap: 64px;
+  align-items: flex-start; width: 100%; margin-top: 0;
 }
-[class*="timeline"], [class*="Timeline"], [id="experience"] ul {
-  position: relative !important; padding-left: 0 !important;
-  list-style: none !important; flex: 1.2 !important; margin: 0 !important;
+.exp-header-col {
+  flex: 0 0 32%; position: sticky; top: 140px;
+  display: flex; flex-direction: column; gap: 14px;
 }
-[class*="timeline"]::before, [class*="Timeline"]::before, [id="experience"] ul::before {
-  content: '' !important; position: absolute !important;
-  left: 5px !important; top: 8px !important; bottom: 0 !important;
-  width: 1px !important;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%) !important;
+.exp-index__num {
+  font-family: var(--fm); font-size: 11px; color: var(--a); opacity: 0.45;
 }
-[class*="exp-item"], [class*="expItem"],
-[id="experience"] li, [id="experience"] [class*="item"] {
-  position: relative !important; padding: 0 0 48px 32px !important;
-  border: none !important; background: transparent !important; box-shadow: none !important;
+.exp-heading {
+  font-family: var(--fd); font-size: 38px; font-weight: 400;
+  color: var(--tx-h); line-height: 1.15; margin: 0;
 }
-[class*="exp-item"]:last-child, [id="experience"] li:last-child { padding-bottom: 0 !important; }
-[class*="exp-item"]::before, [id="experience"] li::before,
-[id="experience"] [class*="item"]::before {
-  content: '' !important; position: absolute !important;
-  left: 1px !important; top: 6px !important;
-  width: 9px !important; height: 9px !important;
-  background: var(--bg) !important; border: 1px solid var(--a) !important;
-  border-radius: 1px !important; transform: rotate(45deg) !important;
-  box-shadow: 0 0 8px var(--a-glow) !important; z-index: 2 !important;
-  transition: background 0.25s var(--spring), box-shadow 0.25s !important;
+.exp-intro {
+  font-family: var(--fb); font-size: 13px; color: var(--tx-2);
+  line-height: 1.7; margin: 4px 0 0 0; opacity: 0.8;
+  max-width: 280px;
 }
-[class*="exp-item"]:hover::before, [id="experience"] li:hover::before {
-  background: var(--a) !important; box-shadow: 0 0 14px var(--a) !important;
+.exp-stream {
+  flex: 1; display: flex; flex-direction: column;
 }
-[class*="exp-period"], [class*="expPeriod"],
-[id="experience"] [class*="period"], [id="experience"] [class*="date"] {
-  display: block !important; font-family: var(--fm) !important;
-  font-size: 10px !important; letter-spacing: 0.12em !important;
-  text-transform: uppercase !important; color: var(--a) !important; margin-bottom: 8px !important;
+.exp-stream-end {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 [class*="exp-role"], [class*="expRole"], [id="experience"] h3, [id="experience"] h4 {
   font-family: var(--fd) !important; font-size: 24px !important;
@@ -522,74 +524,18 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   font-family: var(--fb) !important; font-size: 14.5px !important;
   line-height: 1.65 !important; color: var(--tx) !important; max-width: 480px !important;
 }
-[class*="achievements"], [class*="Achievements"],
-[id="experience"] [class*="highlight"], [id="experience"] [class*="achievement"] {
-  flex: 0.8 !important; background: transparent !important;
-  border: none !important; border-top: 1px solid rgba(255,255,255,0.04) !important;
-  border-radius: 0 !important; padding: 24px 0 0 0 !important;
-  box-shadow: none !important; position: sticky !important; top: 140px !important;
-}
-[class*="achievements"]::before, [class*="Achievements"]::before { display: none !important; }
-[class*="achievements"] h3, [class*="achievements"] h4,
-[class*="Achievements"] h3, [class*="Achievements"] h4,
-[class*="achievements"] [class*="title"], [class*="achievements"] [class*="heading"] {
-  font-family: var(--fm) !important; font-size: 10px !important;
-  letter-spacing: 0.14em !important; text-transform: uppercase !important;
-  color: var(--tx-h) !important; font-weight: 400 !important;
-  margin-bottom: 16px !important; padding-bottom: 12px !important;
-  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
-}
-[class*="achievements"] li, [class*="Achievements"] li {
-  display: flex !important; gap: 16px !important; align-items: flex-start !important;
-  padding: 14px 0 !important; border-bottom: 1px solid rgba(255,255,255,0.04) !important;
-  background: transparent !important;
-}
-[class*="achievements"] li:last-child, [class*="Achievements"] li:last-child {
-  border-bottom: none !important;
-}
-[class*="achievements"], [class*="Achievements"] { counter-reset: ach !important; }
-[class*="achievements"] li::before, [class*="Achievements"] li::before {
-  content: counter(ach) !important; counter-increment: ach !important;
-  font-family: var(--fm) !important; font-size: 10px !important;
-  color: var(--tx-2) !important; opacity: 0.35 !important; min-width: 24px !important;
-}
-[class*="achievements"] li span, [class*="achievements"] li p {
-  font-family: var(--fb) !important; font-size: 14px !important;
-  line-height: 1.6 !important; color: var(--tx) !important;
-}
 
 @media (max-width: 768px) {
-  /* Experience: stack left header + rows + laurels vertically */
-  #experience > div > div[style*="display: flex"][style*="gap: 80px"] {
-    flex-direction: column !important;
-    gap: 0 !important;
+  .exp-layout { flex-direction: column !important; gap: 0 !important; }
+  .exp-header-col {
+    position: static !important; top: unset !important;
+    flex: none !important; width: 100% !important;
   }
-
-  /* Unstick the sticky header panel */
-  #experience div[style*="position: sticky"] {
-    position: static !important;
-  }
-
-  /* Each experience row: stack date/org above content */
-  #experience div[style*="gap: 48px"][style*="padding: 36px 0"] {
-    flex-direction: column !important;
-    gap: 8px !important;
-    padding: 24px 0 !important;
-  }
-  
-  /* Date column: full width, not fixed 140px */
-  #experience div[style*="width: 140px"] {
-    width: 100% !important;
-  }
-
-  /* Laurels panel: remove left border + side padding */
-  #experience div[style*="border-left"][style*="padding-left: 48px"] {
-    border-left: none !important;
-    border-top: 1px solid rgba(255,255,255,0.06) !important;
-    padding-left: 0 !important;
-    padding-top: 32px !important;
-    margin-top: 16px !important;
-  }
+  .exp-header-col > .exp-intro { max-width: 100% !important; }
+  .exp-stream { flex: none !important; width: 100% !important; }
+  .exp-row { flex-direction: column !important; gap: 8px !important; padding: 20px 0 !important; }
+  .exp-meta { width: 100% !important; }
+  .exp-heading { font-size: 28px !important; }
 }
 
 /* ── TERMINAL PROMPT ───────────────────────────────────────────────────────── */
@@ -623,6 +569,41 @@ form input:focus, form textarea:focus,
   border-bottom-color: var(--tx-h) !important; background: transparent !important;
 }
 
+/* ── AWARDS LIST ────────────────────────────────────────────────────────────── */
+.awards-list {
+  display: flex; flex-direction: column;
+}
+.award-row {
+  display: flex; align-items: center; gap: 20px;
+  padding: 22px 0; min-height: 64px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s;
+}
+.award-row:last-child { border-bottom: none; }
+.award-row:hover { background: rgba(255,255,255,0.01); }
+.award-row__idx {
+  font-family: var(--fm); font-size: 10px;
+  color: var(--tx-2); opacity: 0.35; letter-spacing: 0.1em;
+  min-width: 28px; flex-shrink: 0;
+}
+.award-row__body {
+  display: flex; flex-direction: column; gap: 2px;
+  flex: 1; min-width: 0;
+}
+.award-row__title {
+  font-family: var(--fb); font-size: 14.5px;
+  color: var(--tx-h); line-height: 1.5;
+}
+.award-row__context {
+  font-family: var(--fb); font-size: 13px;
+  color: var(--tx-2); line-height: 1.4;
+}
+.award-row__year {
+  font-family: var(--fm); font-size: 10px;
+  color: var(--a); letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
 /* ── SECTION HEADING ───────────────────────────────────────────────────────── */
 [class*="SectionHeading"], [class*="section-heading"], [class*="sectionHeading"] {
   margin-bottom: 4rem !important;
@@ -639,15 +620,14 @@ form input:focus, form textarea:focus,
 }
 
 /* ── FOOTER ────────────────────────────────────────────────────────────────── */
-.pf-footer { border-top: 1px solid rgba(255,255,255,0.04); background: var(--bg); padding: 64px 32px; }
+.pf-footer { border-top: 1px solid rgba(255,255,255,0.04); background: var(--bg); padding: 64px 120px; }
 .pf-footer__inner {
-  max-width: 1050px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr auto 1fr;
-  align-items: center; gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 48px;
 }
 .footer-copy { font-family: var(--fm); font-size: 11px; color: var(--tx-2); letter-spacing: 0.04em; }
-.footer-copy--center { text-align: center; }
-.footer-links { display: flex; gap: 32px; justify-content: flex-end; }
+.footer-links { display: flex; gap: 32px; justify-self: end; }
 .footer-link {
   font-family: var(--fm); font-size: 11px; color: var(--tx-2);
   letter-spacing: 0.06em; transition: color 0.2s ease;
@@ -660,13 +640,17 @@ form input:focus, form textarea:focus,
   /* ── Global overflow guard ── */
   .pf-root, section, footer { overflow-x: hidden !important; }
 
+  /* ── Narrow inline padding on mobile for non-hero sections ── */
+  section:not(#hero) { padding-left: 20px !important; padding-right: 20px !important; }
+
   /* ── Hero ── */
   .hero-inner {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
     gap: 2.5rem; text-align: center;
-    padding: 0 20px; align-items: center;
+    padding: 24px 20px 0; align-items: center;
+    justify-content: flex-start;
   }
-  .hero-left { align-items: center; }
+  .hero-left { align-items: center; max-width: 100% !important; }
   .hero-bio  { text-align: left; }
   .hero-right { display: flex; justify-content: center; }
   .id-card  { width: 280px; }
@@ -715,39 +699,27 @@ form input:focus, form textarea:focus,
     grid-template-columns: 1fr !important;
   }
 
-  /* ── Experience outer container — column ── */
-  #experience > div > div:last-child,
-  #experience > div > div[style*="gap: 80px"],
-  #experience > div > div[style*="gap:80px"] {
+  /* ── Experience — stack header + rows ── */
+  #experience [class*="exp-layout"] {
     flex-direction: column !important;
     gap: 0 !important;
     width: 100% !important;
   }
-  /* Left stream (experience rows) — full width */
-  #experience div[style*="flex: 1.2"],
-  #experience div[style*="flex:1.2"] {
+  /* Experience stream — full width */
+  #experience [class*="exp-stream"] {
     flex: none !important; width: 100% !important;
-  }
-  /* Right laurels panel — full width, no sticky, kill left border */
-  #experience div[style*="borderLeft"],
-  #experience div[style*="border-left"] {
-    flex: none !important; width: 100% !important;
-    position: relative !important; top: auto !important;
-    border-left: none !important; padding-left: 0 !important;
-    border-top: 1px solid rgba(10, 10, 10, 0.06) !important;
-    padding-top: 32px !important; margin-top: 16px !important;
   }
   /* Each experience row — stack meta above content */
-  #experience div[style*="gap: 48px"],
-  #experience div[style*="gap:48px"] {
+  #experience [class*="exp-row"] {
     flex-direction: column !important; gap: 12px !important;
   }
   /* Period/org meta block — row layout side by side */
-  #experience div[style*="width: 140px"],
-  #experience div[style*="width:140px"] {
+  #experience [class*="exp-meta"] {
     width: 100% !important; display: flex !important;
     flex-direction: row !important; gap: 16px !important; align-items: center !important;
   }
+
+  /* ── Awards — list already responsive, no change needed */
 
   /* ── Kill all inline sticky (Skills left col, Experience header) ── */
   [style*="position: sticky"],
@@ -783,7 +755,7 @@ form input:focus, form textarea:focus,
   .pf-footer { padding: 40px 20px; }
   .pf-footer__inner { grid-template-columns: 1fr; gap: 14px; text-align: center; }
   .footer-copy--center { display: none; }
-  .footer-links { justify-content: center; gap: 20px; }
+  .footer-links { gap: 20px; justify-self: center; }
 
   /* ── Navbar — show burger, hide desktop links ── */
   .desktop-nav { display: none !important; }

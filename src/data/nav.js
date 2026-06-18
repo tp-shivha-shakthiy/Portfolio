@@ -1,1 +1,1 @@
-export const NAV = ["About", "Skills", "Projects", "Experience", "Contact"];
+export const NAV = ["About", "Skills", "Projects", "Experience", "Awards", "Contact"];
