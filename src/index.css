@@ -433,29 +433,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 #skills [style*="borderTop"]:hover {
   background: rgba(212,146,15,0.025);
 }
-@media (max-width: 768px) {
-  /* Skills: stack left anchor above the list */
-  #skills > div > div[style*="display: flex"] {
-    flex-direction: column !important;
-    gap: 24px !important;
-  }
 
-  /* Unstick the anchor on mobile */
-  #skills div[style*="position: sticky"] {
-    position: static !important;
-  }
-
-  /* Each skill row: stack category label above items */
-  #skills div[style*="gap: 40px"][style*="padding: 24px 0"] {
-    flex-direction: column !important;
-    gap: 12px !important;
-  }
-
-  /* Category label width: full width on mobile */
-  #skills div[style*="width: 160px"] {
-    width: 100% !important;
-  }
-}
 
 /* ── PROJECTS ──────────────────────────────────────────────────────────────── */
 .proj-card, [class*="proj-card"], [class*="projCard"], [class*="ProjectCard"] {

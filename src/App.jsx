@@ -292,6 +292,7 @@ and I keep iterating until things feel solid and reliable.
       {/* ╔══════════════ EXPERIENCE ══════════════╗ */}
 <section id="experience" style={{ ...S, borderTop: "1px solid var(--border)" }}>
   <div ref={exRef} style={exStyle}>
+    <SectionHeading num="04" title="Experience" />
     <ExperienceSection
       experienceData={EXPERIENCE}
       isDarkMode={true}

@@ -128,9 +128,6 @@ export default function ExperienceSection({ experienceData }) {
     <div className="exp-layout">
       {/* Col 1: Sticky Header */}
       <div className="exp-header-col">
-        <div className="exp-index">
-          <span className="exp-index__num">04</span>
-        </div>
         <h2 className="exp-heading">Experience</h2>
         <p className="exp-intro">
           Research and engineering experiences spanning computer vision,
