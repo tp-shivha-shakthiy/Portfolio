@@ -757,7 +757,9 @@ form input:focus, form textarea:focus,
   .footer-copy--center { display: none; }
   .footer-links { gap: 20px; justify-self: center; }
 
-  /* ── Navbar — show burger, hide desktop links ── */
+  /* ── Navbar — show burger, hide desktop links, tighten padding ── */
+  nav { padding-left: 20px !important; padding-right: 20px !important; }
+  nav button:first-child { font-size: 11px !important; letter-spacing: 0.1em !important; }
   .desktop-nav { display: none !important; }
   .burger { display: flex !important; }
 

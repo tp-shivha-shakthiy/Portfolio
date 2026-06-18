@@ -25,7 +25,7 @@ const mobileStyles = `
 
 export default function Skills({ skillsData }) {
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <style>{mobileStyles}</style>
       <div
         className="skills-layout"
@@ -136,6 +136,6 @@ export default function Skills({ skillsData }) {
           <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.04)" }} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

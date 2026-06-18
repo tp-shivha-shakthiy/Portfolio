@@ -37,7 +37,7 @@ function Tag({ label }) {
 
 export default function Projects({ prRef, prStyle }) {
   return (
-    <section id="projects">
+    <>
       <style>{mobileStyles}</style>
       <div ref={prRef} style={prStyle}>
         <h2>Projects</h2>
@@ -52,7 +52,7 @@ export default function Projects({ prRef, prStyle }) {
     borderBottom: "1px solid rgba(255,255,255,0.04)",
     borderRadius: 0,
     padding: 24,
-    background: "transparent",  // ← add this
+    background: "transparent",
   }}
 >
               {/* Header */}
@@ -165,6 +165,6 @@ export default function Projects({ prRef, prStyle }) {
           ))}
         </div>
       </div>
-    </section>
+    </>
   );
 }
