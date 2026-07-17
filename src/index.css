@@ -232,11 +232,11 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   position: fixed;
   inset: 0;
   z-index: 99;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.5);
   animation: navFadeIn 180ms ease forwards;
 }
 [data-theme="light"] .nav-overlay {
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.25);
 }
 @keyframes navFadeIn {
   from { opacity: 0; }
@@ -249,12 +249,16 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   top: 56px;
   right: 0;
   width: 280px;
-  background: var(--surface);
+  background: var(--surface) !important;
   border-bottom: 1px solid var(--br);
   border-left: 1px solid var(--br);
   padding: 0;
   animation: navPanelIn 200ms ease forwards;
   transform-origin: top right;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+[data-theme="light"] .nav-panel {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 @keyframes navPanelIn {
   from { opacity: 0; transform: translateY(-6px) scale(0.98); }
