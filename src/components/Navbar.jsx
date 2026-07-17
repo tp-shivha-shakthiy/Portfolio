@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
 
@@ -13,11 +13,88 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const [theme, toggleTheme] = useTheme();
+  const triggerRef = useRef(null);
+  const panelRef = useRef(null);
+  const menuItemsRef = useRef([]);
 
   const isActive = (path) => {
     if (path === "/") return pathname === "/";
     return pathname.startsWith(path);
   };
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    triggerRef.current?.focus();
+  }, []);
+
+  const openMenu = useCallback(() => {
+    setMenuOpen(true);
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => {
+      if (!prev) return true;
+      triggerRef.current?.focus();
+      return false;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        closeMenu();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        const focusable = panelRef.current?.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const items = menuItemsRef.current.filter(Boolean);
+        if (!items.length) return;
+        const idx = items.indexOf(document.activeElement);
+        const next =
+          e.key === "ArrowDown"
+            ? (idx + 1) % items.length
+            : (idx - 1 + items.length) % items.length;
+        items[next]?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Focus first menu item on open
+    const timer = setTimeout(() => {
+      menuItemsRef.current[0]?.focus();
+    }, 50);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      clearTimeout(timer);
+    };
+  }, [menuOpen, closeMenu]);
 
   return (
     <header
@@ -100,98 +177,88 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Burger Trigger */}
+        {/* Mobile Menu Trigger */}
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: "none", color: "var(--tx-2)", alignItems: "center", gap: 6 }}
-          className="burger"
+          ref={triggerRef}
+          onClick={toggleMenu}
+          className="nav-trigger"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu-panel"
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             {menuOpen ? (
-              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             ) : (
               <>
-                <line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="3" y1="11" x2="17" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="3" y1="16" x2="17" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="2" y1="5" x2="16" y2="5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+                <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+                <line x1="2" y1="13" x2="16" y2="13" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
               </>
             )}
           </svg>
-          <span style={{ fontFamily: "var(--fm)", fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-            {menuOpen ? "Close" : "Menu"}
-          </span>
+          <span className="nav-trigger__label">Menu</span>
         </button>
       </nav>
 
-      {/* Mobile Flyout */}
+      {/* Mobile Menu Overlay + Panel */}
       {menuOpen && (
         <div
-          style={{
-            background: "var(--bg-1)",
-            borderTop: "1px solid var(--br)",
-            padding: "16px 20px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-          }}
+          className="nav-overlay"
+          onClick={closeMenu}
+          aria-hidden="true"
         >
-          <Link
-            to="/"
-            aria-label="Home"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              textDecoration: "none",
-              marginBottom: 8,
-            }}
-            onClick={() => setMenuOpen(false)}
+          <div
+            ref={panelRef}
+            id="mobile-menu-panel"
+            role="dialog"
+            aria-label="Navigation menu"
+            className="nav-panel"
+            onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src="/logo.png"
-              alt="Home"
-              style={{ height: 32, objectFit: "contain" }}
-            />
-            <span
-              style={{
-                fontFamily: "var(--fm)",
-                fontSize: 8,
-                color: "var(--a)",
-                letterSpacing: ".12em",
-                textTransform: "uppercase",
-                border: "1px solid var(--a-bd)",
-                padding: "2px 6px",
-                borderRadius: 2,
-              }}
-            >
-              Home
-            </span>
-          </Link>
-          {NAV.map((n) => (
-            <Link
-              key={n.path}
-              to={n.path}
-              className="nav-link"
-              style={{ textAlign: "left", textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {n.label}
-            </Link>
-          ))}
-          <button
-            className="theme-toggle"
-            onClick={() => { toggleTheme(); setMenuOpen(false); }}
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            style={{ alignSelf: "flex-start" }}
-          >
-            <span className={`theme-toggle__opt${theme === "light" ? " theme-toggle__opt--active" : ""}`}>
-              light
-            </span>
-            <span className="theme-toggle__pip" />
-            <span className={`theme-toggle__opt${theme === "dark" ? " theme-toggle__opt--active" : ""}`}>
-              dark
-            </span>
-          </button>
+            <div className="nav-panel__header">
+              <span className="nav-panel__title">Menu</span>
+            </div>
+
+            <div className="nav-panel__items">
+              {NAV.map((n, i) => (
+                <Link
+                  key={n.path}
+                  to={n.path}
+                  ref={(el) => { menuItemsRef.current[i] = el; }}
+                  className={`nav-panel__item${isActive(n.path) ? " nav-panel__item--active" : ""}`}
+                  onClick={closeMenu}
+                >
+                  <span className="nav-panel__idx">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="nav-panel__label">{n.label}</span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="nav-panel__divider" />
+
+            <div className="nav-panel__theme">
+              <span className="nav-panel__theme-label">Theme</span>
+              <div className="nav-panel__theme-opts">
+                <button
+                  ref={(el) => { menuItemsRef.current[NAV.length] = el; }}
+                  className={`nav-panel__theme-opt${theme === "light" ? " nav-panel__theme-opt--active" : ""}`}
+                  onClick={() => { toggleTheme(); }}
+                >
+                  <span className="nav-panel__theme-pip" />
+                  Light
+                </button>
+                <button
+                  ref={(el) => { menuItemsRef.current[NAV.length + 1] = el; }}
+                  className={`nav-panel__theme-opt${theme === "dark" ? " nav-panel__theme-opt--active" : ""}`}
+                  onClick={() => { toggleTheme(); }}
+                >
+                  <span className="nav-panel__theme-pip" />
+                  Dark
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </header>

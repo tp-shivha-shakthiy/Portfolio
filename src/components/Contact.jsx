@@ -49,7 +49,7 @@ export default function ContactSection() {
 
           <div className="contact-comm-row">
             <span className="contact-comm-label">Preferred Contact</span>
-            <span className="contact-comm-value">Email</span>
+            <span className="contact-comm-value">LinkedIn</span>
           </div>
 
           <div className="contact-comm-row">
