@@ -1,8 +1,8 @@
 # T P Shivha Shakthiy
 
-### From Models To Systems
+### Software Engineer · Systems Builder
 
-Personal portfolio website featuring projects, research work, technical experience, and interests in machine learning and software engineering.
+Personal portfolio designed as an engineering specification document — clean, structured, and intentional.
 
 🌐 **Live Portfolio:** https://tp-shivha-shakthiy.vercel.app
 
@@ -10,24 +10,35 @@ Personal portfolio website featuring projects, research work, technical experien
 
 ## About
 
-I am a Computer Science undergraduate specializing in Artificial Intelligence and Data Science at IIIT Kottayam.
+Software engineer and systems builder with a B.Tech in CSE (AI & DS) from IIIT Kottayam. I build backend systems and full-stack platforms — from REST APIs to production-ready apps, with applied ML when the problem calls for it.
 
-My interests lie in machine learning, software engineering, and intelligent systems. I enjoy building projects that combine technical depth with practical implementation, moving from ideas and models to working systems.
+This portfolio is designed to feel like a systems specification: dual-theme (dark/light), routed navigation, and a cohesive visual identity led by software and systems engineering.
 
-This portfolio serves as a central place to showcase my projects, research experiences, skills, achievements, and professional journey.
+---
+
+## Design Direction
+
+The site follows an **engineering specification document** aesthetic:
+
+* Typography: Literata (headings), Inter (body), JetBrains Mono (metadata)
+* Dual theme: dark mode (default) with light mode alternate
+* Warm paper-tone background in light mode with subtle engineering grid
+* Oxblood accent for active status markers
+* Clean ruled sections, no gradients, no decorative graphics
+* Portrait grounded with glow aura, mask fade, and rim light
 
 ---
 
 ## Features
 
-* Custom system-inspired identity card interface
-* Responsive design for desktop and mobile devices
-* Interactive project showcase
-* Experience and achievements timeline
-* Scroll-aware navigation
-* Smooth section animations
-* Custom cursor interactions
-* Contact form powered by EmailJS
+* Dual theme with localStorage persistence and anti-flash script
+* Theme toggle: `[ ● light / dark ]` status switch in navbar
+* Routed navigation (React Router v6) — Home, About, Projects, Journey, Contact
+* Responsive design for desktop and mobile
+* Featured project card with expandable details (GitHub API integration)
+* Project catalogue with case study detail pages
+* Fade-in animations via IntersectionObserver
+* Sticky footer on all pages
 
 ---
 
@@ -35,70 +46,50 @@ This portfolio serves as a central place to showcase my projects, research exper
 
 ### Frontend
 
-* React.js
+* React 19
+* React Router v7
 * JavaScript (ES6+)
 * HTML5
-* CSS3
+* CSS3 (custom properties, no framework)
 
-### Tools & Libraries
+### Tools
 
 * Vite
-* EmailJS
 * ESLint
 
 ### Deployment
 
-* GitHub
 * Vercel
 
 ---
-
-
 
 ## Project Structure
 
 ```text
 src/
-├── components/
-├── data/
-├── hooks/
-├── assets/
-├── App.jsx
-└── main.jsx
+├── components/       # Navbar, Contact, Experience, Awards, SectionHeading, ui
+├── data/             # projects, experience, status, awards
+├── hooks/            # useTheme, useFadeIn
+├── pages/            # Home, AboutPage, ProjectsPage, ProjectDetail, ContactPage, JourneyPage
+├── App.jsx           # Routes, ScrollToTop, Loader, Footer
+└── index.css         # Design tokens, all styling
 ```
 
 ---
 
 ## Running Locally
 
-### Clone the Repository
-
 ```bash
 git clone https://github.com/tp-shivha-shakthiy/Portfolio.git
 cd Portfolio
-```
-
-### Install Dependencies
-
-```bash
 npm install
-```
-
-### Start Development Server
-
-```bash
 npm run dev
 ```
 
-### Build for Production
+### Production Build
 
 ```bash
 npm run build
-```
-
-### Preview Production Build
-
-```bash
 npm run preview
 ```
 
@@ -106,11 +97,6 @@ npm run preview
 
 ## Connect
 
-**GitHub**
-https://github.com/tp-shivha-shakthiy
-
-**LinkedIn**
-https://linkedin.com/in/t-p-shivha-shakthiy-801723346
-
-**Portfolio**
-https://tp-shivha-shakthiy.vercel.app
+**GitHub:** https://github.com/tp-shivha-shakthiy
+**LinkedIn:** https://linkedin.com/in/t-p-shivha-shakthiy-801723346
+**Portfolio:** https://tp-shivha-shakthiy.vercel.app

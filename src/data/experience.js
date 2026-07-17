@@ -5,9 +5,9 @@ export const EXPERIENCE = [
     org: "NIT Tiruchirappalli",
     sub: "Dr. Brindha M",
     points: [
-      "Computer vision and representation learning research",
-      "Designing feature learning pipelines & evaluation frameworks",
-      "Controlled experiments on real-world datasets",
+      "Building PyTorch implementations for video-based visible-infrared person re-identification (VI-ReID)",
+      "Developing modular training, evaluation, and benchmarking pipelines for computer vision research",
+      "Engineering reusable components for feature learning and experimental reproducibility",
     ],
   },
   {
@@ -16,9 +16,9 @@ export const EXPERIENCE = [
     org: "IIIT Kottayam",
     sub: "Dr. Balasubramanian P",
     points: [
-      "Preprocessing pipelines for NSL-KDD & CICIDS",
-      "Applied SMOTE / KMeans-SMOTE for imbalanced classification",
-      "Benchmarked XGBoost, RF, CNN with stratified CV",
+      "Built end-to-end preprocessing pipelines for large-scale network intrusion detection datasets",
+      "Implemented feature engineering, class balancing, and model evaluation workflows",
+      "Benchmarked machine learning and deep learning models using reproducible experimentation pipelines",
     ],
   },
   {
@@ -27,8 +27,9 @@ export const EXPERIENCE = [
     org: "Enigma Research Club",
     sub: "",
     points: [
-      "Reproduced ML research papers & validated results",
-      "Built modular ML pipelines (preprocessing → eval)",
+      "Reproduced and validated machine learning research papers through independent implementations",
+      "Built reusable training, evaluation, and experimentation frameworks",
+      "Collaborated on applied AI and software engineering projects across multiple domains",
     ],
   },
 ];

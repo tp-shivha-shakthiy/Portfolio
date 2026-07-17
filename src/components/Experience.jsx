@@ -1,4 +1,5 @@
-import React from "react";
+
+import { EXPERIENCE } from "../data/experience";
 
 function ExperienceRow({ item }) {
   return (
@@ -8,7 +9,7 @@ function ExperienceRow({ item }) {
         display: "flex",
         gap: "48px",
         padding: "36px 0",
-        borderTop: "1px solid rgba(255, 255, 255, 0.04)",
+        borderTop: "1px solid var(--br)",
         alignItems: "flex-start",
       }}
     >
@@ -123,22 +124,23 @@ function ExperienceRow({ item }) {
   );
 }
 
-export default function ExperienceSection({ experienceData }) {
+export default function ExperienceSection() {
   return (
     <div className="exp-layout">
       {/* Col 1: Sticky Header */}
       <div className="exp-header-col">
         <h2 className="exp-heading">Experience</h2>
         <p className="exp-intro">
-          Research and engineering experiences spanning computer vision,
-          cybersecurity, machine learning, and applied AI across academic and
-          industry-oriented projects.
+          Engineering and research experience spanning backend systems, computer
+          vision, cybersecurity, and applied machine learning, with a focus on
+          building reproducible software, scalable pipelines, and
+          production-oriented tooling.
         </p>
       </div>
 
       {/* Col 2: Experience Stream */}
       <div className="exp-stream">
-        {experienceData.map((e, i) => (
+        {EXPERIENCE.map((e, i) => (
           <ExperienceRow key={i} item={e} />
         ))}
         <div className="exp-stream-end" />

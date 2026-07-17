@@ -1,4 +1,3 @@
-import React from "react";
 
 const awardsData = [
   {
@@ -12,7 +11,7 @@ const awardsData = [
     year: "2025",
   },
   {
-    title: "Google Gemini Student Ambassador",
+    title: "Google Student Ambassador",
     context: "",
     year: "2026",
   },
