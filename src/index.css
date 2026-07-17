@@ -389,7 +389,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   padding: 0 16px;
 }
 .build-details--open {
-  max-height: 120px;
+  max-height: 200px;
   opacity: 1;
   padding: 12px 16px 0;
 }
@@ -1282,8 +1282,26 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   /* ── Global overflow guard ── */
   .pf-root, section, footer { overflow-x: hidden !important; }
 
-  /* ── Narrow inline padding on mobile for non-hero sections ── */
-  section:not(#hero) { padding-left: 20px !important; padding-right: 20px !important; }
+  /* ── Home Cover ── */
+  .home-cover { padding: 80px 20px 60px; }
+  .home-cover::before,
+  .home-cover::after,
+  .home-cover-marks { display: none; }
+  .spec-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .spec-header__class { align-self: flex-start; }
+
+  /* ── Catalogue ── */
+  .catalogue { padding: 80px 20px 60px; }
+
+  /* ── About ── */
+  .about-layout { gap: 32px; padding: 0 20px; flex-direction: column; }
+  .about-photo-col { flex: none; width: 100%; max-width: 280px; }
+
+  /* ── Contact ── */
+  .contact-layout {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
 
   /* ── Hero ── */
   .hero-inner {
@@ -1299,14 +1317,6 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   .hero-ctas { justify-content: center; }
   .hero-tags { justify-content: center; }
   .hero-wordmark { display: none; }
-
-  /* ── Home Cover ── */
-  .home-cover { padding: 80px 20px 60px; }
-  .home-cover::before,
-  .home-cover::after,
-  .home-cover-marks { display: none; }
-  .spec-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .spec-header__class { align-self: flex-start; }
 
   /* ── Home Hero — stack on mobile ── */
   .home-hero {
@@ -1330,6 +1340,10 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
     margin-bottom: -12px;
   }
   .home-hero__img { max-height: 40vh; }
+
+  /* ── Doc Header ── */
+  .doc-header { padding: 20px; }
+  .build-details--open { max-height: 260px; }
 
   /* ── Projects — single column ── */
   [id="projects"] > div > div,
@@ -1361,26 +1375,23 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
     position: relative !important; top: auto !important;
   }
 
-  /* ── Contact — stack ── */
-  .contact-layout {
-    flex-direction: column !important;
-    gap: 40px !important;
-  }
-
   /* ── Footer ── */
   .pf-footer { padding: 16px 20px; }
   .pf-footer__inner { flex-direction: column; gap: 8px; text-align: center; }
   .footer-copy::after { display: none; }
   .footer-links { margin-left: 0; gap: 16px; }
 
-  /* ── Navbar — show burger, hide desktop links, tighten padding ── */
+  /* ── Navbar — show burger, hide desktop links ── */
   nav { padding-left: 20px !important; padding-right: 20px !important; }
   nav button:first-child { font-size: 11px !important; letter-spacing: 0.1em !important; }
   .desktop-nav { display: none !important; }
   .burger { display: flex !important; }
 
-  /* ── Section padding tighter on mobile ── */
-  section > div { padding-left: 20px !important; padding-right: 20px !important; }
+  /* ── Page inline padding overrides ── */
+  section[style*="120px"] { padding-left: 20px !important; padding-right: 20px !important; }
+  section[style*="padding: 48px"] { padding-left: 20px !important; padding-right: 20px !important; }
+  section[style*="padding: 24px"] { padding-left: 20px !important; padding-right: 20px !important; }
+  section[style*="padding: 70px"] { padding-left: 20px !important; padding-right: 20px !important; }
 }
 
 @media (max-width: 600px) {

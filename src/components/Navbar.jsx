@@ -103,7 +103,7 @@ export default function Navbar() {
         {/* Mobile Burger Trigger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: "none", color: "var(--tx-2)" }}
+          style={{ display: "none", color: "var(--tx-2)", alignItems: "center", gap: 6 }}
           className="burger"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -117,6 +117,9 @@ export default function Navbar() {
               </>
             )}
           </svg>
+          <span style={{ fontFamily: "var(--fm)", fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            {menuOpen ? "Close" : "Menu"}
+          </span>
         </button>
       </nav>
 
@@ -126,7 +129,7 @@ export default function Navbar() {
           style={{
             background: "var(--bg-1)",
             borderTop: "1px solid var(--br)",
-            padding: "16px 120px",
+            padding: "16px 20px",
             display: "flex",
             flexDirection: "column",
             gap: 16,
