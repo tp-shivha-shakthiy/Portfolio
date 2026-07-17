@@ -14,7 +14,7 @@ export default function AboutPage() {
           <div className="about-photo-col">
             <div className="about-photo-frame">
               <img
-                src="/profile-small_.png"
+                src="/profile-small__.png"
                 alt="T P Shivha Shakthiy"
                 className="about-photo"
               />

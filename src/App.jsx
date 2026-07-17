@@ -21,7 +21,7 @@ function Loader() {
   useEffect(() => {
     const loader = document.getElementById("loader");
     if (!loader) return;
-    const minTime = 1500;
+    const minTime = 650;
     const start = Date.now();
     const fade = () => {
       const elapsed = Date.now() - start;

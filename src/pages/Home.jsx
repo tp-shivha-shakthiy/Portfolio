@@ -6,7 +6,6 @@ import { useFadeIn } from "../hooks/useFadeIn";
 const FEATURED_PROJECT = {
   name: "Vanta AI — AI-Powered Women Safety Platform",
   result: "Full-stack web application developed by a three-member team to support victims of image-based abuse through AI-assisted guidance, reporting tools, and privacy-focused system design.",
-  badge: "Runner-Up — Girlathon 2025",
   stack: ["React", "Express.js", "Firebase", "Supabase", "Phi-3"],
   link: `https://github.com/${GITHUB_USER}/VantaAI`,
   demo: "https://vanta-ai-eight-eight.vercel.app",
@@ -22,7 +21,6 @@ function SpecHeader() {
         <span className="spec-header__sep">·</span>
         <span className="spec-header__meta">Rev {STATUS.revision}</span>
       </div>
-      <span className="spec-header__meta">Updated {STATUS.lastUpdatedDate}</span>
     </div>
   );
 }
@@ -52,7 +50,7 @@ function Hero() {
       </div>
       <div className="home-hero__portrait">
         <img
-          src="/profile-small__.png"
+          src="/profile-small_.png"
           alt="T P Shivha Shakthiy"
           className="home-hero__img"
         />
@@ -90,9 +88,6 @@ function DocHeader() {
           <span className="build-trigger__name">{FEATURED_PROJECT.name}</span>
 
           <div className={`build-details${expanded ? " build-details--open" : ""}`}>
-            {FEATURED_PROJECT.badge && (
-              <span className="build-trigger__time" style={{ marginBottom: 8, display: "inline-block" }}>{FEATURED_PROJECT.badge}</span>
-            )}
             <p className="build-details__commit">{FEATURED_PROJECT.result}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
               {FEATURED_PROJECT.stack.map((s) => (
