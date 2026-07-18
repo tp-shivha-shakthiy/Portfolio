@@ -55,6 +55,54 @@ export const PROJECTS = [
     paper: null,
   },
   {
+    abbr: "C",
+    color: "#6366f1",
+    slug: slugify("Conclave"),
+    title: "Conclave",
+    year: "2026",
+    type: "product",
+    status: "Complete",
+    category: "Real-Time AI · Multi-Agent Systems · Systems Architecture",
+    summary:
+      "Real-time AI system that orchestrates four autonomous stakeholder personas (CTO, Product, Finance, Research) to listen to live audio discussions and selectively intervene when fallacies or unverified claims are detected.",
+    metric: "Google DeepMind Bangalore Hackathon 2026",
+    problem:
+      "Live discussions and meetings often let unverified claims or logical fallacies pass unchallenged simply because no one in the room has the domain expertise, time, or social standing to push back in the moment. Existing AI meeting tools summarize or transcribe after the fact — none intervene in real time with the judgment of a domain-specific stakeholder.",
+    solution:
+      "Built a system where four independent AI agents, each reasoning as a distinct stakeholder persona, continuously listen to live audio and decide — individually and then collectively — whether an intervention is warranted. The system runs on a custom deterministic execution model, the \"Cognitive Tick,\" which triggers once per semantic event rather than on a fixed timer, so agents reason only when the conversation actually produces something worth reasoning about.",
+    impact:
+      "Delivered a working real-time system within the hackathon timeframe capable of ingesting live audio, reasoning across four parallel agents, and producing spoken interventions with under-perceptible latency for a natural conversational flow.",
+    architecture:
+      "Audio input → Gemini Live API (ingestion, diarization, transcription) → Context Layer (structured world model: topics, decisions, assumptions, risks) → Agent Layer (4 stakeholder agents reasoning via Gemini structured output) → Kernel Layer (arbitrates competing proposals under a fixed attention budget) → Output Layer (Gemini TTS) → WebSocket bridge to a Vite-powered browser UI for live observation.",
+    engineeringDecisions: [
+      "Designed the Cognitive Tick as a deterministic, CPU-like cognition loop instead of a polling/timer-based loop, to keep agent reasoning event-driven and reproducible",
+      "Separated perception, reasoning, and arbitration into independent layers so agents never talk to each other directly — all coordination flows through the Kernel",
+      "Used Gemini structured output (not free-form generation) for every agent decision, so the Kernel could arbitrate on typed data instead of parsing natural language",
+      "Built an attention budget into the Kernel to prevent all four agents from interrupting simultaneously, forcing prioritization under real conversational constraints",
+    ],
+    challenges: [
+      "Keeping four independently-reasoning agents from producing conflicting or redundant interventions in the same moment",
+      "Achieving low enough latency across the Perception → Agent → Output pipeline for interventions to feel conversational rather than delayed",
+      "Designing the Context Layer's world model to stay accurate as a live conversation evolves, without re-processing the entire transcript on every tick",
+      "Building and validating this end-to-end pipeline under hackathon time constraints",
+    ],
+    metrics: [
+      "Built a full 6-layer real-time cognitive pipeline from live audio to spoken intervention",
+      "Designed and implemented a novel deterministic execution model (Cognitive Tick) for multi-agent arbitration",
+      "Covered core modules with 30 test files (27 unit, 3 integration), with typecheck and lint enforced",
+      "Presented a working system to Google DeepMind Bangalore Hackathon 2026",
+    ],
+    lessons: [
+      "Event-driven cognition loops scale better than fixed-timer polling for multi-agent reasoning under real-time constraints",
+      "Structured output is essential once you need multiple agents' decisions to be arbitrated programmatically, not just displayed",
+      "An explicit attention/arbitration layer is necessary the moment more than one autonomous agent can act on the same input",
+      "Building for real-time latency surfaces architectural tradeoffs that don't appear in batch or async systems",
+    ],
+    github: "https://github.com/tp-shivha-shakthiy/googledeepmindhackathon-conclave",
+    demo: null,
+    paper: null,
+  },
+  {
     abbr: "N",
     color: "#0891b2",
     slug: slugify("Neurobridge"),
