@@ -65,6 +65,7 @@ Full-stack systems, applied ML pipelines, and end-to-end software —
           <ProjectRow key={p.slug} p={p} />
         ))}
       </div>
+      <Link to="/journey" className="page-next">Continue exploring →</Link>
     </section>
   );
 }

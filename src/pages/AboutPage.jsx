@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const S = { padding: "24px 120px" };
 
@@ -50,6 +51,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <div className="page-next-wrap">
+        <Link to="/projects" className="page-next">Continue exploring →</Link>
+      </div>
     </>
   );
 }

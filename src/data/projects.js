@@ -61,7 +61,7 @@ export const PROJECTS = [
     title: "Neurobridge",
     year: "2026",
     type: "product",
-    status: "Active Development",
+    status: "Complete",
     category: "Full-Stack · Accessibility · Healthcare",
     summary:
       "Accessibility-first health platform supporting neurodiverse individuals through modular assistive tools, AI-powered personalization, and privacy-focused system design.",
@@ -164,7 +164,7 @@ export const PROJECTS = [
     category: "Computer Vision · Research Implementation",
     summary:
       "PyTorch implementation of Spatial-Temporal High-Frequency Learning for Video-based Visible-Infrared Person Re-Identification (VI-ReID), reproducing and extending the architecture proposed in the original research paper.",
-    metric: "116/117 Tests Passing",
+    metric: "Adaptive STHPF",
     problem:
       "Visible-Infrared Person Re-Identification aims to match individuals across RGB and infrared video streams. Cross-modal appearance differences, viewpoint variations, and temporal inconsistencies make robust identity matching a challenging computer vision problem.",
     solution:

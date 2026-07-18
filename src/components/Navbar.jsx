@@ -83,15 +83,22 @@ export default function Navbar() {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    const handlePointerDown = (e) => {
+      if (!panelRef.current) return;
+      if (panelRef.current.contains(e.target)) return;
+      closeMenu();
+    };
 
-    // Focus first menu item on open
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
     const timer = setTimeout(() => {
       menuItemsRef.current[0]?.focus();
     }, 50);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
       clearTimeout(timer);
     };
   }, [menuOpen, closeMenu]);
@@ -201,31 +208,34 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu Overlay + Panel */}
+      {/* Mobile Menu Panel */}
       {menuOpen && (
-        <div
-          className="nav-overlay"
-          onClick={closeMenu}
-          aria-hidden="true"
-        >
           <div
             ref={panelRef}
             id="mobile-menu-panel"
             role="dialog"
             aria-label="Navigation menu"
             className="nav-panel"
-            onClick={(e) => e.stopPropagation()}
           >
             <div className="nav-panel__header">
               <span className="nav-panel__title">Menu</span>
             </div>
 
             <div className="nav-panel__items">
+              <Link
+                to="/"
+                ref={(el) => { menuItemsRef.current[0] = el; }}
+                className={`nav-panel__item${isActive("/") ? " nav-panel__item--active" : ""}`}
+                onClick={closeMenu}
+              >
+                <span className="nav-panel__idx">00</span>
+                <span className="nav-panel__label">Home</span>
+              </Link>
               {NAV.map((n, i) => (
                 <Link
                   key={n.path}
                   to={n.path}
-                  ref={(el) => { menuItemsRef.current[i] = el; }}
+                  ref={(el) => { menuItemsRef.current[i + 1] = el; }}
                   className={`nav-panel__item${isActive(n.path) ? " nav-panel__item--active" : ""}`}
                   onClick={closeMenu}
                 >
@@ -241,17 +251,17 @@ export default function Navbar() {
               <span className="nav-panel__theme-label">Theme</span>
               <div className="nav-panel__theme-opts">
                 <button
-                  ref={(el) => { menuItemsRef.current[NAV.length] = el; }}
+                  ref={(el) => { menuItemsRef.current[NAV.length + 1] = el; }}
                   className={`nav-panel__theme-opt${theme === "light" ? " nav-panel__theme-opt--active" : ""}`}
-                  onClick={() => { toggleTheme(); }}
+                  onClick={() => { toggleTheme(); closeMenu(); }}
                 >
                   <span className="nav-panel__theme-pip" />
                   Light
                 </button>
                 <button
-                  ref={(el) => { menuItemsRef.current[NAV.length + 1] = el; }}
+                  ref={(el) => { menuItemsRef.current[NAV.length + 2] = el; }}
                   className={`nav-panel__theme-opt${theme === "dark" ? " nav-panel__theme-opt--active" : ""}`}
-                  onClick={() => { toggleTheme(); }}
+                  onClick={() => { toggleTheme(); closeMenu(); }}
                 >
                   <span className="nav-panel__theme-pip" />
                   Dark
@@ -259,7 +269,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
       )}
     </header>
   );

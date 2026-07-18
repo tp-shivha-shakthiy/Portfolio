@@ -102,7 +102,7 @@
 
 /* ── RESET ─────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html  { scroll-behavior: smooth; background: var(--bg); overflow-x: hidden; }
+html  { scroll-behavior: smooth; background: var(--bg); overflow-x: clip; }
 body  {
   background-color: var(--bg);
   background-image:
@@ -111,7 +111,7 @@ body  {
   background-size: 24px 24px;
   color: var(--tx); font-family: var(--fb);
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 a     { text-decoration: none; color: inherit; }
 button{ cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -158,7 +158,7 @@ html [style*="transition"] {} /* preserve existing inline transitions */
   flex-direction: column;
   min-height: 100vh;
 }
-.pf-root > *:not(.pf-footer) {
+.pf-root > *:not(.pf-footer):not(nav):not(header):not(.home-cover) {
   flex: 1;
 }
 .section-surface { background: var(--bg-1); }
@@ -506,6 +506,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   position: relative;
   box-shadow: var(--card-sh);
   transition: border-color 0.4s var(--spring), box-shadow 0.4s;
+  touch-action: manipulation;
 }
 .doc-header:hover {
   border-color: var(--a-bd);
@@ -544,6 +545,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   cursor: pointer;
   text-align: left;
   transition: border-color 0.25s, background 0.25s;
+  touch-action: manipulation;
 }
 .build-trigger a { cursor: pointer; }
 .build-trigger:hover,
@@ -670,12 +672,11 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .home-cover {
   width: 100%;
   margin: 0 auto;
-  padding: 100px 120px 80px;
+  padding: 80px 120px 60px;
   display: flex;
   flex-direction: column;
   gap: 0;
   position: relative;
-  overflow: hidden;
 }
 
 /* ── Corner registration marks (homepage only) ── */
@@ -772,7 +773,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .home-hero {
   display: flex;
   align-items: flex-end;
-  min-height: 60vh;
+  min-height: 0;
   margin-bottom: -1px;
   gap: 0;
 }
@@ -781,7 +782,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 20vh;
+  padding-bottom: 0;
   margin-right: -32px;
   position: relative;
   z-index: 2;
@@ -841,7 +842,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   opacity: 0.3;
 }
 .home-hero__img {
-  max-height: 65vh;
+  max-height: 42vh;
   width: 100%;
   object-fit: contain;
   object-position: top;
@@ -902,6 +903,22 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   transition: color 0.2s;
 }
 .home-explore:hover { color: var(--a-hi); }
+
+.page-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--a);
+  margin-top: 32px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.page-next:hover { color: var(--a-hi); }
+.page-next-wrap {
+  padding: 0 120px 48px;
+}
 
 .home-also-building {
   font-family: var(--fm);
@@ -1195,12 +1212,16 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 
 /* ── ABOUT RESPONSIVE ── */
 @media (max-width: 768px) {
-  .about-layout { gap: 0; padding: 0; flex-direction: column; position: relative; min-height: 100vh; }
-  .about-photo-col { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  section:has(.about-layout) { padding-left: 20px !important; padding-right: 20px !important; padding-top: 24px !important; }
+  .about-layout { gap: 0; padding: 0 !important; flex-direction: column; }
+  .about-photo-col { flex: none; width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
   .about-photo-col::before { display: none; }
-  .about-photo-frame { width: 100%; height: 100%; display: flex; align-items: flex-start; justify-content: center; }
-  .about-photo { object-fit: none; opacity: 0.22; }
-  .about-text-col { padding: 32px 20px 40px; position: relative; z-index: 2; }
+  .about-photo-col::after { display: none; }
+  .about-photo-frame { width: 88px; height: 88px; margin: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
+  .about-photo { object-fit: cover; opacity: 1; mask-image: none; -webkit-mask-image: none; filter: none; -webkit-filter: none; width: 88px; height: 88px; }
+  .about-text-col { padding: 0; width: 100%; }
+  .about-name { font-size: 22px; line-height: 1.2; }
+  .about-role { font-size: 11px; letter-spacing: 0.06em; margin-bottom: 24px; }
 }
 
 /* ── PROJECTS ──────────────────────────────────────────────────────────────── */
@@ -1486,7 +1507,8 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 @media (max-width: 900px) {
 
   /* ── Global overflow guard ── */
-  .pf-root, section, footer { overflow-x: hidden !important; }
+  .pf-root, section, footer { overflow-x: clip !important; }
+  .page-next-wrap { padding: 0 20px 40px; }
 
   /* ── Home Cover ── */
   .home-cover { padding: 80px 20px 60px; }
@@ -1500,12 +1522,16 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
   .catalogue { padding: 80px 20px 60px; }
 
   /* ── About ── */
-  .about-layout { gap: 0; padding: 0; flex-direction: column; position: relative; min-height: 100vh; }
-  .about-photo-col { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  section:has(.about-layout) { padding-left: 20px !important; padding-right: 20px !important; padding-top: 24px !important; }
+  .about-layout { gap: 0; padding: 0 !important; flex-direction: column; }
+  .about-photo-col { flex: none; width: 100%; display: flex; justify-content: center; margin-bottom: 20px; }
   .about-photo-col::before { display: none; }
-  .about-photo-frame { width: 100%; height: 100%; display: flex; align-items: flex-start; justify-content: center; }
-  .about-photo { object-fit: none; opacity: 0.22; }
-  .about-text-col { padding: 32px 20px 40px; position: relative; z-index: 2; }
+  .about-photo-col::after { display: none; }
+  .about-photo-frame { width: 88px; height: 88px; margin: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; }
+  .about-photo { object-fit: cover; opacity: 1; mask-image: none; -webkit-mask-image: none; filter: none; -webkit-filter: none; width: 88px; height: 88px; }
+  .about-text-col { padding: 0; width: 100%; }
+  .about-name { font-size: 22px; line-height: 1.2; }
+  .about-role { font-size: 11px; letter-spacing: 0.06em; margin-bottom: 24px; }
 
   /* ── Contact ── */
   .contact-layout {
@@ -1558,7 +1584,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 
   /* ── Doc Header ── */
   .doc-header { padding: 20px; }
-  .build-details--open { max-height: 260px; }
+  .build-details--open { max-height: 400px; }
 
   /* ── Projects — single column ── */
   [id="projects"] > div > div,

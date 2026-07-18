@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import ExperienceSection from "../components/Experience";
 import Awards from "../components/Awards";
 
@@ -17,6 +18,9 @@ export default function JourneyPage() {
       <section style={{ ...S, borderTop: "1px solid var(--br)" }}>
         <Awards />
       </section>
+      <div className="page-next-wrap">
+        <Link to="/contact" className="page-next">Continue exploring →</Link>
+      </div>
     </>
   );
 }
