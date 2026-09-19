@@ -1,6 +1,11 @@
 
 const awardsData = [
   {
+    title: "Runner-Up — Girlathon 4.0",
+    context: "Neurobridge",
+    year: "2026",
+  },
+  {
     title: "Runner-Up — Girlathon 2025",
     context: "Vanta AI",
     year: "2025",

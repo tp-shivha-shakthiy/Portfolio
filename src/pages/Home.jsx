@@ -4,11 +4,12 @@ import { STATUS, GITHUB_USER } from "../data/status";
 import { useFadeIn } from "../hooks/useFadeIn";
 
 const FEATURED_PROJECT = {
-  name: "Vanta AI — AI-Powered Women Safety Platform",
-  result: "Full-stack web application developed by a three-member team to support victims of image-based abuse through AI-assisted guidance, reporting tools, and privacy-focused system design.",
-  stack: ["React", "Express.js", "Firebase", "Supabase", "Phi-3"],
-  link: `https://github.com/${GITHUB_USER}/VantaAI`,
-  demo: "https://vanta-ai-eight-eight.vercel.app",
+  name: "NeuroBridge — Adaptive Support Platform for Neurodivergent Individuals",
+  result:
+    "Adaptive platform designed to personalize task support and interventions for neurodivergent individuals through real-time user-state modeling, reasoning, and context-aware planning.",
+  stack: ["React", "Vite", "Tailwind CSS", "Supabase"],
+  link: `https://github.com/Civora-Forge/NeuroBridge`,
+  demo: "https://neuro-bridge-olive.vercel.app",
 };
 function SpecHeader() {
   const [ref, style] = useFadeIn(0.1);
