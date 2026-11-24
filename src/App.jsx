@@ -8,6 +8,7 @@ import ProjectDetail from "./pages/ProjectDetail";
 import JourneyPage from "./pages/JourneyPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -60,6 +61,7 @@ export default function App() {
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/journey" element={<JourneyPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>

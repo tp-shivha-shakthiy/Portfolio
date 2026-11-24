@@ -177,6 +177,12 @@ export default function ProjectDetail() {
           {p.demo && p.demo !== "#" && <Pill href={p.demo}>Live Demo →</Pill>}
           {p.paper && <Pill href={p.paper}>Paper →</Pill>}
         </div>
+        {p.demo && p.demoNote && (
+          <p className="pj-demo-note">
+            <span className="pj-demo-note__k">Note</span>
+            {p.demoNote}
+          </p>
+        )}
       </section>
     </>
   );

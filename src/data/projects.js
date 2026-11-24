@@ -168,6 +168,8 @@ export const PROJECTS = [
 
   github: "https://github.com/tp-shivha-shakthiy/trace",
   demo: "https://trace-lrrv.onrender.com",
+  demoNote:
+    "The hosted demo runs on a free instance that sleeps when idle, so the first load can take a while to wake up. If it doesn't respond, the GitHub repository has the source.",
   paper: null,
 },
 

@@ -12,7 +12,7 @@ const NAV = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
-  const [theme, toggleTheme] = useTheme();
+  const [theme, toggleTheme, setTheme] = useTheme();
   const triggerRef = useRef(null);
   const panelRef = useRef(null);
   const menuItemsRef = useRef([]);
@@ -25,10 +25,6 @@ export default function Navbar() {
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     triggerRef.current?.focus();
-  }, []);
-
-  const openMenu = useCallback(() => {
-    setMenuOpen(true);
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -253,7 +249,8 @@ export default function Navbar() {
                 <button
                   ref={(el) => { menuItemsRef.current[NAV.length + 1] = el; }}
                   className={`nav-panel__theme-opt${theme === "light" ? " nav-panel__theme-opt--active" : ""}`}
-                  onClick={() => { toggleTheme(); closeMenu(); }}
+                  onClick={() => { setTheme("light"); closeMenu(); }}
+                  aria-pressed={theme === "light"}
                 >
                   <span className="nav-panel__theme-pip" />
                   Light
@@ -261,7 +258,8 @@ export default function Navbar() {
                 <button
                   ref={(el) => { menuItemsRef.current[NAV.length + 2] = el; }}
                   className={`nav-panel__theme-opt${theme === "dark" ? " nav-panel__theme-opt--active" : ""}`}
-                  onClick={() => { toggleTheme(); closeMenu(); }}
+                  onClick={() => { setTheme("dark"); closeMenu(); }}
+                  aria-pressed={theme === "dark"}
                 >
                   <span className="nav-panel__theme-pip" />
                   Dark

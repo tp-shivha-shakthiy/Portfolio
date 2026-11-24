@@ -6,7 +6,9 @@ function getInitial() {
   try {
     const stored = localStorage.getItem(KEY);
     if (stored === "light" || stored === "dark") return stored;
-  } catch {}
+  } catch {
+    // localStorage unavailable (private mode / blocked) — fall back to default
+  }
   return "dark";
 }
 
@@ -15,12 +17,16 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    try { localStorage.setItem(KEY, theme); } catch {}
+    try {
+      localStorage.setItem(KEY, theme);
+    } catch {
+      // persistence is best-effort
+    }
   }, [theme]);
 
   const toggle = useCallback(() => {
     setTheme((t) => (t === "dark" ? "light" : "dark"));
   }, []);
 
-  return [theme, toggle];
+  return [theme, toggle, setTheme];
 }
