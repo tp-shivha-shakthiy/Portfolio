@@ -1,14 +1,14 @@
 export const EXPERIENCE = [
   {
     role: "Research Intern",
-    period: "May 2026 – Present",
+    period: "May – Jul 2026",
     org: "NIT Tiruchirappalli",
     sub: "Dr. Brindha M",
     points: [
-      "Building PyTorch implementations for video-based visible-infrared person re-identification (VI-ReID)",
-      "Developing modular training, evaluation, and benchmarking pipelines for computer vision research",
-      "Engineering reusable components for feature learning and experimental reproducibility",
+      "Designed and implemented the core modules of a video visible-infrared re-identification model, including Adaptive STHPF with a learned frequency-selection gate",
+      "Built the cross-modality evaluation framework (CMC, Rank-k, mAP) and a four-variant cutoff ablation pipeline",
     ],
+    link: "/projects/st-hf-vvi-reid",
   },
   {
     role: "Student Researcher",
@@ -16,20 +16,20 @@ export const EXPERIENCE = [
     org: "IIIT Kottayam",
     sub: "Dr. Balasubramanian P",
     points: [
-      "Built end-to-end preprocessing pipelines for large-scale network intrusion detection datasets",
-      "Implemented feature engineering, class balancing, and model evaluation workflows",
-      "Benchmarked machine learning and deep learning models using reproducible experimentation pipelines",
+      "First-authored an intrusion-detection study on 2.54M UNSW-NB15 records; paper accepted at ICTCS 2026 (Springer LNNS)",
+      "Built reproducible preprocessing, training and evaluation pipelines with feature selection, PCA and SMOTE-based resampling",
     ],
+    link: "/projects/network-intrusion-detection-under-class-imbalance",
   },
   {
     role: "Research Core Member",
     period: "Jan 2025 – Present",
-    org: "Enigma Research Club",
+    org: "Enigma Research Club, IIIT Kottayam",
     sub: "",
     points: [
-      "Reproduced and validated machine learning research papers through independent implementations",
-      "Built reusable training, evaluation, and experimentation frameworks",
+      "Reproduced published ML papers, building modular pipelines to validate reported results",
       "Collaborated on applied AI and software engineering projects across multiple domains",
     ],
+    link: null,
   },
 ];

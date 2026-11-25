@@ -1,71 +1,36 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { PROJECTS } from "../data/projects";
-import SectionHeading from "../components/SectionHeading";
+import { FEATURED_PROJECTS, MORE_PROJECTS, RESEARCH_PROJECTS } from "../data/projects";
+import ProjectCard from "../components/ProjectCard";
 
-function ProjectRow({ p }) {
+function Group({ id, title, projects }) {
+  if (!projects.length) return null;
   return (
-    <Link to={`/projects/${p.slug}`} className="cat-row">
-      <div className="cat-row__head">
-        <div className="cat-row__icon" aria-hidden="true" style={{
-          background: p.color + "18",
-          border: `1px solid ${p.color}44`,
-          color: p.color,
-        }}>
-          {p.abbr}
-        </div>
-        {p.type === "deep-dive" && (
-          <span className="cat-row__type-tag">Deep dive</span>
-        )}
-        <div className="cat-row__title-group">
-          <h2 className="cat-row__title">{p.title}</h2>
-          <span className="cat-row__year">{p.year}</span>
-        </div>
+    <section className="projects-group" aria-labelledby={id}>
+      <h2 id={id} className="section-title section-title--sm">{title}</h2>
+      <div className="pcard-grid">
+        {projects.map((p) => (
+          <ProjectCard key={p.slug} p={p} headingLevel={3} />
+        ))}
       </div>
-
-      <div className="cat-row__fields">
-        <div className="cat-row__field">
-          <span className="cat-row__label">Type</span>
-          <span className="cat-row__value">{p.category}</span>
-        </div>
-        <div className="cat-row__field">
-          <span className="cat-row__label">Status</span>
-          <span className="cat-row__value cat-row__value--status">
-            <span className="cat-dot" aria-hidden="true" />
-            {p.status}
-          </span>
-        </div>
-        <div className="cat-row__field">
-          <span className="cat-row__label">Impact</span>
-          <span className="cat-row__value">{p.metric || "—"}</span>
-        </div>
-      </div>
-
-      <p className="cat-row__summary">{p.summary}</p>
-
-      <span className="cat-row__cta">Read case study →</span>
-    </Link>
+    </section>
   );
 }
 
 export default function ProjectsPage() {
   useEffect(() => {
-    document.title = "System Catalogue — T P Shivha Shakthiy";
+    document.title = "Projects — T P Shivha Shakthiy";
   }, []);
 
   return (
-    <section className="catalogue">
-      <SectionHeading as="h1" title="System Catalogue" />
-      <p className="catalogue__intro">
-Full-stack systems, applied ML pipelines, and end-to-end software —
-          each project a complete case study.
+    <div className="page">
+      <h1 className="page__title">Projects</h1>
+      <p className="page__intro">
+        Selected engineering work first, then hackathon builds and research. Each card says what
+        I built; the case study has the architecture, decisions and results.
       </p>
-      <div className="catalogue__list">
-        {PROJECTS.map((p) => (
-          <ProjectRow key={p.slug} p={p} />
-        ))}
-      </div>
-      <Link to="/journey" className="page-next">Continue exploring →</Link>
-    </section>
+      <Group id="selected" title="Selected" projects={FEATURED_PROJECTS} />
+      <Group id="more" title="More projects" projects={MORE_PROJECTS} />
+      <Group id="research-projects" title="Research" projects={RESEARCH_PROJECTS} />
+    </div>
   );
 }

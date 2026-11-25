@@ -17,8 +17,8 @@ export default function NotFoundPage() {
         <code>{pathname}</code>
       </p>
       <div className="not-found__links">
-        <Link to="/" className="page-next">← Back to home</Link>
-        <Link to="/projects" className="page-next">View projects →</Link>
+        <Link to="/" className="text-link">← Back to home</Link>
+        <Link to="/projects" className="text-link">View projects →</Link>
       </div>
     </section>
   );

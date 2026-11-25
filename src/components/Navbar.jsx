@@ -2,11 +2,12 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
 
+// Links jump to homepage sections; "Projects" also counts as active on /projects pages
 const NAV = [
-  { label: "About", path: "/about" },
-  { label: "Projects", path: "/projects" },
-  { label: "Journey", path: "/journey" },
-  { label: "Contact", path: "/contact" },
+  { label: "Projects", path: "/#projects", activeFor: "/projects" },
+  { label: "Experience", path: "/#experience" },
+  { label: "About", path: "/#about" },
+  { label: "Contact", path: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -17,9 +18,9 @@ export default function Navbar() {
   const panelRef = useRef(null);
   const menuItemsRef = useRef([]);
 
-  const isActive = (path) => {
-    if (path === "/") return pathname === "/";
-    return pathname.startsWith(path);
+  const isActive = (pathOrItem) => {
+    if (pathOrItem === "/") return pathname === "/";
+    return Boolean(pathOrItem.activeFor && pathname.startsWith(pathOrItem.activeFor));
   };
 
   const closeMenu = useCallback(() => {
@@ -134,22 +135,10 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt=""
-            style={{ height: 32, objectFit: "contain" }}
+            width={44}
+            height={44}
+            style={{ height: 44, width: 44, objectFit: "contain", borderRadius: 3 }}
           />
-          <span
-            style={{
-              fontFamily: "var(--fm)",
-              fontSize: 11,
-              color: "var(--a)",
-              letterSpacing: ".12em",
-              textTransform: "uppercase",
-              border: "1px solid var(--a-bd)",
-              padding: "3px 7px",
-              borderRadius: 2,
-            }}
-          >
-            Home
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -158,7 +147,8 @@ export default function Navbar() {
             <Link
               key={n.path}
               to={n.path}
-              className={`nav-link${isActive(n.path) ? " active" : ""}`}
+              className={`nav-link${isActive(n) ? " active" : ""}`}
+              aria-current={isActive(n) ? "page" : undefined}
               style={{ textDecoration: "none" }}
             >
               {n.label}
@@ -232,7 +222,7 @@ export default function Navbar() {
                   key={n.path}
                   to={n.path}
                   ref={(el) => { menuItemsRef.current[i + 1] = el; }}
-                  className={`nav-panel__item${isActive(n.path) ? " nav-panel__item--active" : ""}`}
+                  className={`nav-panel__item${isActive(n) ? " nav-panel__item--active" : ""}`}
                   onClick={closeMenu}
                 >
                   <span className="nav-panel__idx" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>

@@ -1,74 +1,46 @@
+import { PROFILE } from "../data/profile";
 
-function SpecRow({ label, value, href }) {
+const RESUME_SUBJECT = encodeURIComponent("Resume request");
+
+export default function ContactBlock() {
   return (
-    <a
-      href={href || undefined}
-      target={href ? "_blank" : undefined}
-      rel={href ? "noopener noreferrer" : undefined}
-      className="contact-spec-row"
-    >
-      <span className="contact-spec-label">{label}</span>
-      <span className="contact-spec-value">{value}</span>
-    </a>
-  );
-}
+    <div className="contact">
+      <p className="contact__lede">
+        {PROFILE.availability} The fastest way to reach me is email or LinkedIn.
+      </p>
 
-export default function ContactSection() {
-  return (
-    <div className="contact-layout">
-      {/* Left Column */}
-      <div className="contact-left">
-        <h1 className="contact-heading">
-          Get In <br />
-          <span style={{ color: "var(--tx-2)" }}>Touch</span>
-        </h1>
-        <p className="contact-desc">
-          Building backend systems, intelligent applications,<br />
-          and production-ready software.<br /><br />
-          Available for software engineering opportunities.
-        </p>
-
-        <div className="contact-spec-card">
-          <SpecRow label="EMAIL" value="tpshivhashakthiy@gmail.com" href="mailto:tpshivhashakthiy@gmail.com" />
-          <SpecRow label="GITHUB" value="View GitHub →" href="https://github.com/tp-shivha-shakthiy" />
-          <SpecRow label="LINKEDIN" value="Connect on LinkedIn →" href="https://linkedin.com/in/t-p-shivha-shakthiy-801723346" />
-          <div className="contact-spec-status">
-            <span className="contact-spec-label">STATUS</span>
-            <span className="contact-spec-value">
-              Open to Software Engineering<br />
-              Internships & Full-Time Roles
-            </span>
-          </div>
+      <dl className="contact__rows">
+        <div className="contact__row">
+          <dt>Email</dt>
+          <dd>
+            <a href={`mailto:${PROFILE.email}`} className="text-link">{PROFILE.email}</a>
+          </dd>
         </div>
-      </div>
-
-      {/* Right Column — Communication Panel */}
-      <div className="contact-right">
-        <div className="contact-comm-panel">
-          <span className="contact-comm-title">COMMUNICATION</span>
-
-          <div className="contact-comm-row">
-            <span className="contact-comm-label">Preferred Contact</span>
-            <span className="contact-comm-value">LinkedIn</span>
-          </div>
-
-          <div className="contact-comm-row">
-            <span className="contact-comm-label">Current Focus</span>
-            <span className="contact-comm-value">
-              Building TRACE —<br />
-              Developer Intelligence Platform
-            </span>
-          </div>
-
-          <div className="contact-comm-row">
-            <span className="contact-comm-label">Availability</span>
-            <span className="contact-comm-value">
-              Open to Software Engineering<br />
-              Internships & Full-Time Roles
-            </span>
-          </div>
+        <div className="contact__row">
+          <dt>LinkedIn</dt>
+          <dd>
+            <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">
+              Connect on LinkedIn ↗
+            </a>
+          </dd>
         </div>
-      </div>
+        <div className="contact__row">
+          <dt>GitHub</dt>
+          <dd>
+            <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="text-link">
+              github.com/tp-shivha-shakthiy ↗
+            </a>
+          </dd>
+        </div>
+        <div className="contact__row">
+          <dt>Resume</dt>
+          <dd>
+            <a href={`mailto:${PROFILE.email}?subject=${RESUME_SUBJECT}`} className="text-link">
+              Available on request →
+            </a>
+          </dd>
+        </div>
+      </dl>
     </div>
   );
 }
