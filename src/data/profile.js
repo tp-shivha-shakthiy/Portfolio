@@ -5,11 +5,10 @@ export const PROFILE = {
   role: "Software Engineer — Backend & Applied AI",
   bio: "Backend-focused engineer building reliable APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker — with applied ML when the problem calls for it.",
   education: "B.Tech CSE (AI & Data Science) · IIIT Kottayam · Expected 2028",
-  // Matches the resume and git email. The old site used "tpshivhashakthiy@…" (one "y").
+  // Confirmed by owner (matches resume and git).
   email: "tpshivhashakthiyy@gmail.com",
   github: "https://github.com/tp-shivha-shakthiy",
   linkedin: "https://linkedin.com/in/t-p-shivha-shakthiy-801723346",
-  // TODO(owner): add a season (e.g. "Summer 2027") only if that is your actual availability
   availability: "Open to software engineering internships and full-time roles.",
   // Short, verifiable highlights shown under the hero bio
   highlights: ["2× Girlathon Runner-Up", "First-author paper, ICTCS 2026 (Springer LNNS)"],
