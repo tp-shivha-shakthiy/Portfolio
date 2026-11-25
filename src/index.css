@@ -69,14 +69,14 @@
   --bg-1:     #EAE8E3;
   --bg-2:     #F2F0EB;
   --bg-3:     #F8F7F3;
-  --surface:  #FDFCF9;
-  --surface-b:#D8D5CF;
+  --surface:  #FFFFFF;   /* cards stand out from the cream page (was #FDFCF9) */
+  --surface-b:#C9C5BE;   /* firmer card edge (was #D8D5CF) */
 
   --br:       #CDC9C2;
   --br-2:     #B5B1AA;
   --br-3:     #9E9A93;
 
-  --tx:       #565656;
+  --tx:       #333333;   /* body text: darker for reading on cream (was #565656) */
   --tx-2:     #65635E;   /* ≥4.9:1 on bg / bg-1 / bg-2 / surface (was #8A8883, 2.9–3.5:1) */
   --tx-h:     #111111;
   --tx-w:     #111111;
@@ -99,7 +99,7 @@
   --grid-a:   rgba(0,0,0,0.028);
   --grid-b:   rgba(0,0,0,0.015);
   --nav-bg:   rgba(245,243,238,0.92);
-  --card-sh:  0 1px 2px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+  --card-sh:  0 1px 2px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.06);
   --card-sh-h:0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(46,80,144,0.08);
   --photo-sh: 0 1px 3px rgba(0,0,0,0.08);
   --row-hov:  rgba(0,0,0,0.02);
@@ -194,7 +194,7 @@ main:focus { outline: none; }
   color: var(--tx-h);
 }
 .theme-toggle__pip {
-  width: 6px; height: 6px; border-radius: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
   /* !important: the nav rule clears every background inside <nav> */
   background: var(--r) !important; flex-shrink: 0;
   margin: 0 2px;
@@ -238,7 +238,7 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .nav-panel__item:focus-visible { outline-offset: -2px !important; }
 .nav-link {
   font-family: var(--fm) !important; font-size: 11px !important;
-  letter-spacing: 0.18em !important; text-transform: uppercase !important;
+  letter-spacing: 0.1em !important; text-transform: uppercase !important;
   color: var(--tx) !important; font-weight: 400 !important;
   padding: 7px 14px !important; transition: color 0.2s !important;
 }
@@ -951,7 +951,8 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .facts dt {
   font-family: var(--fm);
   font-size: 11px;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--tx-2);
 }
@@ -1052,7 +1053,8 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 .contact__row dt {
   font-family: var(--fm);
   font-size: 11px;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--tx-2);
 }

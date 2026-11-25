@@ -103,7 +103,7 @@ export const PROJECTS = [
 
     tagline:
       "Adaptive support platform that personalizes interventions for neurodivergent users through real-time user-state modelling.",
-    role: "Architected and built the adaptive engine · led the ASD module, built the Anxiety module · release integration",
+    role: "Architected and built the adaptive engine; led the ASD and Anxiety modules",
     team: "Team of 4",
     stack: ["TypeScript", "React", "Supabase", "PostgreSQL"],
     proof: [
