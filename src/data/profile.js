@@ -9,8 +9,15 @@ export const PROFILE = {
   email: "tpshivhashakthiyy@gmail.com",
   github: "https://github.com/tp-shivha-shakthiy",
   linkedin: "https://linkedin.com/in/t-p-shivha-shakthiy-801723346",
+  // TODO(owner): add a season (e.g. "Summer 2027") only if that is your actual availability
   availability: "Open to software engineering internships and full-time roles.",
+  // Short, verifiable highlights shown under the hero bio
+  highlights: ["2× Girlathon Runner-Up", "First-author paper, ICTCS 2026 (Springer LNNS)"],
+  resumeSubject: "Résumé request — [Company]",
 };
+
+export const resumeMailto = () =>
+  `mailto:${PROFILE.email}?subject=${encodeURIComponent(PROFILE.resumeSubject)}`;
 
 export const GITHUB_USER = "tp-shivha-shakthiy";
 
