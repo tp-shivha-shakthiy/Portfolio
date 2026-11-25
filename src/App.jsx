@@ -1,19 +1,31 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetail from "./pages/ProjectDetail";
-import JourneyPage from "./pages/JourneyPage";
-import ContactPage from "./pages/ContactPage";
-import AboutPage from "./pages/AboutPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// Scrolls to top on page change, or to the section in the URL hash (e.g. /#projects).
+// `key` changes on every navigation, so clicking the same hash link twice still scrolls.
+function ScrollManager() {
+  const { pathname, hash, key } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    // Wait one tick so the target route has rendered
+    const t = setTimeout(() => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (!el) return window.scrollTo(0, 0);
+      el.scrollIntoView({ block: "start" });
+      // Move focus with the scroll so keyboard and screen-reader users land in the section
+      if (el.tabIndex >= 0 || el.hasAttribute("tabindex")) el.focus({ preventScroll: true });
+    }, 0);
+    return () => clearTimeout(t);
+  }, [pathname, hash, key]);
   return null;
 }
 
@@ -50,17 +62,22 @@ function Footer() {
 export default function App() {
   return (
     <div className="pf-root">
-      <ScrollToTop />
+      <ScrollManager />
       <Loader />
+      <a href="#main" className="skip-link">Skip to content</a>
       <Navbar />
+      <main id="main" tabIndex={-1} className="pf-main">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
-        <Route path="/journey" element={<JourneyPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        {/* Old standalone pages now live as homepage sections; keep their URLs working */}
+        <Route path="/about" element={<Navigate to="/#about" replace />} />
+        <Route path="/journey" element={<Navigate to="/#experience" replace />} />
+        <Route path="/contact" element={<Navigate to="/#contact" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
       <Footer />
     </div>
   );

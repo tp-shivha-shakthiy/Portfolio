@@ -1,159 +1,131 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { STATUS, GITHUB_USER } from "../data/status";
+import { PROFILE, ABOUT, SKILLS } from "../data/profile";
+import { FEATURED_PROJECTS, PUBLICATION_PROJECT } from "../data/projects";
 import { useFadeIn } from "../hooks/useFadeIn";
-
-const FEATURED_PROJECT = {
-  name: "NeuroBridge — Adaptive Support Platform for Neurodivergent Individuals",
-  result:
-    "Adaptive platform designed to personalize task support and interventions for neurodivergent individuals through real-time user-state modeling, reasoning, and context-aware planning.",
-  stack: ["React", "Vite", "Tailwind CSS", "Supabase"],
-  link: `https://github.com/Civora-Forge/NeuroBridge`,
-  demo: "https://neuro-bridge-olive.vercel.app",
-};
-function SpecHeader() {
-  const [ref, style] = useFadeIn(0.1);
-  return (
-    <div ref={ref} style={style} className="spec-header">
-      <div className="spec-header__left">
-        <span className="spec-header__label">System Specification</span>
-        <span className="spec-header__sep">·</span>
-        <span className="spec-header__meta">Doc No: TPSS-2026</span>
-        <span className="spec-header__sep">·</span>
-        <span className="spec-header__meta">Rev {STATUS.revision}</span>
-      </div>
-    </div>
-  );
-}
+import ProjectCard from "../components/ProjectCard";
+import ExperienceList from "../components/Experience";
+import RecognitionList from "../components/Awards";
+import ContactBlock from "../components/Contact";
 
 function Hero() {
-  const [nameRef, nameStyle] = useFadeIn(0.15);
-  const [bioRef, bioStyle] = useFadeIn(0.2);
-  const [tagRef, tagStyle] = useFadeIn(0.25);
+  const [textRef, textStyle] = useFadeIn(0.1);
 
   return (
-    <section className="home-hero">
-      <div className="home-hero__text">
-        <div ref={nameRef} style={nameStyle}>
-          <h1 className="home-hero__name">T P Shivha Shakthiy</h1>
-          <p className="home-hero__role">Software Engineer · Applied ML</p>
-        </div>
-        <div ref={bioRef} style={bioStyle}>
-          <p className="home-hero__bio">
-           Building backend systems and full-stack platforms — from REST APIs to production-ready apps, with applied ML when the problem calls for it.
-          </p>
-        </div>
-        <div ref={tagRef} style={tagStyle} className="home-hero__tags">
-          {["Software Engineer", "Systems Builder", "B.Tech CSE (AI & DS)"].map((t) => (
-            <span key={t} className="tag">{t}</span>
-          ))}
+    <section className="home-hero" aria-labelledby="hero-name">
+      <div ref={textRef} style={textStyle} className="home-hero__text">
+        <h1 id="hero-name" className="home-hero__name">{PROFILE.name}</h1>
+        <p className="home-hero__role">{PROFILE.role}</p>
+        <p className="home-hero__bio">{PROFILE.bio}</p>
+        <p className="home-hero__edu">{PROFILE.education}</p>
+        <div className="home-hero__ctas">
+          <Link to="/#contact" className="btn btn--primary">Get in touch</Link>
+          <Link to="/#projects" className="btn btn--secondary">View projects</Link>
         </div>
       </div>
       <div className="home-hero__portrait">
-        <img
-          src="/profile-small_.png"
-          alt="T P Shivha Shakthiy"
-          className="home-hero__img"
-        />
+        <img src="/profile-small_.png" alt="Portrait of T P Shivha Shakthiy" className="home-hero__img" />
       </div>
     </section>
   );
 }
 
-function DocHeader() {
-  const [expanded, setExpanded] = useState(false);
-  const triggerRef = useRef(null);
-
+function Section({ id, title, aside, children }) {
   return (
-    <div className="doc-header">
-      <span className="doc-header__status">system.active</span>
-
-      <div className="doc-header__build">
-        <div
-          ref={triggerRef}
-          className="build-trigger"
-          onClick={() => setExpanded(!expanded)}
-          onFocus={() => setExpanded(true)}
-          onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setExpanded(false); }}
-          onMouseEnter={() => setExpanded(true)}
-          onMouseLeave={() => setExpanded(false)}
-          role="button"
-          tabIndex={0}
-          aria-expanded={expanded}
-          aria-label={`${FEATURED_PROJECT.name}. ${expanded ? "Collapse" : "Expand"} for details.`}
-        >
-          <span className="build-trigger__head">
-            <span className="build-pip" />
-            <span className="build-trigger__label">Featured</span>
-          </span>
-          <span className="build-trigger__name">{FEATURED_PROJECT.name}</span>
-
-          <div className={`build-details${expanded ? " build-details--open" : ""}`}>
-            <p className="build-details__commit">{FEATURED_PROJECT.result}</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
-              {FEATURED_PROJECT.stack.map((s) => (
-                <span key={s} className="tag">{s}</span>
-              ))}
-            </div>
-            <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
-              <a
-                href={FEATURED_PROJECT.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="build-details__link"
-                onClick={(e) => e.stopPropagation()}
-              >
-                View repository →
-              </a>
-              {FEATURED_PROJECT.demo && (
-                <a
-                  href={FEATURED_PROJECT.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="build-details__link"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Live demo →
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
+    <section id={id} className="home-section" aria-labelledby={`${id}-title`} tabIndex={-1}>
+      <div className="home-section__head">
+        <h2 id={`${id}-title`} className="section-title">{title}</h2>
+        {aside}
       </div>
+      {children}
+    </section>
+  );
+}
 
-      <hr className="doc-header__rule" />
-      {[
-        ["INSTITUTION", STATUS.institution],
-        ["DEGREE", STATUS.degree],
-        ["DOMAIN", STATUS.domain],
-      ].map(([k, v]) => (
-        <div key={k} className="doc-header__row">
-          <span className="doc-header__row-k">{k}</span>
-          <span className="doc-header__row-v">{v}</span>
-        </div>
-      ))}
-    </div>
+function Publication({ p }) {
+  const pub = p.publication;
+  return (
+    <article className="pub">
+      <p className="pub__kicker">Publication · {pub.authorship}</p>
+      <h3 className="pub__title">{pub.title}</h3>
+      <p className="pub__venue">
+        {pub.venue} · {pub.status} · Paper ID {pub.paperId}
+      </p>
+      <p className="pub__result">{pub.headline}</p>
+      <div className="pcard__links">
+        <Link to={`/projects/${p.slug}`} className="text-link" aria-label="Intrusion detection research case study">
+          Case study →
+        </Link>
+        {p.github && (
+          <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-link text-link--quiet"
+             aria-label="Intrusion detection code on GitHub (opens in a new tab)">
+            Code ↗
+          </a>
+        )}
+      </div>
+    </article>
   );
 }
 
 export default function Home() {
   useEffect(() => {
-    document.title = "T P Shivha Shakthiy — Software Engineer";
+    document.title = "T P Shivha Shakthiy — Software Engineer, Backend & Applied AI";
   }, []);
 
   return (
-    <div className="home-cover">
-      <div className="home-cover-marks" aria-hidden="true" />
-      <div className="grain-overlay" aria-hidden="true" />
-      <SpecHeader />
-      <Hero />
-      <DocHeader />
-      <p className="home-also-building">
-        Also building: <a href={`https://github.com/${GITHUB_USER}/trace`} target="_blank" rel="noopener noreferrer">TRACE</a>, a backend developer-analytics platform →
-      </p>
-      <Link to="/projects" className="home-explore">
-        Explore all projects →
-      </Link>
+    <div className="home">
+      <div className="home-cover">
+        <div className="grain-overlay" aria-hidden="true" />
+        <Hero />
+      </div>
+
+      <Section
+        id="projects"
+        title="Selected projects"
+        aside={<Link to="/projects" className="text-link">All projects →</Link>}
+      >
+        <div className="pcard-grid">
+          {FEATURED_PROJECTS.map((p) => (
+            <ProjectCard key={p.slug} p={p} />
+          ))}
+        </div>
+      </Section>
+
+      <Section id="experience" title="Experience">
+        <ExperienceList />
+      </Section>
+
+      <Section id="research" title="Research & recognition">
+        <div className="research-grid">
+          {PUBLICATION_PROJECT && <Publication p={PUBLICATION_PROJECT} />}
+          <div>
+            <h3 className="subhead">Recognition</h3>
+            <RecognitionList />
+          </div>
+        </div>
+      </Section>
+
+      <Section id="about" title="About">
+        <div className="about">
+          <div className="about__text">
+            {ABOUT.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+          <dl className="facts facts--skills">
+            {SKILLS.map(([k, v]) => (
+              <div key={k} className="facts__row">
+                <dt>{k}</dt>
+                <dd className="facts__stack">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Section>
+
+      <Section id="contact" title="Get in touch">
+        <ContactBlock />
+      </Section>
     </div>
   );
 }
