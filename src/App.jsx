@@ -53,7 +53,9 @@ export default function App() {
     <div className="pf-root">
       <ScrollToTop />
       <Loader />
+      <a href="#main" className="skip-link">Skip to content</a>
       <Navbar />
+      <main id="main" tabIndex={-1} className="pf-main">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
@@ -63,6 +65,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
       <Footer />
     </div>
   );

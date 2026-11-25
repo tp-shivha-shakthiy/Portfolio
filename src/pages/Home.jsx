@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { STATUS, GITHUB_USER } from "../data/status";
 import { useFadeIn } from "../hooks/useFadeIn";
@@ -17,9 +17,9 @@ function SpecHeader() {
     <div ref={ref} style={style} className="spec-header">
       <div className="spec-header__left">
         <span className="spec-header__label">System Specification</span>
-        <span className="spec-header__sep">·</span>
+        <span className="spec-header__sep" aria-hidden="true">·</span>
         <span className="spec-header__meta">Doc No: TPSS-2026</span>
-        <span className="spec-header__sep">·</span>
+        <span className="spec-header__sep" aria-hidden="true">·</span>
         <span className="spec-header__meta">Rev {STATUS.revision}</span>
       </div>
     </div>
@@ -62,7 +62,19 @@ function Hero() {
 
 function DocHeader() {
   const [expanded, setExpanded] = useState(false);
-  const triggerRef = useRef(null);
+
+  // Hover-to-expand only for real mouse pointers. Touch and pen ignore enter/leave
+  // and go through the button's click, so a tap can't open-then-immediately-close.
+  const onPointerEnter = (e) => {
+    if (e.pointerType === "mouse") setExpanded(true);
+  };
+  const onPointerLeave = (e) => {
+    if (e.pointerType !== "mouse") return;
+    // Don't hide content that currently holds keyboard focus (e.g. a tabbed-to link)
+    const focused = document.activeElement;
+    if (e.currentTarget.contains(focused) && focused.matches(":focus-visible")) return;
+    setExpanded(false);
+  };
 
   return (
     <div className="doc-header">
@@ -70,38 +82,41 @@ function DocHeader() {
 
       <div className="doc-header__build">
         <div
-          ref={triggerRef}
           className="build-trigger"
-          onClick={() => setExpanded(!expanded)}
-          onFocus={() => setExpanded(true)}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
           onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setExpanded(false); }}
-          onMouseEnter={() => setExpanded(true)}
-          onMouseLeave={() => setExpanded(false)}
-          role="button"
-          tabIndex={0}
-          aria-expanded={expanded}
-          aria-label={`${FEATURED_PROJECT.name}. ${expanded ? "Collapse" : "Expand"} for details.`}
         >
-          <span className="build-trigger__head">
-            <span className="build-pip" />
-            <span className="build-trigger__label">Featured</span>
-          </span>
-          <span className="build-trigger__name">{FEATURED_PROJECT.name}</span>
+          <button
+            type="button"
+            className="build-trigger__toggle"
+            aria-expanded={expanded}
+            aria-controls="featured-details"
+            onClick={() => setExpanded((v) => !v)}
+          >
+            <span className="build-trigger__head">
+              <span className="build-pip" aria-hidden="true" />
+              <span className="build-trigger__label">Featured</span>
+            </span>
+            <span className="build-trigger__name">{FEATURED_PROJECT.name}</span>
+          </button>
 
-          <div className={`build-details${expanded ? " build-details--open" : ""}`}>
+          <div
+            id="featured-details"
+            className={`build-details${expanded ? " build-details--open" : ""}`}
+          >
             <p className="build-details__commit">{FEATURED_PROJECT.result}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
               {FEATURED_PROJECT.stack.map((s) => (
                 <span key={s} className="tag">{s}</span>
               ))}
             </div>
-            <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0 20px", marginTop: 6 }}>
               <a
                 href={FEATURED_PROJECT.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="build-details__link"
-                onClick={(e) => e.stopPropagation()}
               >
                 View repository →
               </a>
@@ -111,7 +126,6 @@ function DocHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="build-details__link"
-                  onClick={(e) => e.stopPropagation()}
                 >
                   Live demo →
                 </a>

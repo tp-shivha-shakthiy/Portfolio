@@ -133,18 +133,18 @@ export default function Navbar() {
         >
           <img
             src="/logo.png"
-            alt="Home"
+            alt=""
             style={{ height: 32, objectFit: "contain" }}
           />
           <span
             style={{
               fontFamily: "var(--fm)",
-              fontSize: 8,
+              fontSize: 11,
               color: "var(--a)",
               letterSpacing: ".12em",
               textTransform: "uppercase",
               border: "1px solid var(--a-bd)",
-              padding: "2px 6px",
+              padding: "3px 7px",
               borderRadius: 2,
             }}
           >
@@ -173,7 +173,7 @@ export default function Navbar() {
             <span className={`theme-toggle__opt${theme === "light" ? " theme-toggle__opt--active" : ""}`}>
               light
             </span>
-            <span className="theme-toggle__pip" />
+            <span className="theme-toggle__pip" aria-hidden="true" />
             <span className={`theme-toggle__opt${theme === "dark" ? " theme-toggle__opt--active" : ""}`}>
               dark
             </span>
@@ -224,7 +224,7 @@ export default function Navbar() {
                 className={`nav-panel__item${isActive("/") ? " nav-panel__item--active" : ""}`}
                 onClick={closeMenu}
               >
-                <span className="nav-panel__idx">00</span>
+                <span className="nav-panel__idx" aria-hidden="true">00</span>
                 <span className="nav-panel__label">Home</span>
               </Link>
               {NAV.map((n, i) => (
@@ -235,7 +235,7 @@ export default function Navbar() {
                   className={`nav-panel__item${isActive(n.path) ? " nav-panel__item--active" : ""}`}
                   onClick={closeMenu}
                 >
-                  <span className="nav-panel__idx">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="nav-panel__idx" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                   <span className="nav-panel__label">{n.label}</span>
                 </Link>
               ))}
@@ -252,7 +252,7 @@ export default function Navbar() {
                   onClick={() => { setTheme("light"); closeMenu(); }}
                   aria-pressed={theme === "light"}
                 >
-                  <span className="nav-panel__theme-pip" />
+                  <span className="nav-panel__theme-pip" aria-hidden="true" />
                   Light
                 </button>
                 <button
@@ -261,7 +261,7 @@ export default function Navbar() {
                   onClick={() => { setTheme("dark"); closeMenu(); }}
                   aria-pressed={theme === "dark"}
                 >
-                  <span className="nav-panel__theme-pip" />
+                  <span className="nav-panel__theme-pip" aria-hidden="true" />
                   Dark
                 </button>
               </div>

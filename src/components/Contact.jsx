@@ -18,10 +18,10 @@ export default function ContactSection() {
     <div className="contact-layout">
       {/* Left Column */}
       <div className="contact-left">
-        <h2 className="contact-heading">
+        <h1 className="contact-heading">
           Get In <br />
           <span style={{ color: "var(--tx-2)" }}>Touch</span>
-        </h2>
+        </h1>
         <p className="contact-desc">
           Building backend systems, intelligent applications,<br />
           and production-ready software.<br /><br />

@@ -12,6 +12,7 @@ export default function JourneyPage() {
 
   return (
     <>
+      <h1 className="sr-only">Journey — experience and recognition</h1>
       <section style={{ ...S, paddingTop: 100 }}>
         <ExperienceSection />
       </section>

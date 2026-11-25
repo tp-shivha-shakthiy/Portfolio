@@ -45,7 +45,7 @@ export default function Awards() {
         <div className="awards-list">
         {awardsData.map((award, idx) => (
           <div key={idx} className="award-row">
-            <span className="award-row__idx">
+            <span className="award-row__idx" aria-hidden="true">
               {String(idx + 1).padStart(2, "0")}
             </span>
             <div className="award-row__body">

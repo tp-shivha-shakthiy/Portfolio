@@ -20,7 +20,7 @@ function ExperienceRow({ item }) {
         <span
           style={{
             fontFamily: "var(--fm)",
-            fontSize: "11px",
+            fontSize: "12px",
             color: "var(--tx-2)",
             letterSpacing: "0.06em",
             display: "block",
@@ -37,7 +37,6 @@ function ExperienceRow({ item }) {
             textTransform: "uppercase",
             letterSpacing: "0.08em",
             fontWeight: 500,
-            opacity: 0.8,
           }}
         >
           {item.org}
@@ -105,6 +104,7 @@ function ExperienceRow({ item }) {
               }}
             >
               <span
+                aria-hidden="true"
                 style={{
                   position: "absolute",
                   left: 0,

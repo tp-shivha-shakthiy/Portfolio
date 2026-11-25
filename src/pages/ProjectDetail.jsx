@@ -35,8 +35,8 @@ export default function ProjectDetail() {
   if (!p) {
     return (
       <section style={{ ...S, paddingTop: 120, textAlign: "center" }}>
-        <h2 style={{ fontFamily: "var(--fd)", fontSize: 28, color: "var(--tx-h)" }}>Project not found</h2>
-        <Link to="/projects" style={{ fontFamily: "var(--fm)", fontSize: 12, color: "var(--a)", marginTop: 16, display: "inline-block" }}>
+        <h1 style={{ fontFamily: "var(--fd)", fontSize: 28, fontWeight: 400, color: "var(--tx-h)" }}>Project not found</h1>
+        <Link to="/projects" style={{ fontFamily: "var(--fm)", fontSize: 12, color: "var(--a)", marginTop: 8, display: "inline-flex", alignItems: "center", minHeight: 40 }}>
           ← Back to projects
         </Link>
       </section>
@@ -51,11 +51,13 @@ export default function ProjectDetail() {
           to="/projects"
           style={{
             fontFamily: "var(--fm)",
-            fontSize: 11,
+            fontSize: 12,
             color: "var(--tx-2)",
             textDecoration: "none",
-            display: "inline-block",
-            marginBottom: 32,
+            display: "inline-flex",
+            alignItems: "center",
+            minHeight: 40,
+            marginBottom: 22,
           }}
         >
           ← All projects
@@ -65,6 +67,7 @@ export default function ProjectDetail() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             <div
+              aria-hidden="true"
               style={{
                 width: 56,
                 height: 56,
@@ -93,7 +96,7 @@ export default function ProjectDetail() {
             <span
               style={{
                 fontFamily: "var(--fm)",
-                fontSize: 11,
+                fontSize: 12,
                 color: "var(--a)",
                 border: "1px solid var(--a-bd)",
                 background: "var(--a-dim)",

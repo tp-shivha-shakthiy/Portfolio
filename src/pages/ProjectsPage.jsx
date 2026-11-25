@@ -7,7 +7,7 @@ function ProjectRow({ p }) {
   return (
     <Link to={`/projects/${p.slug}`} className="cat-row">
       <div className="cat-row__head">
-        <div className="cat-row__icon" style={{
+        <div className="cat-row__icon" aria-hidden="true" style={{
           background: p.color + "18",
           border: `1px solid ${p.color}44`,
           color: p.color,
@@ -18,7 +18,7 @@ function ProjectRow({ p }) {
           <span className="cat-row__type-tag">Deep dive</span>
         )}
         <div className="cat-row__title-group">
-          <h3 className="cat-row__title">{p.title}</h3>
+          <h2 className="cat-row__title">{p.title}</h2>
           <span className="cat-row__year">{p.year}</span>
         </div>
       </div>
@@ -31,7 +31,7 @@ function ProjectRow({ p }) {
         <div className="cat-row__field">
           <span className="cat-row__label">Status</span>
           <span className="cat-row__value cat-row__value--status">
-            <span className="cat-dot" />
+            <span className="cat-dot" aria-hidden="true" />
             {p.status}
           </span>
         </div>
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
 
   return (
     <section className="catalogue">
-      <SectionHeading title="System Catalogue" />
+      <SectionHeading as="h1" title="System Catalogue" />
       <p className="catalogue__intro">
 Full-stack systems, applied ML pipelines, and end-to-end software —
           each project a complete case study.

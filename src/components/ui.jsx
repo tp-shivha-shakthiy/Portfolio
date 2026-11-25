@@ -1,18 +1,19 @@
 export function FieldLabel({ children }) {
   return (
-    <span
+    <h2
       style={{
         fontFamily: "var(--fm)",
-        fontSize: 10,
+        fontSize: 11,
+        fontWeight: 400,
         color: "var(--a)",
         letterSpacing: "0.08em",
         textTransform: "uppercase",
         display: "block",
-        marginBottom: 4,
+        margin: "0 0 4px",
       }}
     >
       {children}
-    </span>
+    </h2>
   );
 }
 
@@ -57,6 +58,7 @@ export function DashList({ items }) {
           }}
         >
           <span
+            aria-hidden="true"
             style={{
               position: "absolute",
               left: 0,
@@ -82,10 +84,13 @@ export function Pill({ href, children }) {
       rel="noopener noreferrer"
       style={{
         fontFamily: "var(--fm)",
-        fontSize: 11,
+        fontSize: 12,
         color: "var(--tx-2)",
         border: "1px solid var(--br-2)",
-        padding: "5px 14px",
+        padding: "8px 14px",
+        display: "inline-flex",
+        alignItems: "center",
+        minHeight: 32,
         borderRadius: 4,
         textDecoration: "none",
         transition: "color 0.2s, border-color 0.2s",
