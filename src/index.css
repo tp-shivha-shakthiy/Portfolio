@@ -36,13 +36,14 @@
   --tx-h:     #F1F0EC;
   --tx-w:     #F1F0EC;
 
-  --a:        #6C8FCF;   /* accent text ≥4.9:1 on all surfaces (was #5B7FBF, 4.0–4.6:1) */
-  --a-hi:     #83A1D8;
-  --a-solid:  #3F63A3;   /* filled active states (toggle) */
-  --on-a-solid:#F1F0EC;  /* 5.2:1 on --a-solid */
-  --a-dim:    rgba(91,127,191,0.08);
-  --a-bd:     rgba(91,127,191,0.25);
-  --a-glow:   rgba(91,127,191,0.12);
+  /* Accent: violet ink. Links/labels ≥6.5:1 on every surface; used sparingly */
+  --a:        #A495F2;
+  --a-hi:     #B9AEF6;
+  --a-solid:  #5B47C4;   /* filled buttons / active toggle */
+  --on-a-solid:#F1F0EC;  /* 5.9:1 on --a-solid */
+  --a-dim:    rgba(164,149,242,0.08);
+  --a-bd:     rgba(164,149,242,0.28);
+  --a-glow:   rgba(164,149,242,0.12);
 
   --r:        #D4685F;   /* ≥4.5:1 on all surfaces (was #C1554F) */
   --ok:       #4FB57F;   /* status: done */
@@ -55,7 +56,7 @@
   --grid-b:   rgba(255,255,255,0.018);
   --nav-bg:   rgba(17,19,21,0.92);
   --card-sh:  0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.22);
-  --card-sh-h:0 1px 3px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.28), 0 0 0 1px rgba(91,127,191,0.08);
+  --card-sh-h:0 1px 3px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.28), 0 0 0 1px rgba(164,149,242,0.08);
   --photo-sh: 0 1px 3px rgba(0,0,0,0.3);
   --row-hov:  rgba(255,255,255,0.02);
   --error:    #E57373;
@@ -81,13 +82,13 @@
   --tx-h:     #111111;
   --tx-w:     #111111;
 
-  --a:        #2E5090;
-  --a-hi:     #3A61A8;
-  --a-solid:  #2E5090;
-  --on-a-solid:#FDFCF9;  /* 7.7:1 on --a-solid (was #111111, 2.4:1) */
-  --a-dim:    rgba(46,80,144,0.06);
-  --a-bd:     rgba(46,80,144,0.22);
-  --a-glow:   rgba(46,80,144,0.08);
+  --a:        #5440C2;   /* ≥5.9:1 on every light surface */
+  --a-hi:     #6A57D6;
+  --a-solid:  #5440C2;
+  --on-a-solid:#FDFCF9;  /* 7.1:1 on --a-solid */
+  --a-dim:    rgba(84,64,194,0.06);
+  --a-bd:     rgba(84,64,194,0.24);
+  --a-glow:   rgba(84,64,194,0.08);
 
   --r:        #7A2E2E;
   --ok:       #2E7D4F;
@@ -100,7 +101,7 @@
   --grid-b:   rgba(0,0,0,0.015);
   --nav-bg:   rgba(245,243,238,0.92);
   --card-sh:  0 1px 2px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.06);
-  --card-sh-h:0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(46,80,144,0.08);
+  --card-sh-h:0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06), 0 0 0 1px rgba(84,64,194,0.08);
   --photo-sh: 0 1px 3px rgba(0,0,0,0.08);
   --row-hov:  rgba(0,0,0,0.02);
   --error:    #C62828;
