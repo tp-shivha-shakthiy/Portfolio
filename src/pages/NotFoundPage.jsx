@@ -1,12 +1,11 @@
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function NotFoundPage() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    document.title = "Page Not Found — T P Shivha Shakthiy";
-  }, []);
+  // Vercel serves every path with status 200, so tell search engines not to index this page
+  usePageMeta({ title: "Page not found", path: pathname, noindex: true });
 
   return (
     <section className="not-found">

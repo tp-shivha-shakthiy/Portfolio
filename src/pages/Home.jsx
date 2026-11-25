@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PROFILE, ABOUT, SKILLS, resumeMailto } from "../data/profile";
 import { FEATURED_PROJECTS, PUBLICATION_PROJECT } from "../data/projects";
 import { useFadeIn } from "../hooks/useFadeIn";
+import { usePageMeta } from "../hooks/usePageMeta";
 import ProjectCard from "../components/ProjectCard";
 import ExperienceList from "../components/Experience";
 import RecognitionList from "../components/Awards";
@@ -117,9 +117,11 @@ function Publication({ p }) {
 }
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "T P Shivha Shakthiy — Software Engineer, Backend & Applied AI";
-  }, []);
+  usePageMeta({
+    description:
+      "Software engineer focused on backend and applied AI — APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker. Projects, experience and research.",
+    path: "/",
+  });
 
   return (
     <div className="home">

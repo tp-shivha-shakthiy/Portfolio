@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { FEATURED_PROJECTS, MORE_PROJECTS, RESEARCH_PROJECTS } from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function Group({ id, title, projects }) {
   if (!projects.length) return null;
@@ -17,9 +17,12 @@ function Group({ id, title, projects }) {
 }
 
 export default function ProjectsPage() {
-  useEffect(() => {
-    document.title = "Projects — T P Shivha Shakthiy";
-  }, []);
+  usePageMeta({
+    title: "Projects",
+    description:
+      "Backend, full-stack and applied-ML projects — TRACE, NeuroBridge, Vanta AI — plus research case studies, each with role, stack and results.",
+    path: "/projects",
+  });
 
   return (
     <div className="page">
