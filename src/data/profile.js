@@ -11,7 +11,7 @@ export const PROFILE = {
   linkedin: "https://linkedin.com/in/t-p-shivha-shakthiy-801723346",
   availability: "Open to software engineering internships and full-time roles.",
   // Short, verifiable highlights shown under the hero bio
-  highlights: ["2× Girlathon Runner-Up", "First-author paper, ICTCS 2026 (Springer LNNS)"],
+  highlights: ["First-author paper, ICTCS 2026 (Springer LNNS)"],
   resumeSubject: "Résumé request — [Company]",
 };
 

@@ -784,16 +784,17 @@ main:focus { outline: none; }
 }
 
 /* ── PROJECT CARDS ─────────────────────────────────────────────────────────── */
+/* One project per row: room to read instead of three squeezed columns */
 .pcard-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-.pcard {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 24px;
+  gap: 24px;
+}
+.pcard {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 24px 56px;
+  padding: 32px 36px;
   background: var(--surface);
   border: 1px solid var(--surface-b);
   border-radius: 3px;
@@ -801,6 +802,7 @@ main:focus { outline: none; }
   transition: border-color 0.25s;
 }
 .pcard:hover { border-color: var(--a-bd); }
+.pcard__main { display: flex; flex-direction: column; gap: 16px; }
 .pcard__head { display: flex; align-items: center; gap: 14px; }
 .pcard__icon {
   width: 36px;
@@ -818,7 +820,7 @@ main:focus { outline: none; }
 .pcard__title {
   font-family: var(--fd);
   font-weight: 400;
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.2;
   color: var(--tx-h);
 }
@@ -840,13 +842,19 @@ main:focus { outline: none; }
 }
 .status-dot--done { background: var(--ok); }
 .status-dot--active { background: var(--wip); }
-.pcard__tagline { font-size: 14px; line-height: 1.65; color: var(--tx); }
+.pcard__tagline { font-size: 16px; line-height: 1.7; color: var(--tx); max-width: 48ch; }
 .pcard__links {
   display: flex;
   flex-wrap: wrap;
   gap: 0 20px;
   margin-top: auto;
 }
+/* Right column of a project card: larger, easier-to-scan facts */
+.pcard__side { gap: 16px; padding-top: 4px; }
+.pcard__side .facts__row { grid-template-columns: 72px minmax(0, 1fr); }
+.pcard__side dd { font-size: 15px; line-height: 1.6; }
+.pcard__side dd.facts__stack { font-size: 13px; line-height: 1.7; }
+.pcard__side .facts__list { gap: 6px; }
 
 /* Label / value rows used on cards, case studies and About */
 .facts { display: flex; flex-direction: column; gap: 10px; }
@@ -1052,7 +1060,7 @@ main:focus { outline: none; }
 .case__more summary:hover { color: var(--a-hi); }
 
 @media (max-width: 1100px) {
-  .pcard-grid { grid-template-columns: minmax(0, 1fr); }
+  .pcard { grid-template-columns: minmax(0, 1fr); gap: 20px; }
 }
 @media (max-width: 900px) {
   .home-section { padding: 56px 20px; }
@@ -1060,7 +1068,10 @@ main:focus { outline: none; }
   .research-grid,
   .about { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .exp-item { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
-  .pcard, .pub { padding: 20px; }
+  .pcard, .pub { padding: 22px 20px; }
+  .pcard__title { font-size: 23px; }
+  .pcard__tagline { font-size: 15px; }
+  .pcard__side dd { font-size: 14px; }
   /* hero buttons pack two per row and fill the width on phones */
   .home-hero__ctas { gap: 10px; }
   .home-hero__ctas .btn { flex: 1 1 auto; padding: 0 14px; letter-spacing: 0.08em; }
