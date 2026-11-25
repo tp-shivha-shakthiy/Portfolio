@@ -62,7 +62,18 @@ function Hero() {
         <SocialLinks />
       </div>
       <div className="home-hero__portrait">
-        <img src="/profile-small_.png" alt="Portrait of T P Shivha Shakthiy" className="home-hero__img" />
+        <picture>
+          <source srcSet="/portrait.webp" type="image/webp" />
+          <img
+            src="/portrait.png"
+            alt="Portrait of T P Shivha Shakthiy"
+            className="home-hero__img"
+            width={499}
+            height={499}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
     </section>
   );

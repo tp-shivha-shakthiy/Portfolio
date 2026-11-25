@@ -29,22 +29,19 @@ function ScrollManager() {
   return null;
 }
 
+// The app has rendered: fade the static loader out right away (no artificial minimum delay)
 function Loader() {
   useEffect(() => {
     const loader = document.getElementById("loader");
     if (!loader) return;
-    const minTime = 650;
-    const start = Date.now();
-    const fade = () => {
-      const elapsed = Date.now() - start;
-      const delay = Math.max(0, minTime - elapsed);
-      setTimeout(() => {
-        loader.style.transition = "opacity 0.5s ease";
-        loader.style.opacity = "0";
-        setTimeout(() => loader.remove(), 500);
-      }, delay);
-    };
-    fade();
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      loader.remove();
+      return;
+    }
+    loader.style.transition = "opacity 0.25s ease";
+    loader.style.opacity = "0";
+    const t = setTimeout(() => loader.remove(), 250);
+    return () => clearTimeout(t);
   }, []);
   return null;
 }

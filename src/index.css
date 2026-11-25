@@ -7,7 +7,7 @@
    Signature : Engineering grid · clean ruled sections · no gradients
 ══════════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+/* Fonts are loaded with <link> in index.html (not @import, which delays rendering) */
 
 /* ── THEME-INDEPENDENT TOKENS ─────────────────────────────────────────────── */
 :root {
@@ -684,9 +684,11 @@ nav *, header *, [class*="Navbar"] *, .nav-link, [class*="logo"] {
 [data-theme="light"] .home-hero__portrait::before {
   opacity: 0.3;
 }
+.home-hero__portrait picture { display: contents; }
 .home-hero__img {
   max-height: 52vh;
   width: 100%;
+  height: auto;
   object-fit: contain;
   object-position: top;
   mask-image:

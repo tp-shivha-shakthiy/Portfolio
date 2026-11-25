@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Only the weights the site uses: Literata 400 · Inter 400/500 + italic 400 · JetBrains Mono 400/500 -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400&family=Inter:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <!-- Hero portrait is the largest above-the-fold image: fetch it early -->
+    <link rel="preload" as="image" href="/portrait.webp" type="image/webp" fetchpriority="high" />
+    <!-- Loader colours follow the saved theme (the theme script below runs before <body> exists) -->
+    <style>
+      #loader { background: #111315; }
+      #loader-text { color: #8A8D8A; }
+      [data-theme="light"] #loader { background: #F5F3EE; }
+      [data-theme="light"] #loader-text { color: #65635E; }
+    </style>
 
     <!-- Primary -->
     <title>T P Shivha Shakthiy — ML Systems & Full-Stack Development</title>
@@ -24,12 +38,6 @@
       (function(){
         var t=localStorage.getItem("spec-theme")||"dark";
         document.documentElement.setAttribute("data-theme",t);
-        var l=document.getElementById("loader");
-        var lt=document.getElementById("loader-text");
-        if(l){
-          l.style.background=t==="light"?"#E4E5E2":"#111315";
-          if(lt)lt.style.color=t==="light"?"#9C9E9B":"#6B6E6C";
-        }
       })();
     </script>
   </head>
@@ -37,13 +45,11 @@
     <div id="loader" style="
       position: fixed; inset: 0; z-index: 9999;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-      background: #111315;
     ">
-      <img src="/logo.png" alt="" style="height: 120px; object-fit: contain; opacity: 0.9;" />
+      <img src="/logo-240.png" alt="" width="120" height="120" style="object-fit: contain; opacity: 0.9;" />
       <span id="loader-text" style="
         font-family: 'JetBrains Mono', ui-monospace, monospace;
-        font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-        color: #6B6E6C;
+        font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
       ">Loading...</span>
     </div>
     <div id="root"></div>

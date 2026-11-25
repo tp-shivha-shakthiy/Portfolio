@@ -133,7 +133,7 @@ export default function Navbar() {
           }}
         >
           <img
-            src="/logo.png"
+            src="/logo-88.png"
             alt=""
             width={44}
             height={44}
