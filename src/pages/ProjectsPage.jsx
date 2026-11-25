@@ -28,8 +28,8 @@ export default function ProjectsPage() {
     <div className="page">
       <h1 className="page__title">Projects</h1>
       <p className="page__intro">
-        Selected engineering work first, then hackathon builds and research. Each card says what
-        I built; the case study has the architecture, decisions and results.
+        Selected engineering work first, then research. Each card says what I built; the case
+        study has the architecture, decisions and results.
       </p>
       <Group id="selected" title="Selected" projects={FEATURED_PROJECTS} />
       <Group id="more" title="More projects" projects={MORE_PROJECTS} />

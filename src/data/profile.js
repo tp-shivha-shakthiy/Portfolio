@@ -38,7 +38,7 @@ export const RECOGNITION = [
   { title: "Runner-Up — Girlathon 4.0 (2026)", context: "NeuroBridge", year: "2026" },
   { title: "Runner-Up — Girlathon 2025", context: "Vanta AI", year: "2025" },
   { title: "Top 10 Finalist — She Builds Tech 2.0", context: "Kerala Startup Mission", year: "2025" },
-  { title: "Participant — Cerebral Valley × Google DeepMind Hackathon", context: "Conclave", year: "2026" },
+  { title: "Participant — Cerebral Valley × Google DeepMind Hackathon", context: "", year: "2026" },
   { title: "Google Student Ambassador", context: "", year: "2026" },
   { title: "GirlScript Summer of Code Contributor", context: "", year: "2026" },
   { title: "School Topper — Grade 12: 99.9%, Grade 10: 97.4%", context: "", year: "2024" },
