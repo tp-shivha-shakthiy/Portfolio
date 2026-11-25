@@ -49,8 +49,7 @@ export default function ProjectDetail() {
     <article className="page case">
       <Link to="/projects" className="text-link text-link--quiet case__back">← All projects</Link>
 
-      {/* div, not <header>: legacy navbar CSS clears backgrounds inside every header */}
-      <div className="case__head">
+      <header className="case__head">
         <div className="pcard__head">
           <span
             className="pcard__icon pcard__icon--lg"
@@ -127,7 +126,7 @@ export default function ProjectDetail() {
             {p.demoNote}
           </p>
         )}
-      </div>
+      </header>
 
       {isTeam && (
         <p className="case__note">

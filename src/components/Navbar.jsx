@@ -101,55 +101,20 @@ export default function Navbar() {
   }, [menuOpen, closeMenu]);
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        borderBottom: "1px solid var(--br)",
-        background: "var(--nav-bg)",
-        backdropFilter: "blur(12px)",
-      }}
-    >
-      <nav
-        style={{
-          padding: "0 120px",
-          height: 56,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Link
-          to="/"
-          aria-label="Home"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            textDecoration: "none",
-          }}
-        >
-          <img
-            src="/logo-88.png"
-            alt=""
-            width={44}
-            height={44}
-            style={{ height: 44, width: 44, objectFit: "contain", borderRadius: 3 }}
-          />
+    <header className="site-header">
+      <nav className="site-nav" aria-label="Main">
+        <Link to="/" aria-label="Home" className="site-logo">
+          <img src="/logo-88.png" alt="" width={44} height={44} className="site-logo__img" />
         </Link>
 
         {/* Desktop Navigation */}
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }} className="desktop-nav">
+        <div className="desktop-nav">
           {NAV.map((n) => (
             <Link
               key={n.path}
               to={n.path}
               className={`nav-link${isActive(n) ? " active" : ""}`}
               aria-current={isActive(n) ? "page" : undefined}
-              style={{ textDecoration: "none" }}
             >
               {n.label}
             </Link>
