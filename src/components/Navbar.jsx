@@ -6,6 +6,7 @@ import { useTheme } from "../hooks/useTheme";
 const NAV = [
   { label: "Projects", path: "/#projects", activeFor: "/projects" },
   { label: "Experience", path: "/#experience" },
+  { label: "Terminal", path: "/#terminal" },
   { label: "About", path: "/#about" },
   { label: "Contact", path: "/#contact" },
 ];

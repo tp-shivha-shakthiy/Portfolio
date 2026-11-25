@@ -31,6 +31,7 @@ The site follows an **engineering specification document** aesthetic:
 ## Features
 
 * Single-page overview: hero, selected projects, experience, research & recognition, about, contact
+* Built-in terminal (`help`, `ls`, `cat trace`, `paper`, `contact`…) that prints the same data as the page
 * Project cards with role, stack and proof; case studies with problem, what I built, architecture, decisions and results
 * Old `/about`, `/journey` and `/contact` URLs redirect to homepage sections
 * Dual theme with localStorage persistence and an anti-flash script
@@ -65,7 +66,7 @@ The site follows an **engineering specification document** aesthetic:
 
 ```text
 src/
-├── components/       # Navbar, ProjectCard, Experience, Awards (recognition), Contact
+├── components/       # Navbar, ProjectCard, Terminal, Experience, Awards (recognition), Contact
 ├── data/             # projects, experience, profile (bio, skills, recognition)
 ├── hooks/            # useTheme, useFadeIn, usePageMeta
 ├── pages/            # Home, ProjectsPage, ProjectDetail, NotFoundPage
