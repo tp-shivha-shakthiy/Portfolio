@@ -1,8 +1,8 @@
 /*
   Project data.
 
-  Card fields (shown on the homepage and /projects):
-    tagline · role · team · stack · proof · links
+  Summary fields (homepage spreads and rows):
+    tagline · role · team · stack · proof · links · accent (broadsheet colour)
   Case-study fields (shown on /projects/:slug):
     summary · problem · built ("What I built") · architecture · engineeringDecisions · results
   "Full write-up" (collapsed on the case study, nothing removed):
@@ -14,7 +14,10 @@ export const PROJECTS = [
     slug: "trace",
     title: "TRACE",
     abbr: "TR",
-    color: "#059669",
+    cardLine: "Backend that turns GitHub activity into structured data",
+    cardRole: "Solo — design, backend and deployment",
+    cardProof: "66+ live GitHub events synced end to end",
+    accent: "brass",
     year: "2026",
     kind: "project",
     featured: true,
@@ -92,7 +95,10 @@ export const PROJECTS = [
     slug: "neurobridge",
     title: "NeuroBridge",
     abbr: "NB",
-    color: "#0891b2",
+    cardLine: "Adaptive support platform for neurodivergent users",
+    cardRole: "Architected and built the adaptive engine · team of 4",
+    cardProof: "1,054 / 1,059 automated tests passing",
+    accent: "teal",
     year: "2026",
     kind: "project",
     featured: true,
@@ -169,7 +175,8 @@ export const PROJECTS = [
     slug: "vanta-ai",
     title: "Vanta AI",
     abbr: "VA",
-    color: "#7c3aed",
+    shortTitle: "VantaAI",
+    accent: "violet",
     year: "2025",
     kind: "project",
     featured: true,
@@ -248,8 +255,13 @@ export const PROJECTS = [
   {
     slug: "network-intrusion-detection-under-class-imbalance",
     title: "Intrusion Detection under Class Imbalance",
+    shortTitle: "IDS Research",
     abbr: "NID",
-    color: "#d97706",
+    cardLine: "Intrusion detection under severe class imbalance",
+    cardRole: "First author · accepted at ICTCS 2026 (Springer LNNS)",
+    // Binary only, with model and test setup (paper, Table 5 / abstract). Never mixed with multiclass.
+    cardProof: "98.70% binary accuracy — shared-feature BiLSTM, held-out test set",
+    accent: "coral",
     year: "2026",
     kind: "research",
     featured: false,
@@ -263,7 +275,7 @@ export const PROJECTS = [
     // All figures below are taken from the accepted paper (verified against the PDF, Nov 2026).
     proof: [
       "Accepted — ICTCS 2026 (Springer LNNS), oral presentation",
-      "98.70% binary accuracy · 96.66% multiclass accuracy on UNSW-NB15 (2.54M records)",
+      "98.70% binary accuracy on UNSW-NB15 (shared-feature BiLSTM)",
     ],
     publication: {
       title:
@@ -272,8 +284,12 @@ export const PROJECTS = [
       venue: "ICTCS 2026 · Springer LNNS",
       status: "Accepted for oral presentation",
       paperId: "1056",
-      headline:
-        "98.70% binary accuracy and 96.66% multiclass accuracy on the full UNSW-NB15 dataset (2.54M records), under a leakage-controlled evaluation.",
+      // Shown as separate labelled lines: binary and multiclass come from different models
+      results: [
+        ["Binary", "98.70% accuracy, 95.10% F1, 99.92% AUC — shared-feature BiLSTM"],
+        ["Multiclass", "96.66% accuracy, 97.29% weighted F1 — DNN with MI + PCA"],
+      ],
+      dataset: "UNSW-NB15 (2.54M records) · stratified 80:20 split, 5-fold CV, held-out test set",
     },
 
     summary:
@@ -334,7 +350,9 @@ export const PROJECTS = [
     slug: "st-hf-vvi-reid",
     title: "ST-HF-VVI-ReID",
     abbr: "ReID",
-    color: "#be185d",
+    shortTitle: "ReID",
+    plainName: "video person re-identification",
+    accent: "lavender",
     year: "2026",
     kind: "research",
     featured: false,
@@ -398,16 +416,5 @@ export const PROJECTS = [
   },
 ];
 
-// Status dot colour by meaning: done = green, in progress = amber, other = neutral accent
-const DONE = ["Complete", "Paper accepted", "Internship project"];
-const IN_PROGRESS = ["Active development"];
-export function statusTone(status) {
-  if (DONE.includes(status)) return "done";
-  if (IN_PROGRESS.includes(status)) return "active";
-  return "neutral";
-}
-
-export const FEATURED_PROJECTS = PROJECTS.filter((p) => p.featured);
-export const MORE_PROJECTS = PROJECTS.filter((p) => !p.featured && p.kind === "project");
-export const RESEARCH_PROJECTS = PROJECTS.filter((p) => p.kind === "research");
+// The one project with a publication (shown in Research & recognition)
 export const PUBLICATION_PROJECT = PROJECTS.find((p) => p.publication);

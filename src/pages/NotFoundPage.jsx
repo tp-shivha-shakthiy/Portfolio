@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { SiteHeader } from "../components/SiteChrome";
 
 export default function NotFoundPage() {
   const { pathname } = useLocation();
@@ -8,17 +9,17 @@ export default function NotFoundPage() {
   usePageMeta({ title: "Page not found", path: pathname, noindex: true });
 
   return (
-    <section className="not-found">
-      <span className="not-found__code">Error 404 · Route not found</span>
-      <h1 className="not-found__title">This page doesn&apos;t exist.</h1>
-      <p className="not-found__path">
-        <span className="not-found__path-k">Requested</span>
-        <code>{pathname}</code>
-      </p>
-      <div className="not-found__links">
-        <Link to="/" className="text-link">← Back to home</Link>
-        <Link to="/projects" className="text-link">View projects →</Link>
-      </div>
-    </section>
+    <>
+      <SiteHeader />
+      <main id="main" tabIndex={-1} className="plain">
+        <p className="label">404 · Page not found</p>
+        <h1 className="plain__title">This page doesn&apos;t exist.</h1>
+        <p className="plain__path">Requested <code>{pathname}</code></p>
+        <p className="plinks">
+          <Link to="/" className="link">← Home</Link>
+          <Link to="/#work" className="link">Selected work</Link>
+        </p>
+      </main>
+    </>
   );
 }
