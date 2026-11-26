@@ -17,7 +17,7 @@ export default function Masthead() {
   return (
     <header className="mast paper" id="top">
       <div className="mast__dateline label">
-        <span>{PROFILE.role}</span>
+        <span>Portfolio · 2026</span>
         <span>Kerala, India</span>
       </div>
 
@@ -25,6 +25,9 @@ export default function Masthead() {
         <span>Shivha</span> <em>Shakthiy</em>
       </h1>
       <div className="mast__rule" aria-hidden="true" />
+      <p className="mast__role">
+        Software Engineer <span aria-hidden="true">—</span><span className="sr-only">,</span> <em>Backend &amp; Applied AI</em>
+      </p>
 
       <div className="mast__cols">
         <div className="mast__intro">
@@ -59,6 +62,12 @@ export default function Masthead() {
           </ol>
         </nav>
       </div>
+
+      <a href="#work" className="mast__next">
+        <span className="label">Selected work</span>
+        <span className="mast__next-list">NeuroBridge · TRACE · IDS Research</span>
+        <span className="mast__next-arrow" aria-hidden="true">↓</span>
+      </a>
     </header>
   );
 }

@@ -8,12 +8,13 @@ import { EXPERIENCE } from "../data/experience";
 export default function About() {
   const [lede, approach] = ABOUT;
   return (
-    <section id="about" aria-labelledby="about-h" tabIndex={-1} className="section">
+    <section id="about" aria-labelledby="about-h" tabIndex={-1} className="section section--full">
       <div className="runhead">
         <h2 id="about-h"><em>About</em></h2>
         <span className="label">Bio · education · experience · skills</span>
       </div>
 
+      <div className="section__body">
       <div className="about">
         <figure className="portrait">
           <span className="portrait__word" aria-hidden="true">Shivha</span>
@@ -57,6 +58,7 @@ export default function About() {
             </div>
           </dl>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -24,7 +24,6 @@ export function SiteFooter() {
   return (
     <footer className="colophon label">
       <span>© 2026 {PROFILE.displayName}</span>
-      <span>Kerala · IST (UTC+5:30)</span>
       <a href="#top" className="colophon__top">Back to top ↑</a>
     </footer>
   );
