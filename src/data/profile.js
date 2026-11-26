@@ -5,12 +5,18 @@ export const PROFILE = {
   role: "Software Engineer — Backend & Applied AI",
   bio: "Backend-focused engineer building reliable APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker — with applied ML when the problem calls for it.",
   education: "B.Tech CSE (AI & Data Science) · IIIT Kottayam · Expected 2028",
-  // Matches the resume and git email. The old site used "tpshivhashakthiy@…" (one "y").
+  // Confirmed by owner (matches resume and git).
   email: "tpshivhashakthiyy@gmail.com",
   github: "https://github.com/tp-shivha-shakthiy",
   linkedin: "https://linkedin.com/in/t-p-shivha-shakthiy-801723346",
   availability: "Open to software engineering internships and full-time roles.",
+  // Short, verifiable highlights shown under the hero bio
+  highlights: ["First-author paper, ICTCS 2026 (Springer LNNS)"],
+  resumeSubject: "Résumé request — [Company]",
 };
+
+export const resumeMailto = () =>
+  `mailto:${PROFILE.email}?subject=${encodeURIComponent(PROFILE.resumeSubject)}`;
 
 export const GITHUB_USER = "tp-shivha-shakthiy";
 
@@ -32,7 +38,7 @@ export const RECOGNITION = [
   { title: "Runner-Up — Girlathon 4.0 (2026)", context: "NeuroBridge", year: "2026" },
   { title: "Runner-Up — Girlathon 2025", context: "Vanta AI", year: "2025" },
   { title: "Top 10 Finalist — She Builds Tech 2.0", context: "Kerala Startup Mission", year: "2025" },
-  { title: "Participant — Cerebral Valley × Google DeepMind Hackathon", context: "Conclave", year: "2026" },
+  { title: "Participant — Cerebral Valley × Google DeepMind Hackathon", context: "", year: "2026" },
   { title: "Google Student Ambassador", context: "", year: "2026" },
   { title: "GirlScript Summer of Code Contributor", context: "", year: "2026" },
   { title: "School Topper — Grade 12: 99.9%, Grade 10: 97.4%", context: "", year: "2024" },

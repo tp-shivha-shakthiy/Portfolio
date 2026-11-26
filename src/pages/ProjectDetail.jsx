@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PROJECTS, statusTone } from "../data/projects";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function CaseSection({ title, children }) {
   return (
@@ -25,9 +25,12 @@ export default function ProjectDetail() {
   const { slug } = useParams();
   const p = PROJECTS.find((pr) => pr.slug === slug);
 
-  useEffect(() => {
-    document.title = p ? `${p.title} — T P Shivha Shakthiy` : "Project Not Found — T P Shivha Shakthiy";
-  }, [p]);
+  usePageMeta({
+    title: p ? p.title : "Project not found",
+    description: p ? p.tagline : undefined,
+    path: `/projects/${slug}`,
+    noindex: !p,
+  });
 
   if (!p) {
     return (
@@ -46,8 +49,7 @@ export default function ProjectDetail() {
     <article className="page case">
       <Link to="/projects" className="text-link text-link--quiet case__back">← All projects</Link>
 
-      {/* div, not <header>: legacy navbar CSS clears backgrounds inside every header */}
-      <div className="case__head">
+      <header className="case__head">
         <div className="pcard__head">
           <span
             className="pcard__icon pcard__icon--lg"
@@ -124,7 +126,7 @@ export default function ProjectDetail() {
             {p.demoNote}
           </p>
         )}
-      </div>
+      </header>
 
       {isTeam && (
         <p className="case__note">

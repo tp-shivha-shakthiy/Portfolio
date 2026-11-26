@@ -7,9 +7,6 @@
     summary · problem · built ("What I built") · architecture · engineeringDecisions · results
   "Full write-up" (collapsed on the case study, nothing removed):
     solution · impact · challenges · lessons · notes
-
-  `unconfirmed` holds figures that conflict with other sources (resume / repo).
-  They are NOT rendered anywhere until the owner confirms them.
 */
 
 export const PROJECTS = [
@@ -103,7 +100,7 @@ export const PROJECTS = [
 
     tagline:
       "Adaptive support platform that personalizes interventions for neurodivergent users through real-time user-state modelling.",
-    role: "Architected and built the adaptive engine · led the ASD module, built the Anxiety module · release integration",
+    role: "Architected and built the adaptive engine; led the ASD and Anxiety modules",
     team: "Team of 4",
     stack: ["TypeScript", "React", "Supabase", "PostgreSQL"],
     proof: [
@@ -247,71 +244,6 @@ export const PROJECTS = [
     paper: null,
   },
 
-  {
-    slug: "conclave",
-    title: "Conclave",
-    abbr: "CL",
-    color: "#6366f1",
-    year: "2026",
-    kind: "project",
-    featured: false,
-    status: "Hackathon build",
-
-    tagline:
-      "Real-time multi-agent system: four AI stakeholder personas listen to a live discussion and step in when they detect fallacies or unverified claims.",
-    // TODO(owner): your role and team size on Conclave — not shown until confirmed
-    role: null,
-    team: "Hackathon team",
-    stack: ["Gemini Live API", "Gemini structured output", "Gemini TTS", "WebSockets", "Vite"],
-    proof: [
-      "Participant — Cerebral Valley × Google DeepMind Hackathon (2026)",
-      "30 test files (27 unit, 3 integration)",
-    ],
-
-    summary:
-      "Real-time AI system that orchestrates four autonomous stakeholder personas (CTO, Product, Finance, Research) to listen to live audio discussions and selectively intervene when fallacies or unverified claims are detected.",
-    problem:
-      "Live discussions and meetings often let unverified claims or logical fallacies pass unchallenged simply because no one in the room has the domain expertise, time, or social standing to push back in the moment. Existing AI meeting tools summarize or transcribe after the fact — none intervene in real time with the judgment of a domain-specific stakeholder.",
-    built: [],
-    architecture:
-      "Audio input → Gemini Live API (ingestion, diarization, transcription) → Context Layer (structured world model: topics, decisions, assumptions, risks) → Agent Layer (4 stakeholder agents reasoning via Gemini structured output) → Kernel Layer (arbitrates competing proposals under a fixed attention budget) → Output Layer (Gemini TTS) → WebSocket bridge to a Vite-powered browser UI for live observation.",
-    engineeringDecisions: [
-      "Designed the Cognitive Tick as a deterministic, CPU-like cognition loop instead of a polling/timer-based loop, to keep agent reasoning event-driven and reproducible",
-      "Separated perception, reasoning, and arbitration into independent layers so agents never talk to each other directly — all coordination flows through the Kernel",
-      "Used Gemini structured output (not free-form generation) for every agent decision, so the Kernel could arbitrate on typed data instead of parsing natural language",
-      "Built an attention budget into the Kernel to prevent all four agents from interrupting simultaneously, forcing prioritization under real conversational constraints",
-    ],
-    results: [
-      "Working 6-layer real-time pipeline from live audio to spoken intervention",
-      "30 test files (27 unit, 3 integration), with typecheck and lint enforced",
-      "Participant — Cerebral Valley × Google DeepMind Hackathon (2026)",
-    ],
-
-    solution:
-      "Built a system where four independent AI agents, each reasoning as a distinct stakeholder persona, continuously listen to live audio and decide — individually and then collectively — whether an intervention is warranted. The system runs on a custom deterministic execution model, the \"Cognitive Tick,\" which triggers once per semantic event rather than on a fixed timer, so agents reason only when the conversation actually produces something worth reasoning about.",
-    // Latency claim removed: no measurement exists. TODO(owner): add the hackathon outcome if there was one.
-    impact:
-      "Delivered a working end-to-end system within the hackathon timeframe: live audio ingestion, four agents reasoning in parallel, arbitration of competing interventions, and spoken responses.",
-    challenges: [
-      "Keeping four independently-reasoning agents from producing conflicting or redundant interventions in the same moment",
-      "Achieving low enough latency across the Perception → Agent → Output pipeline for interventions to feel conversational rather than delayed",
-      "Designing the Context Layer's world model to stay accurate as a live conversation evolves, without re-processing the entire transcript on every tick",
-      "Building and validating this end-to-end pipeline under hackathon time constraints",
-    ],
-    lessons: [
-      "Event-driven cognition loops scale better than fixed-timer polling for multi-agent reasoning under real-time constraints",
-      "Structured output is essential once you need multiple agents' decisions to be arbitrated programmatically, not just displayed",
-      "An explicit attention/arbitration layer is necessary the moment more than one autonomous agent can act on the same input",
-      "Building for real-time latency surfaces architectural tradeoffs that don't appear in batch or async systems",
-    ],
-    notes: [
-      "Designed a deterministic execution model (the Cognitive Tick) for multi-agent arbitration",
-    ],
-
-    github: "https://github.com/tp-shivha-shakthiy/googledeepmindhackathon-conclave",
-    demo: null,
-    paper: null,
-  },
 
   {
     slug: "network-intrusion-detection-under-class-imbalance",
@@ -324,74 +256,74 @@ export const PROJECTS = [
     status: "Paper accepted",
 
     tagline:
-      "First-author paper: a hybrid feature-engineering and class-imbalance pipeline for network intrusion detection on UNSW-NB15.",
+      "First-author paper: a leakage-controlled intrusion detection framework combining hybrid feature engineering and class balancing on the full UNSW-NB15 dataset.",
     role: "First author · Student Researcher, IIIT Kottayam",
     team: null,
     stack: ["Python", "PyTorch", "scikit-learn", "XGBoost"],
+    // All figures below are taken from the accepted paper (verified against the PDF, Nov 2026).
     proof: [
       "Accepted — ICTCS 2026 (Springer LNNS), oral presentation",
-      "99.04% binary accuracy on UNSW-NB15 (2.54M records)",
+      "98.70% binary accuracy · 96.66% multiclass accuracy on UNSW-NB15 (2.54M records)",
     ],
     publication: {
       title:
-        "A Novel Intrusion Detection Framework with Hybrid Feature Engineering and Class Imbalance Techniques",
+        "A novel intrusion detection framework with Hybrid Feature Engineering and Class Imbalance Techniques",
       authorship: "First author",
       venue: "ICTCS 2026 · Springer LNNS",
       status: "Accepted for oral presentation",
       paperId: "1056",
-      headline: "99.04% binary accuracy on UNSW-NB15 (2.54M network records)",
+      headline:
+        "98.70% binary accuracy and 96.66% multiclass accuracy on the full UNSW-NB15 dataset (2.54M records), under a leakage-controlled evaluation.",
     },
 
     summary:
-      "Machine learning pipeline for network intrusion detection using the UNSW-NB15 dataset, evaluating multiple classical and deep learning models for both binary and multi-class attack classification.",
+      "Leakage-controlled intrusion detection framework for the complete UNSW-NB15 dataset, combining Mutual Information feature selection, standard scaling, PCA and training-only class balancing, evaluated across classical and deep learning models for binary and multiclass detection.",
     problem:
-      "Modern enterprise networks generate massive volumes of traffic containing highly imbalanced attack distributions. Traditional intrusion detection systems often struggle to accurately identify rare attack categories while maintaining low false-positive rates.",
+      "Modern networks generate large volumes of traffic with highly imbalanced attack distributions — in UNSW-NB15, normal traffic is about 87% of records and Worms has only 174 samples. Models can reach high overall accuracy while performing poorly on the rare attack classes, and preprocessing that leaks test information can inflate reported results.",
     built: [
-      "First-authored the study on 2.54M UNSW-NB15 records; paper accepted at ICTCS 2026 (Springer LNNS)",
-      "Built reproducible preprocessing, training and evaluation pipelines reused across every model",
-      "Combined mutual-information feature selection with PCA, and addressed class imbalance with SMOTE and MiniBatchKMeans + SMOTE",
-      "Benchmarked classical ML and deep learning models under one consistent evaluation methodology",
+      "First-authored the study on the full UNSW-NB15 dataset (2,540,044 records, 10 traffic classes); accepted at ICTCS 2026 (Springer LNNS)",
+      "Built a leakage-controlled pipeline: stratified 80:20 split with five-fold stratified cross-validation, and the held-out test set isolated from feature selection, scaling, resampling and model selection",
+      "Combined Mutual Information feature selection (top 15 features, computed per training fold) with standard scaling and PCA retaining 95% of variance",
+      "Compared two training-only balancing strategies — SMOTE and Random Under-Sampling + KMeansSMOTE — across 7 classical and deep learning models",
+      "Ran ablations over six preprocessing configurations to separate the effects of MI, PCA and balancing",
     ],
     architecture:
-      "Raw UNSW-NB15 Dataset → Data Preprocessing → Mutual Information Feature Selection → PCA → Class Balancing (SMOTE / MiniBatchKMeans + SMOTE) → Model Training (HGB, XGBoost, Logistic Regression, DNN, LSTM, Bi-LSTM) → Cross Validation & Holdout Evaluation.",
+      "UNSW-NB15 (2.54M records) → Cleaning & categorical encoding → Stratified 80:20 split → MI feature selection (top 15, per training fold) → StandardScaler → PCA (95% variance) → Training-only balancing (SMOTE or RUS + KMeansSMOTE) → Models (HGB, Logistic Regression, XGBoost, DNN, LSTM, BiLSTM, shared-feature BiLSTM) → 5-fold stratified cross-validation + held-out test evaluation.",
     engineeringDecisions: [
-      "Built a modular preprocessing pipeline reusable across multiple machine learning models",
-      "Combined Mutual Information feature selection with PCA to reduce dimensionality while preserving informative features",
-      "Applied SMOTE and MiniBatchKMeans + SMOTE to address severe class imbalance across rare attack categories",
-      "Evaluated both traditional machine learning and deep learning architectures under a consistent experimental framework",
-      "Implemented a multi-task Bi-LSTM architecture with a shared feature extractor for simultaneous binary and multi-class prediction",
+      "Kept the held-out test set isolated from every fitted step — feature selection, scaling, PCA, resampling and model selection — so reported results are free of leakage",
+      "Used Mutual Information instead of correlation-based selection to capture both linear and non-linear feature–label relationships",
+      "Applied balancing only to training data, comparing conventional SMOTE with RUS (capped at 15,000 samples per class) followed by KMeansSMOTE",
+      "Included Logistic Regression as a baseline to separate the effect of preprocessing and balancing from classifier complexity",
+      "Built a shared-feature BiLSTM with one extractor and two output heads, jointly optimising binary and multiclass objectives",
     ],
     results: [
-      "99.04% binary accuracy on UNSW-NB15",
+      "Shared-feature BiLSTM: 98.70% binary accuracy, 95.10% binary F1, 99.92% AUC",
+      "DNN with MI + PCA: 96.66% multiclass accuracy, 97.29% weighted F1",
+      "HGB with RUS + KMeansSMOTE: 96.29% accuracy, 96.93% F1, 99.76% AUC",
+      "Evaluated 7 models across two balancing strategies and six ablation configurations",
       "Paper accepted for oral presentation — ICTCS 2026 (Springer LNNS)",
-    ],
-    // TODO(owner): these conflict with the resume (0.9792 weighted F1; XGBoost/CNN/DNN/LSTM)
-    // and with the repo's results summary. Confirm against the accepted paper before showing.
-    unconfirmed: [
-      "95.52% binary F1-score",
-      "98.08% multi-class accuracy",
-      "Evaluated 7 machine learning and deep learning architectures",
-      "Best-performing model: Bi-LSTM",
     ],
 
     solution:
-      "Developed a modular intrusion detection pipeline implementing feature selection, dimensionality reduction, class balancing, and multi-model training to classify both binary (Normal/Attack) and 10 attack categories. The framework evaluates multiple machine learning and deep learning architectures under a unified evaluation methodology.",
-    // Unconfirmed F1 / multi-class figures removed from this text (see `unconfirmed`).
+      "Developed a modular intrusion detection pipeline implementing feature selection, standardization, dimensionality reduction and training-only class balancing, classifying traffic both as binary (normal vs attack) and multiclass (normal plus nine attack types). Classical and deep learning models are evaluated under one leakage-controlled protocol.",
     impact:
-      "Implemented and evaluated multiple model configurations on the UNSW-NB15 dataset, achieving 99.04% binary accuracy. The implementation reproduces and extends the methodology proposed by Kasina et al. (2026).",
+      "The shared-feature BiLSTM reached 98.70% binary accuracy and 99.92% AUC, and the DNN with MI and PCA reached 96.66% multiclass accuracy with 97.29% weighted F1. Ablations showed that the benefit of MI, PCA and balancing depends on the classifier, so preprocessing and imbalance handling should be chosen together with the downstream model.",
     challenges: [
-      "Handling highly imbalanced attack distributions within a dataset containing over 2.5 million network records",
-      "Maintaining high performance across both binary and multi-class classification tasks",
-      "Designing preprocessing steps that generalized across multiple model architectures",
-      "Comparing diverse models using a consistent evaluation pipeline",
+      "Handling a highly imbalanced dataset of over 2.5 million network records, where the rarest class has only 174 samples",
+      "Keeping every fitted preprocessing step inside the training folds so the test set stays untouched",
+      "Designing preprocessing that generalized across classical and deep learning architectures",
+      "Comparing diverse models using one consistent evaluation pipeline",
     ],
     lessons: [
-      "Careful preprocessing contributes as much to performance as model selection",
-      "Addressing class imbalance is critical for detecting rare cyberattacks",
-      "Modular pipelines simplify experimentation across multiple architectures",
+      "Careful, leakage-free preprocessing matters as much as model choice",
+      "The effect of feature selection, PCA and balancing is classifier-dependent and has to be evaluated jointly with the model",
+      "High weighted scores can hide weak rare-class performance — macro F1 is the honest check",
       "Consistent evaluation methodology is essential for meaningful model comparison",
     ],
-    notes: [],
+    notes: [
+      "Macro F1 stays around 49–55% across models: the rarest attack classes remain hard to detect, which weighted metrics do not show",
+      "Paper ID 1056 · co-authored with researchers at IIIT Kottayam and Govt. Polytechnic College, Tiruchirappalli",
+    ],
 
     github: "https://github.com/tp-shivha-shakthiy/Intrusion-Detection-System",
     demo: null,
@@ -440,11 +372,6 @@ export const PROJECTS = [
       "Fixed STHF and Adaptive STHF evaluations run and logged, with comparison tables",
       "Support for HITSZ-VCM and BUPTcampus datasets",
       "Standard VI-ReID evaluation pipeline with CMC, Rank-k, and mAP metrics",
-    ],
-    // TODO(owner): confirm whether these are still accurate (the internship ended Jul 2026).
-    unconfirmed: [
-      "116/117 implementation tests passing",
-      "Full 200-epoch experimental reproduction currently in progress",
     ],
 
     solution:

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { FEATURED_PROJECTS, MORE_PROJECTS, RESEARCH_PROJECTS } from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function Group({ id, title, projects }) {
   if (!projects.length) return null;
@@ -17,16 +17,19 @@ function Group({ id, title, projects }) {
 }
 
 export default function ProjectsPage() {
-  useEffect(() => {
-    document.title = "Projects — T P Shivha Shakthiy";
-  }, []);
+  usePageMeta({
+    title: "Projects",
+    description:
+      "Backend, full-stack and applied-ML projects — TRACE, NeuroBridge, Vanta AI — plus research case studies, each with role, stack and results.",
+    path: "/projects",
+  });
 
   return (
     <div className="page">
       <h1 className="page__title">Projects</h1>
       <p className="page__intro">
-        Selected engineering work first, then hackathon builds and research. Each card says what
-        I built; the case study has the architecture, decisions and results.
+        Selected engineering work first, then research. Each card says what I built; the case
+        study has the architecture, decisions and results.
       </p>
       <Group id="selected" title="Selected" projects={FEATURED_PROJECTS} />
       <Group id="more" title="More projects" projects={MORE_PROJECTS} />

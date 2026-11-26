@@ -1,6 +1,4 @@
-import { PROFILE } from "../data/profile";
-
-const RESUME_SUBJECT = encodeURIComponent("Resume request");
+import { PROFILE, resumeMailto } from "../data/profile";
 
 export default function ContactBlock() {
   return (
@@ -35,7 +33,7 @@ export default function ContactBlock() {
         <div className="contact__row">
           <dt>Resume</dt>
           <dd>
-            <a href={`mailto:${PROFILE.email}?subject=${RESUME_SUBJECT}`} className="text-link">
+            <a href={resumeMailto()} className="text-link">
               Available on request →
             </a>
           </dd>
