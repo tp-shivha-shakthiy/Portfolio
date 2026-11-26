@@ -5,28 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Only the weights the site uses: Literata 400 · Inter 400/500 + italic 400 · JetBrains Mono 400/500 -->
+    <!-- Fraunces (display: roman + italic, 300–600, SOFT 50) · Inter 400/500 · JetBrains Mono 400/500 -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400&family=Inter:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,50;1,9..144,300..600,50&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
     />
-    <!-- Hero portrait is the largest above-the-fold image: fetch it early -->
-    <link rel="preload" as="image" href="/portrait.webp" type="image/webp" fetchpriority="high" />
-    <!-- Loader colours follow the saved theme (the theme script below runs before <body> exists) -->
-    <style>
-      #loader { background: #111315; }
-      #loader-text { color: #8A8D8A; }
-      [data-theme="light"] #loader { background: #F5F3EE; }
-      [data-theme="light"] #loader-text { color: #65635E; }
-    </style>
 
     <!-- Primary (defaults; per-page values are set by usePageMeta) -->
     <title>T P Shivha Shakthiy — Software Engineer, Backend &amp; Applied AI</title>
-    <meta name="description" content="Software engineer focused on backend and applied AI — APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker. Projects, experience and research." />
+    <meta name="description" content="Software engineer focused on backend and applied AI. Selected work: NeuroBridge, TRACE and a first-author intrusion-detection paper accepted at ICTCS 2026." />
     <link rel="canonical" href="https://tp-shivha-shakthiy.vercel.app/" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="T P Shivha Shakthiy" />
-    <meta name="theme-color" content="#111315" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#110C16" />
 
     <!-- Icons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -37,7 +29,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="T P Shivha Shakthiy" />
     <meta property="og:title" content="T P Shivha Shakthiy — Software Engineer, Backend &amp; Applied AI" />
-    <meta property="og:description" content="Software engineer focused on backend and applied AI — APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker." />
+    <meta property="og:description" content="Backend and applied AI engineer. Selected work: NeuroBridge, TRACE and a first-author paper accepted at ICTCS 2026 (Springer LNNS)." />
     <meta property="og:url" content="https://tp-shivha-shakthiy.vercel.app/" />
     <meta property="og:image" content="https://tp-shivha-shakthiy.vercel.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -47,28 +39,21 @@
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="T P Shivha Shakthiy — Software Engineer, Backend &amp; Applied AI" />
-    <meta name="twitter:description" content="Software engineer focused on backend and applied AI — APIs and data pipelines with Python, FastAPI, PostgreSQL and Docker." />
+    <meta name="twitter:description" content="Backend and applied AI engineer. Selected work: NeuroBridge, TRACE and a first-author paper accepted at ICTCS 2026 (Springer LNNS)." />
     <meta name="twitter:image" content="https://tp-shivha-shakthiy.vercel.app/og-image.png" />
     <meta name="twitter:image:alt" content="T P Shivha Shakthiy — Software Engineer, Backend &amp; Applied AI" />
-    <script>
-      (function(){
-        var t=localStorage.getItem("spec-theme")||"dark";
-        document.documentElement.setAttribute("data-theme",t);
-      })();
-    </script>
+
+    <!-- Paint the page colour before CSS loads, so there is no white flash -->
+    <style>html, body { background: #110C16; }</style>
   </head>
   <body>
-    <div id="loader" style="
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-    ">
-      <img src="/logo-240.png" alt="" width="120" height="120" style="object-fit: contain; opacity: 0.9;" />
-      <span id="loader-text" style="
-        font-family: 'JetBrains Mono', ui-monospace, monospace;
-        font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      ">Loading...</span>
-    </div>
     <div id="root"></div>
+    <noscript>
+      <p style="color:#F3ECFB;font-family:system-ui,sans-serif;padding:24px">
+        T P Shivha Shakthiy — Software Engineer, Backend &amp; Applied AI.
+        Email: <a style="color:#B39DF0" href="mailto:tpshivhashakthiyy@gmail.com">tpshivhashakthiyy@gmail.com</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

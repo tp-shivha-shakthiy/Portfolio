@@ -1,32 +1,33 @@
 import { useParams, Link } from "react-router-dom";
-import { PROJECTS, statusTone } from "../data/projects";
+import { PROJECTS } from "../data/projects";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { SiteHeader } from "../components/SiteChrome";
+import { ExtLink } from "../components/links";
 
-function CaseSection({ title, children }) {
+function Block({ title, children }) {
   return (
-    <section className="case__section">
-      <h2 className="case__label">{title}</h2>
-      {children}
+    <section className="case__block">
+      <h2 className="label case__label">{title}</h2>
+      <div>{children}</div>
     </section>
   );
 }
 
-function DashList({ items }) {
+function Dashes({ items }) {
   return (
-    <ul className="dash-list">
-      {items.map((d) => (
-        <li key={d}>{d}</li>
-      ))}
+    <ul className="dashes">
+      {items.map((d) => <li key={d}>{d}</li>)}
     </ul>
   );
 }
 
+/* Case study: same broadsheet language as the homepage, tinted with the project's accent. */
 export default function ProjectDetail() {
   const { slug } = useParams();
   const p = PROJECTS.find((pr) => pr.slug === slug);
 
   usePageMeta({
-    title: p ? p.title : "Project not found",
+    title: p ? p.shortTitle || p.title : "Project not found",
     description: p ? p.tagline : undefined,
     path: `/projects/${slug}`,
     noindex: !p,
@@ -34,174 +35,105 @@ export default function ProjectDetail() {
 
   if (!p) {
     return (
-      <div className="page page--center">
-        <h1 className="page__title">Project not found</h1>
-        <Link to="/projects" className="text-link">← Back to projects</Link>
-      </div>
+      <>
+        <SiteHeader />
+        <main id="main" tabIndex={-1} className="plain">
+          <p className="label">Not found</p>
+          <h1 className="plain__title">There is no project at this address.</h1>
+          <Link to="/#work" className="link">← Selected work</Link>
+        </main>
+      </>
     );
   }
 
-  const isTeam = p.team && p.team !== "Solo" && p.built?.length > 0;
-  const hasWriteup =
-    p.solution || p.impact || p.challenges?.length || p.lessons?.length || p.notes?.length;
+  const isTeam = p.team && p.team !== "Solo";
+  const hasWriteup = p.solution || p.impact || p.challenges?.length || p.lessons?.length || p.notes?.length;
 
   return (
-    <article className="page case">
-      <Link to="/projects" className="text-link text-link--quiet case__back">← All projects</Link>
+    <>
+      <SiteHeader />
+      <main id="main" tabIndex={-1} className={`case case--${p.accent}`}>
+        <header className="case__head paper">
+          <Link to="/#work" className="link case__back">← Selected work</Link>
+          <p className="meta">{p.year} · {p.status}</p>
+          <h1 className="case__title">{p.title}</h1>
+          <p className="case__summary">{p.summary}</p>
 
-      <header className="case__head">
-        <div className="pcard__head">
-          <span
-            className="pcard__icon pcard__icon--lg"
-            aria-hidden="true"
-            style={{ background: p.color + "18", border: `1px solid ${p.color}44`, color: p.color }}
-          >
-            {p.abbr}
-          </span>
-          <div className="pcard__titles">
-            <h1 className="case__title">{p.title}</h1>
-            <span className="pcard__meta">
-              {p.year}
-              <span className="pcard__sep" aria-hidden="true">·</span>
-              <span className={`status-dot status-dot--${statusTone(p.status)}`} aria-hidden="true" />
-              {p.status}
-            </span>
-          </div>
+          <table className="spec case__spec">
+            <tbody>
+              {p.publication && (
+                <tr>
+                  <th scope="row">Paper</th>
+                  <td>
+                    “{p.publication.title}” — {p.publication.authorship} · {p.publication.venue} ·{" "}
+                    {p.publication.status} · Paper ID {p.publication.paperId}
+                  </td>
+                </tr>
+              )}
+              {p.role && <tr><th scope="row">My part</th><td>{p.role}</td></tr>}
+              {isTeam && <tr><th scope="row">Team</th><td>{p.team}</td></tr>}
+              <tr><th scope="row">Stack</th><td className="stk">{p.stack.join(" · ")}</td></tr>
+            </tbody>
+          </table>
+
+          {(p.github || p.demo) && (
+            <p className="plinks">
+              {p.github && <ExtLink href={p.github} label={`${p.title} source code on GitHub`}>Code ↗</ExtLink>}
+              {p.demo && <ExtLink href={p.demo} label={`${p.title} live demo`}>Live demo ↗</ExtLink>}
+            </p>
+          )}
+          {p.demo && p.demoNote && <p className="case__note"><b>Note</b> {p.demoNote}</p>}
+        </header>
+
+        <div className="case__body">
+          {p.publication?.results && (
+            <Block title="Results">
+              <table className="res res--case">
+                <caption className="sr-only">Results by task; each task uses a different model.</caption>
+                <thead><tr><th scope="col">Task</th><th scope="col">Result and model</th></tr></thead>
+                <tbody>
+                  {p.publication.results.map(([task, line]) => (
+                    <tr key={task}><th scope="row">{task}</th><td>{line}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="case__fine">{p.publication.dataset}</p>
+            </Block>
+          )}
+
+          {isTeam && (
+            <p className="case__note">
+              <b>Team project</b> “What I built” is my part. The other sections describe the whole system.
+            </p>
+          )}
+
+          <Block title="Problem"><p className="case__text">{p.problem}</p></Block>
+          {p.built?.length > 0 && <Block title="What I built"><Dashes items={p.built} /></Block>}
+          <Block title="Architecture"><p className="case__text case__flow">{p.architecture}</p></Block>
+          {p.engineeringDecisions?.length > 0 && (
+            <Block title="Engineering decisions"><Dashes items={p.engineeringDecisions} /></Block>
+          )}
+          {p.results?.length > 0 && !p.publication && (
+            <Block title="Results"><Dashes items={p.results} /></Block>
+          )}
+          {p.results?.length > 0 && p.publication && (
+            <Block title="All findings"><Dashes items={p.results} /></Block>
+          )}
+
+          {hasWriteup && (
+            <details className="case__more">
+              <summary>Full write-up — solution, impact, challenges and lessons</summary>
+              {p.solution && (<><h3 className="case__sub">Solution</h3><p className="case__text">{p.solution}</p></>)}
+              {p.impact && (<><h3 className="case__sub">Impact</h3><p className="case__text">{p.impact}</p></>)}
+              {p.challenges?.length > 0 && (<><h3 className="case__sub">Challenges</h3><Dashes items={p.challenges} /></>)}
+              {p.lessons?.length > 0 && (<><h3 className="case__sub">Lessons</h3><Dashes items={p.lessons} /></>)}
+              {p.notes?.length > 0 && (<><h3 className="case__sub">Other details</h3><Dashes items={p.notes} /></>)}
+            </details>
+          )}
+
+          <Link to="/#work" className="link case__back case__back--end">← Selected work</Link>
         </div>
-
-        <p className="case__summary">{p.summary}</p>
-
-        <dl className="facts">
-          {p.publication && (
-            <div className="facts__row">
-              <dt>Paper</dt>
-              <dd>
-                “{p.publication.title}” — {p.publication.authorship.toLowerCase()} · {p.publication.venue} ·{" "}
-                {p.publication.status} · Paper ID {p.publication.paperId}
-              </dd>
-            </div>
-          )}
-          {p.role && (
-            <div className="facts__row">
-              <dt>Role</dt>
-              <dd>{p.role}</dd>
-            </div>
-          )}
-          {p.team && (
-            <div className="facts__row">
-              <dt>Team</dt>
-              <dd>{p.team}</dd>
-            </div>
-          )}
-          <div className="facts__row">
-            <dt>Stack</dt>
-            <dd className="facts__stack">{p.stack.join(" · ")}</dd>
-          </div>
-        </dl>
-
-        {(p.github || p.demo || p.paper) && (
-          <div className="pcard__links">
-            {p.github && (
-              <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-link"
-                 aria-label={`${p.title} source code on GitHub (opens in a new tab)`}>
-                Code ↗
-              </a>
-            )}
-            {p.demo && (
-              <a href={p.demo} target="_blank" rel="noopener noreferrer" className="text-link"
-                 aria-label={`${p.title} live demo (opens in a new tab)`}>
-                Live demo ↗
-              </a>
-            )}
-            {p.paper && (
-              <a href={p.paper} target="_blank" rel="noopener noreferrer" className="text-link">
-                Paper ↗
-              </a>
-            )}
-          </div>
-        )}
-        {p.demo && p.demoNote && (
-          <p className="case__note">
-            <span className="case__note-k">Note</span>
-            {p.demoNote}
-          </p>
-        )}
-      </header>
-
-      {isTeam && (
-        <p className="case__note">
-          <span className="case__note-k">Team project</span>
-          “What I built” is my part. The other sections describe the whole system.
-        </p>
-      )}
-
-      <CaseSection title="Problem">
-        <p className="case__text">{p.problem}</p>
-      </CaseSection>
-
-      {p.built?.length > 0 && (
-        <CaseSection title="What I built">
-          <DashList items={p.built} />
-        </CaseSection>
-      )}
-
-      <CaseSection title="Architecture">
-        <p className="case__text case__flow">{p.architecture}</p>
-      </CaseSection>
-
-      {p.engineeringDecisions?.length > 0 && (
-        <CaseSection title="Key engineering decisions">
-          <DashList items={p.engineeringDecisions} />
-        </CaseSection>
-      )}
-
-      {p.results?.length > 0 && (
-        <CaseSection title="Results">
-          <ul className="results-grid">
-            {p.results.map((m) => (
-              <li key={m}>{m}</li>
-            ))}
-          </ul>
-        </CaseSection>
-      )}
-
-      {hasWriteup && (
-        <details className="case__more">
-          <summary>Full write-up — solution, impact, challenges and lessons</summary>
-          {p.solution && (
-            <>
-              <h3 className="case__sublabel">Solution</h3>
-              <p className="case__text">{p.solution}</p>
-            </>
-          )}
-          {p.impact && (
-            <>
-              <h3 className="case__sublabel">Impact</h3>
-              <p className="case__text">{p.impact}</p>
-            </>
-          )}
-          {p.challenges?.length > 0 && (
-            <>
-              <h3 className="case__sublabel">Challenges</h3>
-              <DashList items={p.challenges} />
-            </>
-          )}
-          {p.lessons?.length > 0 && (
-            <>
-              <h3 className="case__sublabel">Lessons learned</h3>
-              <DashList items={p.lessons} />
-            </>
-          )}
-          {p.notes?.length > 0 && (
-            <>
-              <h3 className="case__sublabel">Other details</h3>
-              <DashList items={p.notes} />
-            </>
-          )}
-        </details>
-      )}
-
-      <Link to="/projects" className="text-link case__back case__back--end">← All projects</Link>
-    </article>
+      </main>
+    </>
   );
 }

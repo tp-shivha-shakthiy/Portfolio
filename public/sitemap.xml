@@ -2,37 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://tp-shivha-shakthiy.vercel.app/projects</loc>
-    <lastmod>2026-11-25</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/projects/trace</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/projects/neurobridge</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/projects/vanta-ai</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/projects/network-intrusion-detection-under-class-imbalance</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://tp-shivha-shakthiy.vercel.app/projects/st-hf-vvi-reid</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>
