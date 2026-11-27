@@ -481,9 +481,14 @@ html.is-locked { overflow: hidden; }
 .year li span { display: block; font-size: 14px; color: var(--tx); }
 
 /* ═══ 5. About — cut-out portrait under its name ════════════════════════════ */
-.about { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: 64px; margin: 0 var(--pad); padding-top: 36px; align-items: start; }
+.about {
+  display: grid; grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  column-gap: clamp(48px, 6vw, 96px);
+  margin: 0 var(--pad); padding-top: 40px; align-items: start;
+}
+/* The portrait stays in view while the longer text column is read */
 .portrait {
-  position: relative; display: flex; flex-direction: column; align-items: center;
+  position: sticky; top: 32px; display: flex; flex-direction: column; align-items: center;
   border-radius: 4px; overflow: hidden;
   background:
     radial-gradient(75% 60% at 50% 88%, rgba(179, 157, 240, 0.34), rgba(179, 157, 240, 0.06) 62%, transparent 78%),
@@ -499,24 +504,47 @@ html.is-locked { overflow: hidden; }
 }
 .portrait picture { display: block; width: 84%; margin-top: -2%; }
 .portrait img { width: 100%; height: auto; }
-.about__body { display: flex; flex-direction: column; gap: 16px; }
+.about__body { min-width: 0; }
+
+/* Biography: the strongest text in the section */
+.about__bio { padding-bottom: 36px; }
 .about__lede {
-  font-family: var(--serif); font-variation-settings: "SOFT" 50, "opsz" 36;
-  font-size: clamp(23px, 2vw, 30px); line-height: 1.3; color: var(--tx-h);
+  font-family: var(--serif); font-variation-settings: "SOFT" 50, "opsz" 72;
+  font-size: clamp(25px, 2.3vw, 34px); line-height: 1.25; letter-spacing: -0.005em;
+  color: var(--tx-h); max-width: 21em;
 }
-.about__p { font-size: 16px; color: var(--tx); max-width: 38em; }
-.cv { margin-top: 8px; }
-.cv__row { display: grid; grid-template-columns: 128px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
-.cv dt { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tx-2); padding-top: 3px; }
-.cv dd { color: var(--tx-h); }
-.cv__exp li { padding: 2px 0 6px; }
-.cv__exp b { font-weight: 500; }
-.cv__exp span { display: block; font-family: var(--mono); font-size: 12.5px; color: var(--tx-2); }
-.cv__skills li { display: grid; grid-template-columns: 92px 1fr; gap: 8px; padding: 2px 0 6px; font-size: 14.5px; color: var(--tx-h); }
-.cv__skills span {
+.about__p { margin-top: 20px; font-size: 16.5px; line-height: 1.75; color: var(--tx); max-width: 36em; }
+
+/* Reference groups: a fine rule, a quiet label column, then the content */
+.about__group {
+  display: grid; grid-template-columns: 120px minmax(0, 1fr); column-gap: 28px;
+  padding: 26px 0; border-top: 1px solid var(--line);
+}
+.about__k {
+  padding-top: 4px;
+  font-family: var(--mono); font-weight: 400; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--tx-2);
+}
+.about__edu { font-size: 16px; line-height: 1.5; color: var(--tx-h); }
+
+/* Experience: role, organisation and dates kept distinct */
+.xp { display: grid; gap: 18px; }
+.xp__item { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 20px; row-gap: 2px; }
+.xp__role { font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--tx-h); }
+.xp__org { grid-row: 2; font-size: 14.5px; line-height: 1.5; color: var(--tx); }
+.xp__when {
+  grid-column: 2; grid-row: 1; padding-top: 2px; text-align: right; white-space: nowrap;
+  font-family: var(--mono); font-size: 12.5px; color: var(--tx-2);
+}
+
+/* Skills: an editorial list — labels quiet on the left, technologies on the right */
+.skills { display: grid; gap: 2px; }
+.skills__row { display: grid; grid-template-columns: 92px minmax(0, 1fr); column-gap: 18px; padding: 6px 0; }
+.skills__row dt {
   padding-top: 3px;
-  font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tx-2);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tx-2);
 }
+.skills__row dd { font-size: 14.5px; line-height: 1.6; color: var(--tx-h); }
 
 /* ═══ 6. Contact ════════════════════════════════════════════════════════════ */
 .contact {
@@ -619,6 +647,8 @@ html.is-locked { overflow: hidden; }
 @media (max-width: 1180px) {
   .nb { gap: 40px; }
   .tr { gap: 48px; }
+  .about { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); }
+  .about__group { grid-template-columns: 104px minmax(0, 1fr); column-gap: 22px; }
   .ov { grid-template-columns: var(--folio) minmax(0, 1fr); row-gap: 20px; }
   .ov__facts { grid-column: 2; }
   .row { grid-template-columns: 180px 1fr; row-gap: 24px; }
@@ -643,7 +673,9 @@ html.is-locked { overflow: hidden; }
   .ids__top, .ids__grid { grid-template-columns: 1fr; gap: 28px; }
   .ids__grid { margin-top: 32px; }
   .rr, .about { grid-template-columns: 1fr; gap: 44px; }
-  .portrait { max-width: 460px; width: 100%; }
+  .about { gap: 40px; padding-top: 32px; }
+  .portrait { position: relative; top: auto; max-width: 440px; width: 100%; }
+  .about__bio { padding-bottom: 28px; }
   .case__block { grid-template-columns: 1fr; gap: 10px; }
   .runhead { padding-top: 72px; }
 }
@@ -695,8 +727,12 @@ html.is-locked { overflow: hidden; }
   .row h3 { font-size: 36px; }
   .year { grid-template-columns: 64px 1fr; gap: 12px; }
   .year__n { font-size: 26px; }
-  .cv__row { grid-template-columns: 1fr; gap: 6px; }
-  .cv__skills li { grid-template-columns: 1fr; gap: 0; }
+  .about__group { grid-template-columns: 1fr; row-gap: 12px; padding: 22px 0; }
+  .xp { gap: 16px; }
+  .xp__item { grid-template-columns: 1fr; }
+  .xp__when { grid-column: 1; grid-row: 3; text-align: left; padding-top: 2px; }
+  .skills__row { grid-template-columns: 84px minmax(0, 1fr); column-gap: 14px; }
+  .about__p { font-size: 16px; }
   .contact__where { margin-left: 0; }
   .contact { padding: 56px var(--pad); }
   .case__head { padding-top: 28px; }
