@@ -27,9 +27,10 @@ export const GITHUB_USER = "tp-shivha-shakthiy";
 export const ABOUT_EDUCATION = "B.Tech CSE (AI & Data Science), IIIT Kottayam";
 export const ABOUT_PHOTO_CAPTION = "Kerala, India";
 
+// About: identity first, then how I work. Projects carry the technical detail.
 export const ABOUT = [
-  "I'm a backend-focused software engineer. I design REST APIs with FastAPI and Express, model data in PostgreSQL, and ship services with Docker.",
-  "I like architectures that are simple to reason about, resilient under real-world constraints, and easy for other engineers to maintain. When a problem calls for ML, I bring the same discipline to it — reproducible pipelines and consistent evaluation.",
+  "I'm a backend-focused software engineer building reliable APIs, data-intensive systems and applied AI solutions.",
+  "I prefer architecture that stays simple to reason about and easy for the next engineer to maintain, and systems that keep working under real-world constraints. When a problem calls for machine learning, I hold it to the same standard: reproducible pipelines and consistent evaluation.",
 ];
 
 export const SKILLS = [
